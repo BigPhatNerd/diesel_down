@@ -32,6 +32,8 @@
     "stripe": "^8.142.0"
   },
   "devDependencies": {
+    "@types/react": "^17.0.2",
+    "@types/scheduler": "^0.23.0",
     "concurrently": "^6.0.1",
     "faker": "^5.5.3",
     "lodash": "^4.17.21",
