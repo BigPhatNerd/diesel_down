@@ -1,27 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { Container, Col, Button, Form, Row } from "react-bootstrap";
-import background from "../../../img/diesel_down_black.jpg";
+import NavigationLinks from "../../NavigationLinks";
+import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import Spinner from "../../Spinner";
 
 import RegistrationContext from "../../../context/registration/registrationContext";
 const UserRegistration = () => {
-  const styles = {
-    container: {
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)),url(${background})`,
-      backgroundPosition: "center",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      width: "100vw",
-      height: "100vh",
-    },
-    button: {
-      backgroundColor: '#C70C18', // Red color
-      color: 'white',
-      borderColor: '#C70C18',
-      transition: 'background-color 0.3s, color 0.3s'
-    },
-  };
+  const styles = getBackgroundStyles();
   const registrationContext = useContext(RegistrationContext);
   const { user, register, setAlert, setEmail, loading } =
     registrationContext;
@@ -98,6 +84,7 @@ const UserRegistration = () => {
             </Button>
           </Form>
         </Col>
+        <NavigationLinks user={user} currentPage="user-registration" />
       </Container>
     </div>
   );
