@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Row, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks"; // Import the new component
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
@@ -72,9 +73,11 @@ const Landing = () => {
         </Row>
 
         <Row className="justify-content-center m-4">
-          <Button style={styles.button} href="/book-dyno" className="custom-button">
-            Book Your Dyno Session Today!
-          </Button>
+          <Link to="/book-dyno" style={{ textDecoration: 'none' }}>
+            <Button style={styles.button} className="custom-button">
+              Book Your Dyno Session Today!
+            </Button>
+          </Link>
         </Row>
 
         <Row className="justify-content-center m-2">
