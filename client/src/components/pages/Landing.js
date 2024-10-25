@@ -67,7 +67,7 @@ const Landing = () => {
         </Row>
         <Row className="justify-content-center m-2">
           <p>
-            <strong>Custom Tuning – Tailored to You:</strong> At Diesel Down, we don’t do “one-size-fits-all.” Every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to drag racing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says it's time to leave.
+            <strong>Custom Tuning – Tailored to You:</strong> At Diesel Down, we don’t do “one-size-fits-all.” Every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to drag racing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says so.
           </p>
         </Row>
 
