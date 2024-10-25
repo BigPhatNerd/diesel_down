@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { Container, Col, Button, Form, Row } from "react-bootstrap";
 import NavigationLinks from "../../NavigationLinks";
-import { getBackgroundStyles } from "../helpers/backgroundStyles";
+import { getBackgroundStyles } from "../../helpers/backgroundStyles";
 import Spinner from "../../Spinner";
 
 import RegistrationContext from "../../../context/registration/registrationContext";
