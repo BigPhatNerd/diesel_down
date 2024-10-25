@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const connectDB = require('./config/db');
+const path = require('path');
 const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
 const contact = require('./routes/api/contact');
