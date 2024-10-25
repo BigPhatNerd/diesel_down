@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks"; // Import the new component
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
+import logo from "../../img/transparent_white_red.png";
 
 const Landing = () => {
   const registrationContext = useContext(RegistrationContext);
@@ -20,16 +21,14 @@ const Landing = () => {
     <div id="cover" style={styles.container}>
       <Container className="pt-3">
         <Row className="justify-content-center m-2">
+          <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
+        </Row>
+
+        <Row className="justify-content-center m-2">
           <h1>Welcome to Diesel Down – Where Power Meets Performance.</h1>
         </Row>
         <Row className="justify-content-center m-2">
           <h2>Bringing Dyno Testing & Precision Tuning to North Mississippi</h2>
-        </Row>
-
-        <Row className="justify-content-center m-2">
-          <p>
-            “We think it’s a travesty that you can’t just run down the street, fill up on diesel, grab dinner from the gas station, and get real-time data on the torque and horsepower your truck’s putting out. Diesel Down is here to fix that.”
-          </p>
         </Row>
 
         <Row className="justify-content-center m-2">
@@ -63,12 +62,13 @@ const Landing = () => {
         </Row>
         <Row className="justify-content-center m-2">
           <p>
-            <strong>"Get the Facts"</strong> – Whether it’s horsepower, torque, throttle response, or fuel efficiency - we provide the data that tells you where you are so we can get you where you want to be.
+            <strong>Get the Facts</strong> – Whether it’s horsepower, torque, throttle response, or fuel efficiency - we provide the data that tells you where you are so we can get you where you want to be.
           </p>
         </Row>
         <Row className="justify-content-center m-2">
           <p>
-            <strong>Custom Tuning – Tailored to You:</strong> At Diesel Down, we don’t do “one-size-fits-all.” Every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to drag racing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says so.
+            <strong>Custom Tuning – Tailored to You: &nbsp;
+            </strong> At Diesel Down, we don’t do “one-size-fits-all.” Every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to drag racing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says so.
           </p>
         </Row>
 

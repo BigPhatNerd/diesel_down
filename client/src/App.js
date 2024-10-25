@@ -12,22 +12,22 @@ import RegistrationState from './context/registration/RegistrationState'
 
 function App() {
 
-    return (
+	return (
 
-        <RegistrationState>
+		<RegistrationState>
 			<Router>
 				<MyNavbar />
-				
+
 				{/*<Spinner />*/}
 				<Switch>
 					<Route exact path="/" component={Landing} />
 					<Route component={Routes} />
-				
+
 				</Switch>
 			</Router>
 		</RegistrationState>
 
-    )
+	)
 }
 
 export default App

@@ -6,6 +6,7 @@ import NavigationLinks from "../NavigationLinks";
 import 'react-phone-input-2/lib/style.css';
 import RegistrationContext from '../../context/registration/registrationContext';
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
+import logo from "../../img/transparent_white_red.png";
 
 export const options = [
     {
@@ -96,6 +97,9 @@ const BookDyno = ({ history }) => {
     return (
         <div id='book-dyno' style={styles.container}>
             <Container className='pt-3'>
+                <Row className="justify-content-center m-2">
+                    <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
+                </Row>
                 <Row className="justify-content-center m-2">
                     <h1>Book Your Dyno Session</h1>
                 </Row>

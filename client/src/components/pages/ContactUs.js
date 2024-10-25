@@ -3,6 +3,7 @@ import { Container, Row, Button, Form } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
 import RegistrationContext from '../../context/registration/registrationContext';
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
+import logo from "../../img/transparent_white_red.png";
 
 const ContactUs = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -44,6 +45,9 @@ const ContactUs = () => {
             <div id='contact-us' style={styles.container}>
                 <Container className='pt-3'>
                     <Row className="justify-content-center m-2">
+                        <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
+                    </Row>
+                    <Row className="justify-content-center m-2">
                         <h1>Thank You!</h1>
                     </Row>
                     <Row className="justify-content-center">
@@ -60,6 +64,9 @@ const ContactUs = () => {
     return (
         <div id='contact-us' style={styles.container}>
             <Container className='pt-3'>
+                <Row className="justify-content-center m-2">
+                    <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
+                </Row>
                 <Row className="justify-content-center m-2">
                     <h1>Contact Us</h1>
                 </Row>

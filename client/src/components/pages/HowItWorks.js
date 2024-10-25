@@ -3,6 +3,7 @@ import { Container, Row } from "react-bootstrap";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
+import logo from "../../img/transparent_white_red.png";
 
 const HowItWorks = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -18,6 +19,9 @@ const HowItWorks = () => {
     return (
         <div id="cover" style={styles.container}>
             <Container className="pt-3">
+                <Row className="justify-content-center m-2">
+                    <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
+                </Row>
                 <Row className="justify-content-center m-4">
                     <h2>How It Works</h2>
                 </Row>

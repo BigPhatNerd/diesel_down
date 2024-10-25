@@ -4,7 +4,7 @@ import { Container, Col, Button, Form, Row } from "react-bootstrap";
 import NavigationLinks from "../../NavigationLinks";
 import { getBackgroundStyles } from "../../helpers/backgroundStyles";
 import Spinner from "../../Spinner";
-
+import logo from "../../../img/transparent_white_red.png";
 import RegistrationContext from "../../../context/registration/registrationContext";
 const UserRegistration = () => {
   const styles = getBackgroundStyles();
@@ -38,6 +38,9 @@ const UserRegistration = () => {
   return (
     <div id="cover" style={styles.container}>
       <Container>
+        <Row className="justify-content-center m-2">
+          <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
+        </Row>
         <Row className="justify-content-center m-2">
           <h1>User Registration</h1>
         </Row>
