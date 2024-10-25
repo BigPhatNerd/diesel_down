@@ -93,9 +93,7 @@ const BookDyno = ({ history }) => {
         //eslint-disable-next-line
     }, []);
 
-    return loading && profile === null ? (
-        <Redirect to='/dashboard' />
-    ) : (
+    return (
         <div id='book-dyno' style={styles.container}>
             <Container className='pt-3'>
                 <Row className="justify-content-center m-2">
