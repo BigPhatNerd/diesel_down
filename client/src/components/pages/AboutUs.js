@@ -1,19 +1,13 @@
-import React, { useEffect, useContext, useState } from "react";
-import { Container, Row, Accordion, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import ChooseEventModal from "../modals/ChooseEventModal";
+import React, { useEffect, useContext } from "react";
+import { Container, Row } from "react-bootstrap";
 import NavigationLinks from "../NavigationLinks";
 import RegistrationContext from "../../context/registration/registrationContext";
-import axios from "axios";
+import { getBackgroundStyles } from "../helpers/backgroundStyles";
 
-import background from "../../img/diesel_down_black.jpg";
 
-//
 
 const AboutUs = () => {
     const registrationContext = useContext(RegistrationContext);
-    console.log("More Info");
-    console.log({ registrationContext });
     const { loadUser, user } = registrationContext;
 
     useEffect(() => {
@@ -21,16 +15,7 @@ const AboutUs = () => {
         //eslint-disable-next-line
     }, []);
 
-    const styles = {
-        container: {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)),url(${background})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            width: "100vw",
-            height: "100vh",
-        },
-    };
+    const styles = getBackgroundStyles();
 
     return (
         <div id="cover" style={styles.container}>

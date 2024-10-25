@@ -3,6 +3,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
+const contact = require('./routes/api/contact');
 const profile = require('./routes/api/profile')
 const stripe = require('./routes/stripe');
 var cors = require('cors')
@@ -25,6 +26,7 @@ app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/profile', profile);
 app.use('/stripe', stripe);
+app.use('/api/contact', contact);
 
 
 

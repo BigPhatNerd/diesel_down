@@ -13,12 +13,18 @@ const Login = () => {
   })
   const styles = {
     container: {
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)),url(${background})`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)),url(${background})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       width: '100vw',
       height: '100vh'
+    },
+    button: {
+      backgroundColor: '#C70C18', // Red color
+      color: 'white',
+      borderColor: '#C70C18',
+      transition: 'background-color 0.3s, color 0.3s'
     },
 
   };
@@ -26,8 +32,7 @@ const Login = () => {
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  console.log("In Login");
-  console.log({ registrationContext })
+
   const onSubmit = e => {
     e.preventDefault();
     if (email === '' || password === '') {
@@ -58,12 +63,12 @@ const Login = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control onChange={e => onChange(e)} value={password} name="password" type="password" placeholder="Enter password" />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button style={styles.button} type="submit" className="custom-button">
             Submit
           </Button>
         </Form>
         <Row className="ml-2 mt-2">
-          <p>Don't have an account?&nbsp; <Link to='/user-registration'>Create Account</Link></p>
+          <p>Don't have an account? <Link className='custom-link' to='/user-registration'>Create Account</Link></p>
         </Row>
       </Container>
     </div>)

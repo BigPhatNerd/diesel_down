@@ -21,8 +21,7 @@ import {
 	GET_PROFILE,
 	UPDATE_PROFILE,
 	PROFILE_ERROR,
-	CLEAR_PROFILE,
-	SET_NAME
+	CLEAR_PROFILE
 } from '../types'
 
 import setAuthToken from '../../utils/setAuthToken'
@@ -58,8 +57,6 @@ const RegistrationState = props => {
 			};
 
 			const res = await axios.put(`/api/profile/add-score/${hour}`, formData, config);
-			console.log("res.data: ", res.data);
-			console.log({ formData })
 			dispatch({
 				type: UPDATE_PROFILE,
 				payload: res.data
@@ -89,7 +86,6 @@ const RegistrationState = props => {
 			};
 
 			const res = await axios.put(`/api/profile/add-miles`, miles, config);
-			console.log("res.data: ", res.data);
 
 			dispatch({
 				type: UPDATE_PROFILE,
@@ -152,7 +148,6 @@ const RegistrationState = props => {
 			});
 			setAlert('Team Member Removed', 'success');
 		} catch (err) {
-			console.log({ err })
 			const errors = err.response.data.errors
 			if (errors) {
 				errors.forEach(error => setAlert(error.msg, 'danger'))
@@ -176,9 +171,9 @@ const RegistrationState = props => {
 					'Content-Type': 'application/json',
 				},
 			}
-			console.log({ formData });
+
 			const res = await axios.post('/api/profile', formData, config)
-			console.log("res.data: ", res.data);
+
 			dispatch({
 				type: GET_PROFILE,
 				payload: res.data,
@@ -189,7 +184,6 @@ const RegistrationState = props => {
 			// }
 			history.push('/dashboard');
 		} catch (err) {
-			console.log({ err })
 			const errors = err.response.data.errors
 			if (errors) {
 				errors.forEach(error => setAlert(error.msg, 'danger'))
@@ -208,16 +202,13 @@ const RegistrationState = props => {
 	//Get current user's profile:
 	const getCurrentProfile = async () => {
 		try {
-			console.log("at least hit this")
+
 			const res = await axios.get('/api/profile/me');
-			console.log("res.data in getCurrentProfile: ", res.data);
 			dispatch({
 				type: GET_PROFILE,
 				payload: res.data,
 			})
 		} catch (err) {
-			console.log('err being hit in getCurrentProfile()')
-			console.log(err.response)
 			dispatch({
 				type: PROFILE_ERROR,
 				payload: {
@@ -230,19 +221,16 @@ const RegistrationState = props => {
 	}
 	//Load user
 	const loadUser = async () => {
-		console.log("loadUser fired");
 		if (localStorage.token) {
 			setAuthToken(localStorage.token)
 		}
 		try {
 			const res = await axios.get('/api/auth');
-			console.log("res.data: ", res.data)
 			dispatch({
 				type: USER_LOADED,
 				payload: res.data,
 			})
 		} catch (err) {
-			console.log({ err })
 
 			dispatch({
 				type: AUTH_ERROR,
@@ -266,7 +254,6 @@ const RegistrationState = props => {
 			})
 			loadUser()
 		} catch (err) {
-			console.log({ err })
 			const errors = err.response.data.errors
 			if (errors) {
 				errors.forEach(error => {
@@ -282,7 +269,6 @@ const RegistrationState = props => {
 	//logout user
 
 	const logout = () => {
-		console.log("Logout being hit!!")
 
 		dispatch({ type: LOGOUT })
 		dispatch({ type: CLEAR_PROFILE })
@@ -355,9 +341,25 @@ const RegistrationState = props => {
 		}
 	}
 
+	const contactUs = async (formData) => {
+		try {
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+
+			const res = await axios.post('/api/contact', formData, config);
+
+			return true
+		} catch (err) {
+			console.error('Error sending contact form:', err);
+			setAlert('Failed to send the message. Please try again later.', 'danger');
+		}
+	};
+
 	//Set Loading
 	const setLoading = trueOrFalse => {
-		console.log('Inside setLoading')
 		dispatch({
 			type: SET_LOADING,
 			payload: trueOrFalse,
@@ -386,7 +388,8 @@ const RegistrationState = props => {
 				addTeamMembers,
 				deleteTeamMember,
 				enterScore,
-				enterMiles
+				enterMiles,
+				contactUs
 			}}
 		>
 			{props.children}

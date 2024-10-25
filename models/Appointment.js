@@ -1,54 +1,57 @@
 const { Schema, model } = require('mongoose');
 
 const AppointmentSchema = new Schema({
-    customerFirstName: {
+    firstName: {
         type: String,
         required: true
     },
-    customerLastName: {
+    lastName: {
         type: String,
         required: true
     },
-    customerCelPhone: {
+    celPhone: {
         type: String,
         required: true
     },
-    customerAddress: {
+    address: {
         type: String,
         required: true
     },
-    customerCity: {
+    city: {
         type: String,
         required: true
     },
-    customerState: {
+    state: {
         type: String,
         required: true
     },
-    customerZip: {
+    zip: {
         type: String,
         required: true
     },
-    customerEmail: {
+    email: {
         type: String,
         required: true
     },
-    customerDOB: {
+    dob: {
         type: Date,
         required: true
     },
-    customerVehicleVIN: {
+    vehicleVIN: {
         type: String,
         required: true
     },
-    customerVehicleInfoAndUpgrades: {
+    vehicleInfoAndUpgrades: {
         type: String,
         required: true
     },
-    customerVehiclePics: {
+    vehiclePics: {
         type: [String], // Store file paths or URLs for uploaded pics
     },
-    customerDesiredMusic: {
+    vehicleVideos: {
+        type: [String], // Store file paths or URLs for uploaded videos
+    },
+    desiredMusic: {
         type: String
     },
     selectedOptions: [

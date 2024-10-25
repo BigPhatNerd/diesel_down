@@ -8,12 +8,18 @@ import RegistrationContext from "../../../context/registration/registrationConte
 const UserRegistration = () => {
   const styles = {
     container: {
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)),url(${background})`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)),url(${background})`,
       backgroundPosition: "center",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       width: "100vw",
       height: "100vh",
+    },
+    button: {
+      backgroundColor: '#C70C18', // Red color
+      color: 'white',
+      borderColor: '#C70C18',
+      transition: 'background-color 0.3s, color 0.3s'
     },
   };
   const registrationContext = useContext(RegistrationContext);
@@ -26,8 +32,7 @@ const UserRegistration = () => {
     password2: "",
   });
   const { email, password, password2 } = formData;
-  console.log("UserRegistration");
-  console.log({ registrationContext });
+
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -42,7 +47,7 @@ const UserRegistration = () => {
       register({ email, password });
     }
   };
-  console.log({ registrationContext });
+
   if (user.isAuthenticated) return <Redirect to="/" />;
   return (
     <div id="cover" style={styles.container}>
@@ -88,7 +93,7 @@ const UserRegistration = () => {
               />
             </Form.Group>
             {loading && <Spinner />}
-            <Button variant="primary" type="submit">
+            <Button style={styles.button} type="submit" className="custom-button">
               Submit
             </Button>
           </Form>

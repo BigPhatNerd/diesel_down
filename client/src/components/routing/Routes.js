@@ -12,13 +12,10 @@ import AboutUs from '../pages/AboutUs';
 
 import Checkout from '../pages/Checkout';
 import Dashboard from '../pages/Dashboard';
-import CreateProfile from '../profile-forms/CreateProfile';
 import PrivateRoute from '../routing/PrivateRoute';
-import EditTeamName from '../profile-forms/EditTeamName';
-import AddTeamMembers from '../profile-forms/AddTeamMembers';
-import EnterScores from '../profile-forms/EnterScores';
 import BookDyno from '../pages/BookDyno';
 import HowItWorks from '../pages/HowItWorks';
+import ContactUs from '../pages/ContactUs';
 
 
 
@@ -33,14 +30,11 @@ const Routes = () => {
 				<Route exact path="/user-registration" component={UserRegistration} />
 				<Route exact path="/checkout" component={Checkout} />
 				<Route exact path='/dashboard' component={Dashboard} />
-				<Route exact path='/create-team-profile' component={CreateProfile} />
 				<Route exact path='/more-info' component={MoreInfo} />
 				<Route exact path='/book-dyno' component={BookDyno} />
 				<Route exact path='/how-it-works' component={HowItWorks} />
 				<Route exact path='/about-us' component={AboutUs} />
-				<PrivateRoute exact path='/edit-team-name' component={EditTeamName} />
-				<PrivateRoute exact path='/add-team-members' component={AddTeamMembers} />
-				<PrivateRoute exact path='/enter-scores' component={EnterScores} />
+				<Route exact path='/contact-us' component={ContactUs} />
 				<Route component={NotFound} />
 			</Switch>
 		</>
