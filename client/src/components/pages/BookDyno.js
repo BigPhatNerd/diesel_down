@@ -66,7 +66,7 @@ const BookDyno = ({ history }) => {
                 <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
-                        src={`https://form.jotform.com/243175484508159?email=${user && user.email ? user.email : ''}`} // Replace with your JotForm URL
+                        src={`https://form.jotform.com/243176354266157?email=${user && user.email ? user.email : ''}`} // Replace with your JotForm URL
                         width="100%"
                         height="600px"
                         frameBorder="0"

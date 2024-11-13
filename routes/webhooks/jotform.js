@@ -63,7 +63,7 @@ router.post('/jotform/book-dyno', async (req, res) => {
                 }
 
                 const messageBody = `
-New Dyno Appointment:
+🙌 New Dyno Appointment 🙌:
 Name: ${appointmentData.name.first} ${appointmentData.name.last}
 Email: ${appointmentData.email}
 Phone: ${appointmentData.phone}
@@ -75,7 +75,7 @@ Tuning Goal: ${appointmentData.tuningGoal}
                 await client.messages.create({
                     body: messageBody,
                     from: process.env.TWILIO_PHONE_NUMBER,
-                    to: process.env.YOUR_PHONE_NUMBER,
+                    to: process.env.MY_PHONE_NUMBER,
                 });
 
                 res.status(201).json({ msg: 'Appointment saved successfully', appointment });
