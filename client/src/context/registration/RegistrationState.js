@@ -29,6 +29,7 @@ const RegistrationState = props => {
 		user: {
 			isAuthenticated: false,
 			email: '',
+			appointments: []
 
 		},
 		loading: true,
