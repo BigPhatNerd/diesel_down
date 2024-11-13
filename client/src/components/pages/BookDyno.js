@@ -62,7 +62,7 @@ const BookDyno = ({ history }) => {
                     </p>
                 </Row>
 
-                //PRODUCTION Book Dyno
+                {/* PRODUCTION Book Dyno */}
                 <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
@@ -75,7 +75,7 @@ const BookDyno = ({ history }) => {
                     ></iframe>
                 </Row>
 
-                //Development Book Dyno
+                {/* Development Book Dyno */}
                 {/* <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
