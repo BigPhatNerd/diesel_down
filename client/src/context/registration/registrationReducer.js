@@ -122,7 +122,7 @@ const RegistrationReducer = (state, action) => {
 				...state,
 				user: {
 					...state.user,
-					appointments: action.payload.appointments || [],
+					appointments: action.payload?.appointments || [],
 					isAuthenticated: true,
 					email: action.payload?.email,
 
