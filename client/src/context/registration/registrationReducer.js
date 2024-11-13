@@ -6,6 +6,7 @@ import {
 	SET_ALERT,
 	REMOVE_ALERT,
 	SET_EMAIL,
+	SET_NAME,
 	USER_LOADED,
 	AUTH_ERROR,
 	LOGIN_SUCCESS,
@@ -41,8 +42,6 @@ const RegistrationReducer = (state, action) => {
 				user: {
 					isAuthenticated: false,
 					email: '',
-					eventId: '',
-					paid: false
 
 				}
 			}
@@ -53,11 +52,13 @@ const RegistrationReducer = (state, action) => {
 			};
 		case REGISTER_SUCCESS:
 		case LOGIN_SUCCESS:
+			console.log({ actionPayload: action.payload })
 			localStorage.setItem('token', action.payload.token);
 			return {
 				...state,
 				user: {
 					...state.user,
+					email: action.payload.email,
 					isAuthenticated: true,
 
 
@@ -105,16 +106,24 @@ const RegistrationReducer = (state, action) => {
 
 				}
 			};
+		case SET_NAME:
+			return {
+				...state,
+				user: {
+					...state.user,
+					name: action.payload,
+
+				}
+			};
 
 		case USER_LOADED:
+			console.log({ actionPayload: action.payload })
 			return {
 				...state,
 				user: {
 					...state.user,
 					isAuthenticated: true,
 					email: action.payload?.email,
-					eventId: action.payload?.eventId,
-					paid: action.payload?.paid
 
 				}
 			}

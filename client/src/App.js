@@ -6,6 +6,7 @@ import './App.css'
 import MyNavbar from './components/MyNavbar'
 import Routes from './components/routing/Routes'
 import Landing from './components/pages/Landing'
+import ScrollToTop from './components/ScrollToTop';
 
 import RegistrationState from './context/registration/RegistrationState'
 
@@ -16,14 +17,17 @@ function App() {
 
 		<RegistrationState>
 			<Router>
+				<ScrollToTop />
 				<MyNavbar />
+				<div className="content-container">
 
-				{/*<Spinner />*/}
-				<Switch>
-					<Route exact path="/" component={Landing} />
-					<Route component={Routes} />
+					{/*<Spinner />*/}
+					<Switch>
+						<Route exact path="/" component={Landing} />
+						<Route component={Routes} />
 
-				</Switch>
+					</Switch>
+				</div>
 			</Router>
 		</RegistrationState>
 

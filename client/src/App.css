@@ -57,6 +57,10 @@ li.country {
     color: grey;
 }
 
+.content-container {
+    padding-top: 70px;
+    /* Adjust to the height of your navbar */
+}
 
 .color-nav {
     background-color: var(--primary-color);
@@ -89,7 +93,7 @@ body,
     /* font-family: 'Raleway', sans-serif;*/
     font-family: 'Oswald',
         sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     background-color: var(--background-color);
     color: white;

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Row } from "react-bootstrap";
+import BookDynoButton from "./BookDynoButton";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
@@ -59,12 +60,16 @@ const MoreInfo = () => {
                             <strong>Enhanced Engine Response:</strong> Our testing allows precise adjustments to ensure smoother acceleration, better throttle response, and optimal power delivery.
                         </li>
                         <li>
-                            <strong>Customized Tuning Solutions:</strong> Each vehicle is different, and we use the data to create a custom tuning solution that meets your specific performance goals, whether it's for street performance, drag racing, or heavy-duty applications.
+                            <strong>Customized Tuning Solutions:</strong> Each vehicle is different, and we use the data to create a custom tuning solution that meets your specific performance goals, whether it's for street performance, towing, or better fuel mileage.
                         </li>
                     </ul>
                     <p>
                         The combination of cutting-edge technology and expert tuning ensures your diesel or high-performance vehicle runs at its best, providing power, reliability, and improved drivability.
                     </p>
+                </Row>
+
+                <Row className="justify-content-center m-4">
+                    <BookDynoButton style={styles.button} />
                 </Row>
 
                 <NavigationLinks user={user} currentPage="more-info" />

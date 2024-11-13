@@ -4,12 +4,27 @@ const connectDB = require('./config/db');
 const path = require('path');
 const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
-const contact = require('./routes/api/contact');
-const profile = require('./routes/api/profile')
-const stripe = require('./routes/stripe');
+const jotFormWebhook = require('./routes/webhooks/jotform');
+
 var cors = require('cors')
 const app = express();
 connectDB();
+
+
+app.use((req, res, next) => {
+  console.log({ env: process.env.NODE_ENV });
+  // Skip redirection for local development
+  if (process.env.NODE_ENV !== 'production') {
+    return next();
+  }
+
+  // Redirect to HTTPS if not already secure
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(`https://${req.headers.host}${req.url}`);
+  }
+  next();
+});
+
 
 //Init middleware
 app.use((_, res, next) => {
@@ -25,9 +40,7 @@ app.use(express.json({ extended: false }));
 
 app.use('/api/users', users);
 app.use('/api/auth', auth);
-app.use('/api/profile', profile);
-app.use('/stripe', stripe);
-app.use('/api/contact', contact);
+app.use('/webhooks', jotFormWebhook);
 
 
 
@@ -39,6 +52,6 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 4390;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

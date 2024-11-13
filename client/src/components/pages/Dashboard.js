@@ -1,7 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
-import Spinner from '../Spinner';
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
@@ -11,17 +9,16 @@ import RegistrationContext from '../../context/registration/registrationContext'
 const Dashboard = () => {
     const registrationContext = useContext(RegistrationContext)
     const {
-        getCurrentProfile,
+        loadUser,
         profile,
-        loading,
         user,
     } = registrationContext
 
     useEffect(() => {
-        getCurrentProfile()
+        loadUser()
         //eslint-disable-next-line
     }, [])
-
+    console.log("in dashboard", { user, profile })
     const styles = getBackgroundStyles();
 
     return (
@@ -34,6 +31,7 @@ const Dashboard = () => {
                     <h3>Welcome {user?.name}</h3>
                 </Row>
 
+                <NavigationLinks user={user} currentPage="dashboard" />
             </Container>
         </div>
     )

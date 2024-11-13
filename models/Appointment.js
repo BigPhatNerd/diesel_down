@@ -1,79 +1,35 @@
 const { Schema, model } = require('mongoose');
 
 const AppointmentSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
+    name: {
+        first: { type: String, required: true },
+        last: { type: String, required: true },
     },
-    lastName: {
-        type: String,
-        required: true
-    },
-    celPhone: {
-        type: String,
-        required: true
-    },
+    email: { type: String, required: true },
+    phone: { type: String, required: true },
     address: {
-        type: String,
-        required: true
+        line1: { type: String, required: true },
+        line2: { type: String },
+        city: { type: String, required: true },
+        state: { type: String, required: true },
+        postal: { type: String, required: true },
     },
-    city: {
-        type: String,
-        required: true
+    appointmentDetails: {
+        implementation: { type: String, required: true },
+        date: { type: Date, required: true },
+        duration: { type: Number, required: true },
+        timezone: { type: String, required: true },
     },
-    state: {
-        type: String,
-        required: true
+    vehicle: {
+        vin: { type: String, required: true },
+        info: { type: String, required: true },
+        engineType: { type: String, required: true },
+        transmissionType: { type: String, required: true },
     },
-    zip: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    dob: {
-        type: Date,
-        required: true
-    },
-    vehicleVIN: {
-        type: String,
-        required: true
-    },
-    vehicleInfoAndUpgrades: {
-        type: String,
-        required: true
-    },
-    vehiclePics: {
-        type: [String], // Store file paths or URLs for uploaded pics
-    },
-    vehicleVideos: {
-        type: [String], // Store file paths or URLs for uploaded videos
-    },
-    desiredMusic: {
-        type: String
-    },
-    selectedOptions: [
-        {
-            name: String,
-            descr: String,
-            price: Number,
-            id: Number
-        }
-    ],
-    totalPrice: {
-        type: Number,
-        required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    }
+    tuningGoal: { type: String, required: true },
+    primaryUse: { type: String, required: true },
+    knownIssues: { type: String },
+    eventId: { type: String, required: true },
 });
 
 const Appointment = model('Appointment', AppointmentSchema);

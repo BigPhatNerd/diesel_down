@@ -8,17 +8,11 @@ const { check, validationResult } = require('express-validator');
 const { userValidations } = require('../validationHelpers');
 
 
-//@route GET api/users
-//@desc Test route
-//@access Public
-router.get("/", (req, res) => {
-    res.send("User route");
-})
 
 //@route POST api/users
 //@desc Register route
 //@access Public
-router.post('/', userValidations,
+router.post('/register', userValidations,
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

@@ -3,21 +3,22 @@ import { Redirect } from "react-router-dom";
 import { Container, Col, Button, Form, Row } from "react-bootstrap";
 import NavigationLinks from "../../NavigationLinks";
 import { getBackgroundStyles } from "../../helpers/backgroundStyles";
-import Spinner from "../../Spinner";
 import logo from "../../../img/transparent_white_red.png";
 import RegistrationContext from "../../../context/registration/registrationContext";
+
 const UserRegistration = () => {
   const styles = getBackgroundStyles();
   const registrationContext = useContext(RegistrationContext);
-  const { user, register, setAlert, setEmail, loading } =
+  const { user, register, setAlert, setEmail, setName } =
     registrationContext;
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
     password2: "",
   });
-  const { email, password, password2 } = formData;
+  const { name, email, password, password2 } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,7 +31,8 @@ const UserRegistration = () => {
       setAlert("Passwords do not match", "dark");
     } else {
       setEmail(email);
-      register({ email, password });
+      setName(name)
+      register({ name, email, password });
     }
   };
 
@@ -44,9 +46,23 @@ const UserRegistration = () => {
         <Row className="justify-content-center m-2">
           <h1>User Registration</h1>
         </Row>
+        <Row className="justify-content-center m-2">
+          <p style={styles.italicText}>
+            Logins not your thing?<br /> (They annoy me too.) <br />Call or Text Us at (901) 443-7461
+          </p>
+        </Row>
         <Col>
           <Form onSubmit={(e) => onSubmit(e)}>
-
+            <Form.Group controlId="formBasicName"> {/* Added name field */}
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                onChange={(e) => onChange(e)}
+                value={name}
+                name="name"
+                type="text"
+                placeholder="Enter your full name"
+              />
+            </Form.Group>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -81,7 +97,6 @@ const UserRegistration = () => {
                 placeholder="Password confirmation"
               />
             </Form.Group>
-            {loading && <Spinner />}
             <Button style={styles.button} type="submit" className="custom-button">
               Submit
             </Button>

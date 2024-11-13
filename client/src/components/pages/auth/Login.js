@@ -39,13 +39,18 @@ const Login = () => {
           <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
         </Row>
         <Row className="justify-content-center m-2">
+          <p style={styles.italicText}>
+            Don’t hesitate to reach out. <br />Call or Text Us at (901) 443-7461
+          </p>
+        </Row>
+        <Row className="justify-content-center m-2">
           <h1>Sign In </h1>
         </Row>
 
         <Form onSubmit={e => onSubmit(e)}>
           <Form.Group controlId="formBasicFirstName">
             <Form.Label>Email</Form.Label>
-            <Form.Control onChange={e => onChange(e)} value={email} name="email" type="email" placeholder="Enter email" />
+            <Form.Control onChange={e => onChange(e)} value={email} name="email" type="text" placeholder="Enter email" />
           </Form.Group>
           <Form.Group controlId="formBasicLastName">
             <Form.Label>Password</Form.Label>

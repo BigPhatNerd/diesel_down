@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
-import { Container, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
+import BookDynoButton from "./BookDynoButton";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks"; // Import the new component
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
@@ -16,7 +16,7 @@ const Landing = () => {
   }, []);
 
   const styles = getBackgroundStyles();
-
+  console.log({ user })
   return (
     <div id="cover" style={styles.container}>
       <Container className="pt-3">
@@ -40,7 +40,7 @@ const Landing = () => {
         <Row className="justify-content-center m-2">
           <ul style={{ listStylePosition: 'outside', paddingLeft: '20px', textAlign: 'left' }}>
             <li>💪 Handles up to 14,000 lbs – That’s a pretty big boy.</li>
-            <li>⚡ 2400 HP Capacity – That’s a shit-ton of power.</li>
+            <li>⚡ 2400 HP Capacity – That’s a lot of power.</li>
             <li>🔥 15,000 ft-lbs of Torque – Get the facts on what your truck can really do.</li>
             <li>🏆 World’s Largest Eddy Brake – The biggest brake there is, capable of handling over 850+ HP and 3000 ft-lbs of torque.</li>
           </ul>
@@ -67,22 +67,23 @@ const Landing = () => {
         </Row>
         <Row className="justify-content-center m-2">
           <p>
+            <strong>Specialized Tuning for Cummins (Dodge/RAM) and Duramax (GMC/Chevy):</strong> While we dyno test all diesel vehicles, we focus on delivering efficient and powerful custom tunes specifically for Cummins and Duramax engines. With our expertise in these brands, we ensure that your engine reaches its peak performance. Armed with our dyno data, you get the insights you need for a smoother, more powerful ride that’s built for your goals.
+          </p>
+        </Row>
+        <Row className="justify-content-center m-2">
+          <p>
             <strong>Custom Tuning – Tailored to You: &nbsp;
-            </strong> At Diesel Down, we don’t do “one-size-fits-all.” Every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to drag racing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says so.
+            </strong> At Diesel Down, we don’t do “one-size-fits-all.” Every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to towing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says so.
           </p>
         </Row>
 
         <Row className="justify-content-center m-4">
-          <Link to="/book-dyno" style={{ textDecoration: 'none' }}>
-            <Button style={styles.button} className="custom-button">
-              Book Your Dyno Session Today!
-            </Button>
-          </Link>
+          <BookDynoButton style={styles.button} />
         </Row>
 
         <Row className="justify-content-center m-2">
           <p style={styles.italicText}>
-            Have Questions? Let’s Chat. <br />Call or Text Us at (901) 921-3757
+            Have Questions? Let’s Chat. <br />Call or Text Us at (901) 443-7461
           </p>
         </Row>
 

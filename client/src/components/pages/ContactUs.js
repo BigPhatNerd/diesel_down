@@ -72,7 +72,7 @@ const ContactUs = () => {
                 </Row>
                 <Row className="justify-content-center">
                     <p style={styles.italicText}>
-                        Have questions? We're here to help. <br />Fill out the form below, or give us a call or text at (901) 921-3757.
+                        Have questions? We're here to help. <br />Fill out the form below, or give us a call or text at (901) 443-7461.
                     </p>
                 </Row>
                 <Form onSubmit={e => onSubmit(e)}>

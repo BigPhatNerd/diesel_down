@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import RegisterOrSignup from '../pages/RegisterOrSignup'
 import UserRegistration from '../pages/auth/UserRegistration'
 import NotFound from '../pages/NotFound'
 import Login from '../pages/auth/Login'
@@ -8,11 +7,7 @@ import Alert from '../Alert';
 
 import MoreInfo from '../pages/MoreInfo';
 import AboutUs from '../pages/AboutUs';
-
-
-import Checkout from '../pages/Checkout';
 import Dashboard from '../pages/Dashboard';
-import PrivateRoute from '../routing/PrivateRoute';
 import BookDyno from '../pages/BookDyno';
 import HowItWorks from '../pages/HowItWorks';
 import ContactUs from '../pages/ContactUs';
@@ -25,10 +20,8 @@ const Routes = () => {
 		<>
 			<Alert />
 			<Switch>
-				<Route exact path="/register-or-signup" component={RegisterOrSignup} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/user-registration" component={UserRegistration} />
-				<Route exact path="/checkout" component={Checkout} />
 				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/more-info' component={MoreInfo} />
 				<Route exact path='/book-dyno' component={BookDyno} />
