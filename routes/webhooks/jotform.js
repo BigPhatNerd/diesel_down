@@ -3,6 +3,9 @@ const multer = require('multer');
 const upload = multer();
 const router = express.Router();
 const { Appointment, User } = require('../../models');
+const twilio = require('twilio');
+
+const client = new twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 // @route POST /webhooks/jotform
 // @desc Handle incoming webhook from JotForm
@@ -19,7 +22,7 @@ router.post('/jotform/book-dyno', async (req, res) => {
         if (match && match[1]) {
             try {
                 const parsedData = JSON.parse(match[1]);
-
+                console.log({ parsedData })
                 const appointmentData = {
                     name: parsedData.q3_name,
                     email: parsedData.q4_email,
@@ -59,6 +62,22 @@ router.post('/jotform/book-dyno', async (req, res) => {
                     await user.save();
                 }
 
+                const messageBody = `
+New Dyno Appointment:
+Name: ${appointmentData.name.first} ${appointmentData.name.last}
+Email: ${appointmentData.email}
+Phone: ${appointmentData.phone}
+Vehicle: ${appointmentData.vehicle.info}
+Date: ${appointmentData.appointmentDetails.date}
+Tuning Goal: ${appointmentData.tuningGoal}
+                `;
+
+                await client.messages.create({
+                    body: messageBody,
+                    from: process.env.TWILIO_PHONE_NUMBER,
+                    to: process.env.YOUR_PHONE_NUMBER,
+                });
+
                 res.status(201).json({ msg: 'Appointment saved successfully', appointment });
             } catch (error) {
                 console.error('Error processing appointment:', error);
@@ -76,6 +95,5 @@ router.post('/jotform/book-dyno', async (req, res) => {
     });
 });
 
-router.post('/jotform/login', async (req, res) => { })
 
 module.exports = router;

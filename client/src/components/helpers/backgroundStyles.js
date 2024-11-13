@@ -36,6 +36,18 @@ export const getBackgroundStyles = () => {
             borderColor: '#C70C18',
             transition: 'background-color 0.3s, color 0.3s'
         },
+        row: {
+            backgroundColor: '#C70C18',
+            color: 'white',
+            padding: '10px',
+            borderRadius: '5px',
+            textAlign: 'center',
+            transition: 'background-color 0.3s, color 0.3s',
+            cursor: 'pointer',
+        },
+        rowHover: {
+            backgroundColor: '#A00E15', // Slightly darker red for hover
+        },
     };
 
     const isMobile = window.innerWidth <= 768;
