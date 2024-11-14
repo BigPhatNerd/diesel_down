@@ -28,7 +28,7 @@ const Login = () => {
     }
 
   }
-  if (user.isAuthenticated) {
+  if (user.isAuthenticated && user.email) {
     return <Redirect to='/book-dyno' />;
   }
 
