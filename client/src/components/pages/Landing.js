@@ -16,7 +16,7 @@ const Landing = () => {
   }, []);
 
   const styles = getBackgroundStyles();
-  console.log({ user })
+
   return (
     <div id="cover" style={styles.container}>
       <Container className="pt-3">

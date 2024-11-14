@@ -7,6 +7,7 @@ import logo from "../../../img/transparent_white_red.png";
 import RegistrationContext from "../../../context/registration/registrationContext";
 
 const UserRegistration = () => {
+  console.log("Heerrreeee in userRegistraion")
   const styles = getBackgroundStyles();
   const registrationContext = useContext(RegistrationContext);
   const { user, register, setAlert, setEmail, setName } =
@@ -23,8 +24,9 @@ const UserRegistration = () => {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  console.log({ name, email, setName, setEmail })
   const onSubmit = (e) => {
+    console.log("Here")
     e.preventDefault();
 
     if (password !== password2) {
