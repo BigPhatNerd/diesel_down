@@ -34,7 +34,6 @@ router.post('/',
             .exists()
     ],
     async (req, res) => {
-        console.log("Is this the problem")
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -68,7 +67,7 @@ router.post('/',
                 payload,
                 process.env.JWT_SECRET, { expiresIn: 3600000 },
                 (err, token) => {
-                    console.log("token in api/auth.js", { token })
+
                     if (err) throw err;
 
                     res.json({ token, email: user.email });

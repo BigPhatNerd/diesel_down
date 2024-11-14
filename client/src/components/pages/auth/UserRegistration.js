@@ -24,7 +24,7 @@ const UserRegistration = () => {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log({ name, email, setName, setEmail })
+
   const onSubmit = (e) => {
     console.log("Here")
     e.preventDefault();
@@ -39,7 +39,7 @@ const UserRegistration = () => {
     }
   };
 
-  if (user.isAuthenticated) return <Redirect to="/" />;
+  if (user.isAuthenticated) return <Redirect to="/book-dyno" />;
   return (
     <div id="cover" style={styles.container}>
       <Container>

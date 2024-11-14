@@ -95,5 +95,61 @@ Tuning Goal: ${appointmentData.tuningGoal}
     });
 });
 
+// @route POST /webhooks/contact-us
+// @desc Handle incoming Contact Us form submission
+// @access Public
+router.post('/jotform/contact-us', async (req, res) => {
+    let body = '';
+
+    req.on('data', (chunk) => {
+        body += chunk.toString(); // Collect chunks into `body`
+    });
+
+    req.on('end', async () => {
+        try {
+            // Use regex to extract the rawRequest JSON
+            const match = body.match(/name="rawRequest"\r\n\r\n([\s\S]*?)\r\n/);
+
+            if (match && match[1]) {
+                // Parse the extracted JSON string
+                const parsedData = JSON.parse(match[1]);
+
+                // Construct the message
+                const messageBody = `
+🙌 New Contact Us Form Submission 🙌:
+Name: ${parsedData.q3_name.first} ${parsedData.q3_name.last}
+Email: ${parsedData.q4_email}
+Phone: ${parsedData.q5_celPhone.full}
+Subject: ${parsedData.q27_subject}
+Message: ${parsedData.q29_message}
+                `;
+
+                // Send the Twilio SMS
+                await client.messages.create({
+                    body: messageBody,
+                    from: process.env.TWILIO_PHONE_NUMBER,
+                    to: process.env.MY_PHONE_NUMBER,
+                });
+
+                res.status(201).json({ msg: 'Contact Us form received successfully', parsedData });
+            } else {
+                console.error('rawRequest not found in the payload');
+                res.status(400).send('rawRequest field not found in the payload');
+            }
+        } catch (error) {
+            console.error('Error processing form submission:', error);
+            res.status(400).send('Error processing form submission');
+        }
+    });
+
+    req.on('error', (err) => {
+        console.error('Error receiving data:', err.message);
+        res.status(500).send('Server Error');
+    });
+});
+
+
+
+
 
 module.exports = router;

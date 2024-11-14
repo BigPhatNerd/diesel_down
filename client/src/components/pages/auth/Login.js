@@ -29,7 +29,7 @@ const Login = () => {
 
   }
   if (user.isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to='/book-dyno' />;
   }
 
   return (
