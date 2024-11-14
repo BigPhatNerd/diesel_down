@@ -12,7 +12,6 @@ connectDB();
 
 
 app.use((req, res, next) => {
-  console.log({ env: process.env.NODE_ENV });
   // Skip redirection for local development
   if (process.env.NODE_ENV !== 'production') {
     return next();

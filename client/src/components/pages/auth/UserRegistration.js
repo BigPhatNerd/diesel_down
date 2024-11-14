@@ -30,6 +30,7 @@ const UserRegistration = () => {
     if (password !== password2) {
       setAlert("Passwords do not match", "dark");
     } else {
+      console.log({ email, name })
       setEmail(email);
       setName(name)
       register({ name, email, password });

@@ -18,7 +18,7 @@ router.post('/register', userValidations,
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { email, password } = req.body;
+        const { name, email, password } = req.body;
 
         try {
             let user = await User.findOne({ email });
@@ -28,6 +28,7 @@ router.post('/register', userValidations,
             }
 
             user = new User({
+                name,
                 email,
                 password
             });

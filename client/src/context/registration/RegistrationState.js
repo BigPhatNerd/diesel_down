@@ -150,7 +150,7 @@ const RegistrationState = props => {
 		try {
 
 			setLoading(true)
-			const res = await axios.post('/api/users', body, config)
+			const res = await axios.post('/api/users/register', body, config)
 
 
 			dispatch({

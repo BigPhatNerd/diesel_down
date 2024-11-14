@@ -11,13 +11,11 @@ const { check, validationResult } = require('express-validator');
 //@access Public
 
 router.get('/', auth, async (req, res) => {
-    console.log("I made it here", { user: req.user })
     try {
         const user = await User.findById(req.user.id)
             .select('-password')
             .populate('appointments')
 
-        console.log({ user })
         res.json(user)
     } catch (err) {
         console.error(err.message)
