@@ -43,7 +43,7 @@ const BookDyno = ({ history }) => {
         //eslint-disable-next-line
     }, []);
 
-    if (!user || !user.isAuthenticated) {
+    if (!user || !user.isAuthenticated || !user.email) {
         return <Redirect to="/login" />;
     }
 
@@ -63,7 +63,7 @@ const BookDyno = ({ history }) => {
                 </Row>
 
                 {/* PRODUCTION Book Dyno */}
-                {/* <Row className="justify-content-center">
+                <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
                         src={`https://form.jotform.com/243176354266157?email=${user && user.email ? user.email : ''}`} // Replace with your JotForm URL
@@ -73,10 +73,10 @@ const BookDyno = ({ history }) => {
                         style={{ border: 'none' }}
                         allow="geolocation; microphone; camera"
                     ></iframe>
-                </Row> */}
+                </Row>
 
                 {/* Development Book Dyno */}
-                <Row className="justify-content-center">
+                {/* <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
                         src={`https://form.jotform.com/243137760742154?name[first]=Wilson&name[last]=Horrell&email=wilsonhorrell@gmail.com&celPhone=1234567890&address[addr_line1]=123+Main+St&address[city]=City&address[state]=State&address[postal]=12345&appointment=2024-11-10+4%3A00+PM&vehicleVin=1HGCM82633A123456&vehicleInfo=2000+Dodge+Ram+2500&engineType=5.9L+Cummins&transmissionType=Automatic&tuningGoal=Performance&primaryUse=Daily+Driving`}
@@ -87,7 +87,7 @@ const BookDyno = ({ history }) => {
                         style={{ border: 'none' }}
                         allow="geolocation; microphone; camera"
                     ></iframe>
-                </Row>
+                </Row> */}
 
 
                 <br />
