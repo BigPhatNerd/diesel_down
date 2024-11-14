@@ -124,6 +124,13 @@ const RegistrationState = props => {
 		})
 	}
 
+	const setName = name => {
+		dispatch({
+			type: SET_NAME,
+			payload: name,
+		})
+	}
+
 	//Register user
 	const register = async ({
 		name,
@@ -200,6 +207,7 @@ const RegistrationState = props => {
 				setAlert,
 				register,
 				setEmail,
+				setName,
 				setLoading,
 				login,
 				logout,
