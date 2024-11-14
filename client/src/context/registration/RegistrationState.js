@@ -126,6 +126,7 @@ const RegistrationState = props => {
 
 	//Register user
 	const register = async ({
+		name,
 		email,
 		password,
 
@@ -136,7 +137,7 @@ const RegistrationState = props => {
 				'Content-Type': 'application/json',
 			},
 		}
-		const body = { email, password }
+		const body = { name, email, password }
 
 		try {
 
