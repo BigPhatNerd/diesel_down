@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import RegistrationContext from '../context/registration/registrationContext';
@@ -11,9 +11,20 @@ const MyNavbar = () => {
   const location = useLocation();
 
   const currentPath = location.pathname;
+  const [expanded, setExpanded] = useState(false);
+
+  const handleLinkClick = () => {
+    setExpanded(false); // Collapse the menu
+  };
 
   return (
-    <Navbar className="color-nav" expand="lg" fixed="top">
+    <Navbar
+      className="color-nav"
+      expand="lg"
+      fixed="top"
+      expanded={expanded}
+      onToggle={(isOpen) => setExpanded(isOpen)}
+    >
       <Navbar.Brand as={Link} to="/">
         <img
           src={dieselDownIcon}
@@ -22,43 +33,45 @@ const MyNavbar = () => {
           className="d-inline-block align-top"
         />
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          {currentPath !== "/" && <Nav.Link as={Link} to="/">Home</Nav.Link>}
+          {currentPath !== "/" && (
+            <Nav.Link as={Link} to="/" onClick={handleLinkClick}>Home</Nav.Link>
+          )}
 
           {!user.isAuthenticated && currentPath !== "/login" && (
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            <Nav.Link as={Link} to="/login" onClick={handleLinkClick}>Login</Nav.Link>
           )}
 
           {currentPath !== "/dashboard" && (
-            <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link as={Link} to="/dashboard" onClick={handleLinkClick}>Dashboard</Nav.Link>
           )}
 
           {currentPath !== "/more-info" && (
-            <Nav.Link as={Link} to="/more-info">More Info</Nav.Link>
+            <Nav.Link as={Link} to="/more-info" onClick={handleLinkClick}>More Info</Nav.Link>
           )}
 
           {currentPath !== "/how-it-works" && (
-            <Nav.Link as={Link} to="/how-it-works">How It Works</Nav.Link>
+            <Nav.Link as={Link} to="/how-it-works" onClick={handleLinkClick}>How It Works</Nav.Link>
           )}
 
           {currentPath !== "/book-dyno" && (
-            <Nav.Link as={Link} to="/book-dyno">
-              Book a Dyno
-            </Nav.Link>
+            <Nav.Link as={Link} to="/book-dyno" onClick={handleLinkClick}>Book a Dyno</Nav.Link>
           )}
 
           {currentPath !== "/about-us" && (
-            <Nav.Link as={Link} to="/about-us">About Us</Nav.Link>
+            <Nav.Link as={Link} to="/about-us" onClick={handleLinkClick}>About Us</Nav.Link>
           )}
 
           {currentPath !== "/contact-us" && (
-            <Nav.Link as={Link} to="/contact-us">Contact Us</Nav.Link>
+            <Nav.Link as={Link} to="/contact-us" onClick={handleLinkClick}>Contact Us</Nav.Link>
           )}
 
           {user.isAuthenticated && currentPath !== "/" && (
-            <Nav.Link as={Link} to="/" onClick={logout}>Logout</Nav.Link>
+            <Nav.Link as={Link} to="/" onClick={() => { handleLinkClick(); logout(); }}>
+              Logout
+            </Nav.Link>
           )}
         </Nav>
       </Navbar.Collapse>

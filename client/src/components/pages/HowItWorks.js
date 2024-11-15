@@ -30,7 +30,7 @@ const HowItWorks = () => {
                     <ol>
                         <li><strong>Book Your Appointment:</strong> Schedule a time that works best for you.</li>
                         <li><strong>Show Up & Relax:</strong> Arrive on the day, kick back, ask questions, and share any details you might have forgotten.</li>
-                        <li><strong>Watch the Dyno Performance:</strong> Sit back and watch as we test your truck’s performance on the dyno.</li>
+                        <li><strong>Watch the Dyno Performance:</strong> Relax in the observation room as we test your truck’s performance on the dyno.</li>
                         <li><strong>Receive Your Data:</strong> Get detailed files with all the data produced from the run.</li>
                         <li><strong>Tuning & Re-Running (Optional):</strong> Choose to have your truck tuned and run again for even better performance.</li>
                         <li><strong>Take Your Data, Truck, & Tune:</strong> Leave with your data, truck, and tune, then go show the world just how badass your ride is.</li>
