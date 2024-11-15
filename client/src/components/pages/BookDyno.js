@@ -43,9 +43,9 @@ const BookDyno = ({ history }) => {
         //eslint-disable-next-line
     }, []);
 
-    if (!user || !user.isAuthenticated || !user.email) {
-        return <Redirect to="/login" />;
-    }
+    // if (!user || !user.isAuthenticated || !user.email) {
+    //     return <Redirect to="/login" />;
+    // }
 
     return (
         <div id='book-dyno' style={styles.container}>

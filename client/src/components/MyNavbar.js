@@ -44,7 +44,7 @@ const MyNavbar = () => {
           )}
 
           {currentPath !== "/book-dyno" && (
-            <Nav.Link as={Link} to={user && user.isAuthenticated ? "/book-dyno" : "/login"}>
+            <Nav.Link as={Link} to="/book-dyno">
               Book a Dyno
             </Nav.Link>
           )}

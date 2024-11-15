@@ -38,19 +38,12 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             )}
 
-            {user && user.isAuthenticated ? (
-                currentPage !== "book-dyno" && (
-                    <Link to="/book-dyno" className="custom-link">
-                        Book a Dyno
-                    </Link>
-                )
-            ) : (
-                currentPage !== "login" && (
-                    <Link to="/login" className="custom-link">
-                        Book a Dyno
-                    </Link>
-                )
-            )}
+
+            {currentPage !== "book-dyno" &&
+                <Link to="/book-dyno" className="custom-link">
+                    Book a Dyno
+                </Link>
+            }
 
             {currentPage !== "about-us" && (
                 <Link to="/about-us" className="custom-link">
