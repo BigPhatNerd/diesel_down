@@ -11,11 +11,7 @@ const BookDynoButton = ({ style }) => {
     const history = useHistory();
 
     const handleBookDynoClick = () => {
-        if (!user?.isAuthenticated) {
-            history.push('/login');
-        } else {
-            history.push('/book-dyno');
-        }
+        history.push('/book-dyno');
     };
 
     return (
