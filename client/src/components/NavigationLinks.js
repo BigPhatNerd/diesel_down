@@ -12,18 +12,11 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             )}
 
-            {user && user.isAuthenticated ? (
-                currentPage !== "dashboard" && (
-                    <Link to="/dashboard" className="custom-link">
-                        Dashboard
-                    </Link>
-                )
-            ) : (
-                currentPage !== "login" && (
-                    <Link to="/login" className="custom-link">
-                        Login
-                    </Link>
-                )
+            {currentPage !== "dashboard" && (
+                <Link to="/dashboard" className="custom-link">
+                    Dashboard
+                </Link>
+
             )}
 
             {currentPage !== "more-info" && (

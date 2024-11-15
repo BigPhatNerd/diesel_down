@@ -31,7 +31,7 @@ const MyNavbar = () => {
             <Nav.Link as={Link} to="/login">Login</Nav.Link>
           )}
 
-          {user.isAuthenticated && currentPath !== "/dashboard" && (
+          {currentPath !== "/dashboard" && (
             <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
           )}
 
