@@ -5,6 +5,7 @@ import RegistrationContext from "../../context/registration/registrationContext"
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const HowItWorks = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -56,6 +57,10 @@ const HowItWorks = () => {
                     <p style={styles.italicText}>
                         Have Questions? Let’s Chat. <br />Call or Text Us at (901) 443-7461
                     </p>
+                </Row>
+
+                <Row className="justify-content-center m-4">
+                    <SocialMediaLinks />
                 </Row>
 
                 <NavigationLinks user={user} currentPage="how-it-works" />

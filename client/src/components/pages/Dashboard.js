@@ -5,6 +5,7 @@ import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
 import { useHistory } from 'react-router-dom';
 import RegistrationContext from '../../context/registration/registrationContext';
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const Dashboard = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -115,6 +116,9 @@ const Dashboard = () => {
                         </Row>
                     </div>
                 )}
+                <Row className="justify-content-center m-4">
+                    <SocialMediaLinks />
+                </Row>
             </Container>
         </div>
     );

@@ -160,3 +160,15 @@ body,
 
 
 }
+
+.social-icon {
+    font-size: 1.5rem;
+    color: #C70C18;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #ffffff;
+    /* White hover color */
+}

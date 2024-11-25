@@ -5,6 +5,7 @@ import RegistrationContext from "../../context/registration/registrationContext"
 import NavigationLinks from "../NavigationLinks"; // Import the new component
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const Landing = () => {
   const registrationContext = useContext(RegistrationContext);
@@ -40,6 +41,9 @@ const Landing = () => {
         <Row className="justify-content-center m-2">
           <ul style={{ listStylePosition: 'outside', paddingLeft: '20px', textAlign: 'left' }}>
             <li>💪 Handles up to 14,000 lbs – That’s a pretty big boy.</li>
+            <li>📊 <strong>DC AFM Module:</strong> Industry-leading data analysis for accurate adjustments.</li>
+            <li>🔗 <strong>CAN Complete Module:</strong> Advanced integration with your truck’s onboard systems for seamless tuning.</li>
+            <li>💨 <strong>Opacity Meter:</strong> Measure and optimize emissions without compromising power.</li>
             <li>⚡ 2400 HP Capacity – That’s a lot of power.</li>
             <li>🔥 15,000 ft-lbs of Torque – Get the facts on what your truck can really do.</li>
             <li>🏆 World’s Largest Eddy Brake – The biggest brake there is, capable of handling over 850+ HP and 3000 ft-lbs of torque.</li>
@@ -48,7 +52,7 @@ const Landing = () => {
 
         <Row className="justify-content-center m-2">
           <p style={styles.italicText}>
-            "You can't beat power, you gotta love speed, and you can't argue data."
+            "You can't argue data."
           </p>
         </Row>
 
@@ -85,6 +89,10 @@ const Landing = () => {
           <p style={styles.italicText}>
             Have Questions? Let’s Chat. <br />Call or Text Us at (901) 443-7461
           </p>
+        </Row>
+
+        <Row className="justify-content-center m-4">
+          <SocialMediaLinks />
         </Row>
 
         {/* Use the new NavLinks component */}

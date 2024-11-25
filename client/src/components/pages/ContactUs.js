@@ -4,6 +4,7 @@ import NavigationLinks from "../NavigationLinks";
 import RegistrationContext from '../../context/registration/registrationContext';
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const ContactUs = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -67,6 +68,11 @@ const ContactUs = () => {
                         allow="geolocation; microphone; camera"
                     ></iframe>
                 </Row>
+
+                <Row className="justify-content-center m-4">
+                    <SocialMediaLinks />
+                </Row>
+
                 <NavigationLinks user={user} currentPage='contact-us' />
             </Container>
         </div>

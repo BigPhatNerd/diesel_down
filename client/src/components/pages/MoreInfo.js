@@ -4,8 +4,8 @@ import BookDynoButton from "./BookDynoButton";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
-
 import logo from "../../img/transparent_white_red.png";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const MoreInfo = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -46,6 +46,21 @@ const MoreInfo = () => {
                     </p>
                 </Row>
 
+                {/* Additional Tools */}
+                <Row className="m-3 text-left">
+                    <h3>Additional Tools for Precision Tuning:</h3>
+                    <p>
+                        At Diesel Down, we go beyond standard tuning with advanced tools that ensure optimal performance and compliance:
+                    </p>
+                    <ul>
+                        <li><strong>Opacity Meter:</strong> Measure and optimize exhaust emissions for performance without compromise. This ensures your vehicle meets or exceeds environmental standards while maintaining power.</li>
+                        <li><strong>CAN Complete Module:</strong> Advanced data integration with your truck’s onboard systems, enabling real-time analysis and precise adjustments to optimize every parameter.</li>
+                    </ul>
+                    <p>
+                        These tools, combined with our dyno, enable us to fine-tune your vehicle with accuracy unmatched by traditional methods.
+                    </p>
+                </Row>
+
                 {/* About Performance Tuning */}
                 <Row className="m-3 text-left">
                     <h3>Taking the Data to Tune Your Vehicle:</h3>
@@ -70,6 +85,10 @@ const MoreInfo = () => {
 
                 <Row className="justify-content-center m-4">
                     <BookDynoButton style={styles.button} />
+                </Row>
+
+                <Row className="justify-content-center m-4">
+                    <SocialMediaLinks />
                 </Row>
 
                 <NavigationLinks user={user} currentPage="more-info" />

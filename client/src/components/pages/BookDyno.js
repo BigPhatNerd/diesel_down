@@ -4,9 +4,9 @@ import { Container, Row } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
 import 'react-phone-input-2/lib/style.css';
 import RegistrationContext from '../../context/registration/registrationContext';
-
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 export const options = [
     {
@@ -96,6 +96,11 @@ const BookDyno = ({ history }) => {
                         Feel free to reach out via text or phone at (901) 443-7461.
                     </p>
                 </Row>
+
+                <Row className="justify-content-center m-4">
+                    <SocialMediaLinks />
+                </Row>
+
                 <NavigationLinks user={user} currentPage="book-dyno" />
             </Container>
         </div>

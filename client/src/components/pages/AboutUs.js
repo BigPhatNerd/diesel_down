@@ -5,7 +5,7 @@ import NavigationLinks from "../NavigationLinks";
 import RegistrationContext from "../../context/registration/registrationContext";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
-
+import SocialMediaLinks from "./SocialMediaLinks";
 const AboutUs = () => {
     const registrationContext = useContext(RegistrationContext);
     const { loadUser, user } = registrationContext;
@@ -57,6 +57,10 @@ const AboutUs = () => {
                     <p style={styles.italicText}>
                         Want to learn more? <br />Call or Text Us at (901) 443-7461
                     </p>
+                </Row>
+
+                <Row className="justify-content-center m-4">
+                    <SocialMediaLinks />
                 </Row>
 
                 <NavigationLinks user={user} currentPage="about-us" />
