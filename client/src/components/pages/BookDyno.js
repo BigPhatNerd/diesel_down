@@ -58,7 +58,7 @@ const BookDyno = ({ history }) => {
                 </Row>
                 <Row className="justify-content-center">
                     <p style={styles.italicText}>
-                        If you prefer, you can always just call or text. <br /> Happy to answer any questions (901) 443-7461
+                        Happy to answer any questions (901) 443-7461
                     </p>
                 </Row>
 
