@@ -37,7 +37,7 @@ router.get('/:id/comments', async (req, res) => {
     try {
         const { id } = req.params;
         const response = await axios.get(
-            `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts/${id}?populate=comments
+            `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts/${id}?populate=comment
 `
         );
         res.json(response.data); // Return the response data

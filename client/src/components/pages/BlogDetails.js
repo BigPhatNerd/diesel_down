@@ -11,6 +11,7 @@ const BlogDetails = () => {
 
     const fetchBlogDetails = async () => {
         try {
+            console.log({ documentId })
             const response = await fetch(`/api/blog/${documentId}/comments`);
             if (!response.ok) throw new Error('Failed to load blog post and comments');
             const data = await response.json();
@@ -29,18 +30,18 @@ const BlogDetails = () => {
     if (loading) return <p>Loading...</p>;
     if (!blog) return <p>Blog post not found.</p>;
 
-    const { Title, Content, comments = [] } = blog;
+    const { Title, Content, comment = [] } = blog;
     console.log({ blog })
     return (
         <div>
             <h1>{Title}</h1>
             <p>{Content}</p>
             <h3>Comments</h3>
-            <ul>
-                {comments.map((comment) => (
-                    <li key={comment.id}>{comment.Content}</li>
+            {/* <ul>
+                {comment.map(({ id, Content }) => (
+                    <li key={id}>{Content}</li>
                 ))}
-            </ul>
+            </ul> */}
             <CommentForm blogId={documentId} />
         </div>
     );
