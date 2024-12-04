@@ -30,18 +30,18 @@ const BlogDetails = () => {
     if (loading) return <p>Loading...</p>;
     if (!blog) return <p>Blog post not found.</p>;
 
-    const { Title, Content, comment = [] } = blog;
+    const { Title, Content, comments = [] } = blog;
     console.log({ blog })
     return (
         <div>
             <h1>{Title}</h1>
             <p>{Content}</p>
             <h3>Comments</h3>
-            {/* <ul>
-                {comment.map(({ id, Content }) => (
+            <ul>
+                {comments.map(({ id, Content }) => (
                     <li key={id}>{Content}</li>
                 ))}
-            </ul> */}
+            </ul>
             <CommentForm blogId={documentId} />
         </div>
     );
