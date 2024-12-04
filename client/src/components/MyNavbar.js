@@ -67,6 +67,9 @@ const MyNavbar = () => {
           {currentPath !== "/contact-us" && (
             <Nav.Link as={Link} to="/contact-us" onClick={handleLinkClick}>Contact Us</Nav.Link>
           )}
+          {currentPath !== "/blog" && (
+            <Nav.Link as={Link} to="/blog" onClick={handleLinkClick}>Blog</Nav.Link>
+          )}
 
           {user.isAuthenticated && currentPath !== "/" && (
             <Nav.Link as={Link} to="/" onClick={() => { handleLinkClick(); logout(); }}>

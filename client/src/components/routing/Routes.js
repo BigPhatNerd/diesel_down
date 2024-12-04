@@ -11,7 +11,8 @@ import Dashboard from '../pages/Dashboard';
 import BookDyno from '../pages/BookDyno';
 import HowItWorks from '../pages/HowItWorks';
 import ContactUs from '../pages/ContactUs';
-
+import BlogList from '../pages/BlogList'; // Adjust the import path
+import BlogDetails from '../pages/BlogDetails';
 
 
 
@@ -28,6 +29,8 @@ const Routes = () => {
 				<Route exact path='/how-it-works' component={HowItWorks} />
 				<Route exact path='/about-us' component={AboutUs} />
 				<Route exact path='/contact-us' component={ContactUs} />
+				<Route exact path='/blog' component={BlogList} />
+				<Route exact path='/blog/:id' component={BlogDetails} />
 				<Route component={NotFound} />
 			</Switch>
 		</>

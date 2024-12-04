@@ -50,6 +50,12 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             )}
 
+            {currentPage !== "blog" && (
+                <Link to="/blog" className="custom-link">
+                    Blog
+                </Link>
+            )}
+
             {user && user.isAuthenticated && currentPage !== "logout" && (
                 <Link to="/logout" className="custom-link">
                     Logout

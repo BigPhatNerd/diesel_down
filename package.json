@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
@@ -32,6 +32,7 @@
     "material-ui-search-bar": "^1.0.0",
     "mongoose": "^5.12.3",
     "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
     "node-quickbooks": "^2.0.45",
     "nodemailer": "^6.9.15",
     "popper.js": "^1.16.1",

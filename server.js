@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const path = require('path');
 const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
+const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
 
 var cors = require('cors')
@@ -40,6 +41,7 @@ app.use(express.json({ extended: false }));
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/webhooks', jotFormWebhook);
+app.use('/api/blog', blog);
 
 
 
