@@ -3,7 +3,7 @@ import { Container, Row, Accordion, Card, Button } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import RegistrationContext from '../../context/registration/registrationContext';
 import SocialMediaLinks from "./SocialMediaLinks";
 
@@ -12,6 +12,7 @@ const Dashboard = () => {
     const { loadUser, user } = registrationContext;
     const [expanded, setExpanded] = useState(null);
     const history = useHistory();
+    const location = useLocation();
 
     useEffect(() => {
         loadUser();
@@ -103,13 +104,14 @@ const Dashboard = () => {
                                 If you want access to your previous appointment information,
                                 <br />please log in or sign up.
                             </p>
-
                         </Row>
                         <Row className="justify-content-center m-4">
                             <Button
                                 style={styles.button}
                                 className="custom-button"
-                                onClick={() => history.push("/login")}
+                                onClick={() =>
+                                    history.push("/login", { from: location.pathname }) // Pass the current page to login
+                                }
                             >
                                 Register or login
                             </Button>
@@ -123,6 +125,5 @@ const Dashboard = () => {
         </div>
     );
 };
-
 
 export default Dashboard;

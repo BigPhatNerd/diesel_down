@@ -35,17 +35,10 @@ const BookDyno = ({ history }) => {
 
     const styles = getBackgroundStyles();
 
-
-    console.log("bookdyno: ", { user })
-
     useEffect(() => {
         loadUser();
         //eslint-disable-next-line
     }, []);
-
-    // if (!user || !user.isAuthenticated || !user.email) {
-    //     return <Redirect to="/login" />;
-    // }
 
     return (
         <div id='book-dyno' style={styles.container}>

@@ -52,7 +52,6 @@ const RegistrationReducer = (state, action) => {
 			};
 		case REGISTER_SUCCESS:
 		case LOGIN_SUCCESS:
-			console.log({ actionPayload: action.payload })
 			localStorage.setItem('token', action.payload.token);
 			return {
 				...state,
@@ -117,7 +116,6 @@ const RegistrationReducer = (state, action) => {
 			};
 
 		case USER_LOADED:
-			console.log({ actionPayload: action.payload })
 			return {
 				...state,
 				user: {

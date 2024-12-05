@@ -172,3 +172,43 @@ body,
     color: #ffffff;
     /* White hover color */
 }
+
+.blog-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.blog-post {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.blog-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.blog-content-preview {
+    font-size: 1rem;
+    color: var(--dark-color);
+}
+
+.blog-link {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-link:hover {
+    color: var(--success-color);
+}

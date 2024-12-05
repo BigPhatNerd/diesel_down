@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Row } from "react-bootstrap";
 
 const NavigationLinks = ({ user, currentPage }) => {
-    console.log({ currentPage })
     return (
         <Row className="justify-content-center m-4">
             {currentPage !== "landing" && (

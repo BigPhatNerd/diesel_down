@@ -36,6 +36,12 @@ export const getBackgroundStyles = () => {
             borderColor: '#C70C18',
             transition: 'background-color 0.3s, color 0.3s'
         },
+        reverseButton: {
+            backgroundColor: 'white',
+            color: '#C70C18',
+            borderColor: '#C70C18',
+            transition: 'background-color 0.3s, color 0.3s'
+        },
         row: {
             backgroundColor: '#C70C18',
             color: 'white',

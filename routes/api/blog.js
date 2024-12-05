@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         const response = await axios.get(
             'https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts'
         );
-        res.json(response.data); // Return the response data
+        res.json(response.data.data); // Return the response data
     } catch (error) {
         console.error('Error fetching blog posts:', error.message);
         res.status(500).json({ error: 'Failed to fetch blog posts' });
@@ -18,21 +18,19 @@ router.get('/', async (req, res) => {
 // Get a single blog post by ID
 router.get('/:id', async (req, res) => {
     try {
-        console.log("Here")
         const { id } = req.params;
-        console.log({ id })
         const response = await axios.get(
-            `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts/${id}`
+            `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts/${id}?populate=comments`
         );
 
-        res.json(response.data); // Return the response data
+        res.json(response.data.data); // Return the response data
     } catch (error) {
         console.error('Error fetching blog post:', error);
         res.status(500).json({ error: 'Failed to fetch blog post' });
     }
 });
 
-// Get comments for a blog post
+// Get blog and comments for a blog post
 router.get('/:id/comments', async (req, res) => {
     try {
         const { id } = req.params;
@@ -40,7 +38,7 @@ router.get('/:id/comments', async (req, res) => {
             `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts/${id}?populate=comments
 `
         );
-        res.json(response.data); // Return the response data
+        res.json(response.data.data); // Return the response data
     } catch (error) {
         console.error('Error fetching comments:', error.message);
         res.status(500).json({ error: 'Failed to fetch comments' });
@@ -51,22 +49,19 @@ router.get('/:id/comments', async (req, res) => {
 router.post('/:id/comments', async (req, res) => {
     try {
         const { id } = req.params;
-        const { content } = req.body;
-        console.log("In th :id/comments")
-        console.log({ id, content })
+        const { Author, Content } = req.body;
         const response = await axios.post(
             'https://diesel-down-blog-21d26aae320a.herokuapp.com/api/comments',
             {
-                data: { blog_post: id, Content: content, Author: "Cinderella" },
+                data: { blog_post: id, Author, Content },
             },
             {
                 headers: { 'Content-Type': 'application/json' },
             }
         );
-        console.log({ responseData: response.data })
-        res.json(response.data); // Return the response data
+
+        res.json(response.data.data); // Return the response data
     } catch (error) {
-        console.log({ error })
         console.error('Error posting comment:', error.message);
         res.status(500).json({ error: 'Failed to post comment' });
     }

@@ -48,14 +48,12 @@ const RegistrationState = props => {
 
 	//Load user
 	const loadUser = async () => {
-		console.log("Here")
+
 		if (localStorage.token) {
 			setAuthToken(localStorage.token)
 		}
 		try {
 			const res = await axios.get('/api/auth');
-
-			console.log("loadUser:", { resData: res.data })
 
 			dispatch({
 				type: USER_LOADED,
@@ -78,7 +76,7 @@ const RegistrationState = props => {
 		const body = JSON.stringify({ email, password })
 		try {
 			const res = await axios.post('/api/auth', body, config)
-			console.log("resData in login: ", { resData: res.data })
+
 			dispatch({
 				type: LOGIN_SUCCESS,
 				payload: res.data,

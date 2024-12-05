@@ -5,10 +5,10 @@ const CommentForm = ({ blogId }) => {
     const { setAlert } = useContext(RegistrationContext); // Access setAlert from context
     const [commentText, setCommentText] = useState('');
     const [loading, setLoading] = useState(false);
-    console.log({ commentText })
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({ commentText })
+
         try {
             setLoading(true);
             const response = await fetch(`/api/blog/${blogId}/comments`, {

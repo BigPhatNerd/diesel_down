@@ -22,7 +22,6 @@ router.post('/jotform/book-dyno', async (req, res) => {
         if (match && match[1]) {
             try {
                 const parsedData = JSON.parse(match[1]);
-                console.log({ parsedData })
                 const appointmentData = {
                     name: parsedData.q3_name,
                     email: parsedData.q4_email,

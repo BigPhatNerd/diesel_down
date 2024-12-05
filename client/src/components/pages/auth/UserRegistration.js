@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect, useLocation, useHistory } from "react-router-dom";
 import { Container, Col, Button, Form, Row } from "react-bootstrap";
 import NavigationLinks from "../../NavigationLinks";
 import { getBackgroundStyles } from "../../helpers/backgroundStyles";
@@ -7,12 +7,8 @@ import logo from "../../../img/transparent_white_red.png";
 import RegistrationContext from "../../../context/registration/registrationContext";
 
 const UserRegistration = () => {
-  console.log("Heerrreeee in userRegistraion")
-  const styles = getBackgroundStyles();
   const registrationContext = useContext(RegistrationContext);
-  const { user, register, setAlert, setEmail, setName } =
-    registrationContext;
-
+  const { user, register, setAlert, setEmail, setName } = registrationContext;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,26 +16,31 @@ const UserRegistration = () => {
     password2: "",
   });
   const { name, email, password, password2 } = formData;
+  const location = useLocation();
+  const history = useHistory();
+  const styles = getBackgroundStyles();
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
-    console.log("Here")
+  const onSubmit = async (e) => {
     e.preventDefault();
-
     if (password !== password2) {
       setAlert("Passwords do not match", "dark");
     } else {
-      console.log({ email, name })
       setEmail(email);
-      setName(name)
-      register({ name, email, password });
+      setName(name);
+      await register({ name, email, password });
+      const redirectTo = location.state?.from || '/book-dyno'; // Fallback to default
+      history.push(redirectTo);
     }
   };
 
-  if (user.isAuthenticated) return <Redirect to="/book-dyno" />;
+  if (user.isAuthenticated) {
+    return <Redirect to={location.state?.from || '/book-dyno'} />;
+  }
+
   return (
     <div id="cover" style={styles.container}>
       <Container>
@@ -55,11 +56,11 @@ const UserRegistration = () => {
           </p>
         </Row>
         <Col>
-          <Form onSubmit={(e) => onSubmit(e)}>
-            <Form.Group controlId="formBasicName"> {/* Added name field */}
+          <Form onSubmit={onSubmit}>
+            <Form.Group controlId="formBasicName">
               <Form.Label>Full Name</Form.Label>
               <Form.Control
-                onChange={(e) => onChange(e)}
+                onChange={onChange}
                 value={name}
                 name="name"
                 type="text"
@@ -69,7 +70,7 @@ const UserRegistration = () => {
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
-                onChange={(e) => onChange(e)}
+                onChange={onChange}
                 value={email}
                 name="email"
                 type="email"
@@ -79,11 +80,10 @@ const UserRegistration = () => {
                 We'll never share your email with anyone else.
               </Form.Text>
             </Form.Group>
-
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                onChange={(e) => onChange(e)}
+                onChange={onChange}
                 value={password}
                 name="password"
                 type="password"
@@ -93,7 +93,7 @@ const UserRegistration = () => {
             <Form.Group controlId="formBasicPassword2">
               <Form.Label>Re-enter Password</Form.Label>
               <Form.Control
-                onChange={(e) => onChange(e)}
+                onChange={onChange}
                 value={password2}
                 name="password2"
                 type="password"
@@ -105,6 +105,20 @@ const UserRegistration = () => {
             </Button>
           </Form>
         </Col>
+        <Row className="ml-2 mt-2">
+          <p>
+            Already have an account?{' '}
+            <Link
+              className="custom-link"
+              to={{
+                pathname: '/login',
+                state: { from: location.state?.from || '/' }, // Pass `from` state
+              }}
+            >
+              Sign In
+            </Link>
+          </p>
+        </Row>
         <NavigationLinks user={user} currentPage="user-registration" />
       </Container>
     </div>
