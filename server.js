@@ -43,15 +43,30 @@ app.use('/api/auth', auth);
 app.use('/webhooks', jotFormWebhook);
 app.use('/api/blog', blog);
 
+app.get('/privacy-policy', (req, res) => {
+  const filePath = path.join(__dirname, 'privacy-policy.html');
 
+  // Debug the path
+  console.log('Resolved filePath:', filePath);
 
+  // Send the file
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error('Error sending privacy-policy.html:', err.message);
+      res.status(500).send('Privacy Policy file not found.');
+    }
+  });
+});
 
+console.log({ dirname: __dirname })
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   })
 }
+
+
 
 const PORT = process.env.PORT || 4390;
 
