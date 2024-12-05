@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Card, Button, Form } from "react-bootstrap";
 import { Link, useParams, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet"; // Import Helmet
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import SocialMediaLinks from "./SocialMediaLinks";
@@ -15,6 +16,7 @@ const BlogDetails = () => {
     const [commentsVisible, setCommentsVisible] = useState(false);
     const styles = getBackgroundStyles();
     const location = useLocation();
+
     useEffect(() => {
         const fetchBlog = async () => {
             try {
@@ -33,7 +35,6 @@ const BlogDetails = () => {
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
-
         if (!newComment.trim()) {
             setAlert("Comment cannot be empty", "danger");
             return;
@@ -46,7 +47,7 @@ const BlogDetails = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    Author: user.email, // Replace with user info if available
+                    Author: user.email,
                     Content: newComment,
                 }),
             });
@@ -60,16 +61,15 @@ const BlogDetails = () => {
 
             setBlog((prevBlog) => ({
                 ...prevBlog,
-                comments: [...(prevBlog?.comments || []), addedComment], // Add the new comment
+                comments: [...(prevBlog?.comments || []), addedComment],
             }));
 
-            setNewComment(""); // Clear the input field
+            setNewComment("");
             setAlert("Comment submitted successfully", "success");
         } catch (error) {
             setAlert(error.message, "danger");
         }
     };
-
 
     if (loading) return <p>Loading...</p>;
     if (!blog) return <p>Blog not found.</p>;
@@ -80,6 +80,16 @@ const BlogDetails = () => {
 
     return (
         <div style={{ backgroundColor: "var(--background-color)", color: "white" }}>
+            {/* Use Helmet to set meta tags */}
+            <Helmet>
+                <title>{blog.Title}</title>
+                <meta name="description" content={blog.Content.substring(0, 150)} />
+                <meta property="og:title" content={blog.Title} />
+                <meta property="og:description" content={blog.Content.substring(0, 150)} />
+                <meta property="og:image" content={blog.featuredImage?.url || "/default-image.jpg"} />
+                <meta property="og:type" content="article" />
+            </Helmet>
+
             <Container className="pt-3">
                 <Row className="justify-content-center mb-4">
                     <h1>{blog.Title}</h1>
@@ -146,11 +156,17 @@ const BlogDetails = () => {
                 ) : (
                     <Row className="justify-content-center mt-4">
                         <p>
-                            You must <Link
+                            You must{" "}
+                            <Link
                                 to={{
                                     pathname: "/login",
-                                    state: { from: location.pathname }, // Pass current page as `from`
-                                }} style={{ color: '#C70C18' }}>log in</Link> to leave a comment.
+                                    state: { from: location.pathname },
+                                }}
+                                style={{ color: "#C70C18" }}
+                            >
+                                log in
+                            </Link>{" "}
+                            to leave a comment.
                         </p>
                     </Row>
                 )}
@@ -160,9 +176,8 @@ const BlogDetails = () => {
                 </Row>
 
                 <NavigationLinks user={user} currentPage="blog" />
-
             </Container>
-        </div >
+        </div>
     );
 };
 
