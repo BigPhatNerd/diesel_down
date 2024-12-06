@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
         const response = await axios.get(
             `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts/${id}?populate=comments`
         );
-
+        console.log({ responseData: response.data.data })
         res.json(response.data.data); // Return the response data
     } catch (error) {
         console.error('Error fetching blog post:', error);

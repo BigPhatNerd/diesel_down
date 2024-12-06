@@ -212,3 +212,7 @@ body,
 .blog-link:hover {
     color: var(--success-color);
 }
+
+.text-justify {
+    text-align: justify;
+}
