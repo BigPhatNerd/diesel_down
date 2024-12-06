@@ -1,65 +1,84 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Container, Row, Button } from "react-bootstrap";
-import { useParams, Link } from "react-router-dom";
-import { Helmet } from "react-helmet"; // Import Helmet
+import { Container, Row, Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import NavigationLinks from "../NavigationLinks";
+import SocialMediaLinks from "./SocialMediaLinks";
+import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import RegistrationContext from "../../context/registration/registrationContext";
 
-const BlogDetails = () => {
-    const { setAlert } = useContext(RegistrationContext);
-    const { id } = useParams();
-    const [blog, setBlog] = useState(null);
+const BlogList = () => {
+    const { setAlert, user } = useContext(RegistrationContext);
+    const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [expanded, setExpanded] = useState(null);
+
+    const styles = getBackgroundStyles();
+    const toggleExpand = (index) => {
+        setExpanded(expanded === index ? null : index); // Toggle expansion
+    };
 
     useEffect(() => {
-        const fetchBlog = async () => {
+        const fetchBlogs = async () => {
             try {
-                const response = await fetch(`/api/blog/${id}`);
-                if (!response.ok) throw new Error("Failed to load blog post");
+                const response = await fetch("/api/blog");
+                if (!response.ok) throw new Error("Failed to load blog posts");
                 const data = await response.json();
-                setBlog(data);
+                setBlogs(data);
             } catch (error) {
                 setAlert(error.message, "danger");
             } finally {
                 setLoading(false);
             }
         };
-        fetchBlog();
-    }, [id, setAlert]);
+        fetchBlogs();
+    }, [setAlert]);
 
     if (loading) return <p>Loading...</p>;
-    if (!blog) return <p>Blog not found.</p>;
-
-    // Format the content to add paragraph tags
-    const formatContent = (content) =>
-        content.split("\n\n").map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-        ));
 
     return (
         <div style={{ backgroundColor: "var(--background-color)", color: "white" }}>
-            <Helmet>
-                <title>{blog.Title}</title>
-                <meta name="description" content={blog.Content.substring(0, 150)} />
-                <meta property="og:title" content={blog.Title} />
-                <meta property="og:description" content={blog.Content.substring(0, 150)} />
-            </Helmet>
             <Container className="pt-3">
-                <Row className="justify-content-center mb-4">
-                    <h1>{blog.Title}</h1>
+                <Row className="justify-content-center m-2">
+                    <h1>Blog Posts</h1>
                 </Row>
-                <Row className="mb-4">
-                    <div className="text-justify">
-                        {formatContent(blog.Content)}
-                    </div>
+
+                {blogs.map((blog, index) => (
+                    <Card key={index} className="mb-3">
+                        <Card.Header>
+                            <Row
+                                className="justify-content-between align-items-center"
+                                style={{
+                                    cursor: "pointer",
+                                    backgroundColor: "var(--primary-color)",
+                                    color: "white",
+                                    padding: "10px",
+                                    borderRadius: "5px",
+                                }}
+                                onClick={() => toggleExpand(index)}
+                            >
+                                <strong>{blog.Title}</strong>
+                                <span>{expanded === index ? "▲" : "▼"}</span>
+                            </Row>
+                        </Card.Header>
+                        {expanded === index && (
+                            <Card.Body>
+                                <p className="text-justify">{blog.Content.substring(0, 200)}...</p>
+                                <Link to={`/blog/${blog.documentId}`}>
+                                    <Button style={styles.button}>Read More</Button>
+                                </Link>
+                            </Card.Body>
+                        )}
+                    </Card>
+                ))}
+
+                <Row className="justify-content-center m-4">
+                    <SocialMediaLinks />
                 </Row>
-                <Row className="mb-4">
-                    <Link to="/blog">
-                        <Button variant="secondary">Back to Blog List</Button>
-                    </Link>
-                </Row>
+
+                <NavigationLinks user={user} currentPage="blog" />
             </Container>
         </div>
     );
 };
 
-export default BlogDetails;
+export default BlogList;
