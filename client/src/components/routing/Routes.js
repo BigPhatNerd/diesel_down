@@ -30,7 +30,7 @@ const Routes = () => {
 				<Route exact path='/about-us' component={AboutUs} />
 				<Route exact path='/contact-us' component={ContactUs} />
 				<Route exact path='/blog' component={BlogList} />
-				<Route exact path='/blog/:id' component={BlogDetails} />
+				<Route exact path='/blog/:slug' component={BlogDetails} />
 				<Route component={NotFound} />
 			</Switch>
 		</>

@@ -15,20 +15,23 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Get a single blog post by ID
-router.get('/:id', async (req, res) => {
+// Get a single blog post by Slug
+router.get('/:slug', async (req, res) => {
     try {
-        const { id } = req.params;
+        const { slug } = req.params; // Extract slug instead of id
         const response = await axios.get(
-            `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts/${id}?populate=comments`
+            `https://diesel-down-blog-21d26aae320a.herokuapp.com/api/blog-posts?filters[slug][$eq]=${slug}&populate=comments`
         );
-        console.log({ responseData: response.data.data })
-        res.json(response.data.data); // Return the response data
+        if (response.data.data.length === 0) {
+            return res.status(404).json({ error: 'Blog post not found' });
+        }
+        res.json(response.data.data[0]); // Return the first matching blog post
     } catch (error) {
         console.error('Error fetching blog post:', error);
         res.status(500).json({ error: 'Failed to fetch blog post' });
     }
 });
+
 
 // Get blog and comments for a blog post
 router.get('/:id/comments', async (req, res) => {

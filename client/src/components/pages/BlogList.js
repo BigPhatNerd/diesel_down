@@ -63,7 +63,7 @@ const BlogList = () => {
                         {expanded === index && (
                             <Card.Body>
                                 <p className="text-justify">{blog.Content.substring(0, 200)}...</p>
-                                <Link to={`/blog/${blog.documentId}`}>
+                                <Link to={`/blog/${blog.slug}`}>
                                     <Button style={styles.button}>Read More</Button>
                                 </Link>
                             </Card.Body>

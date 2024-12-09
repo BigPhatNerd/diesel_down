@@ -8,9 +8,8 @@ import SocialMediaLinks from "./SocialMediaLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 
 const BlogDetails = () => {
-    // Context and State
     const { setAlert, user } = useContext(RegistrationContext);
-    const { id } = useParams(); // Get the blog post ID from the URL
+    const { slug } = useParams();
     const location = useLocation();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -18,11 +17,10 @@ const BlogDetails = () => {
     const [commentsVisible, setCommentsVisible] = useState(false);
     const styles = getBackgroundStyles();
 
-    // Fetch the blog post on component mount
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const response = await fetch(`/api/blog/${id}`);
+                const response = await fetch(`/api/blog/${slug}`);
                 if (!response.ok) throw new Error("Failed to load blog post");
                 const data = await response.json();
                 setBlog(data);
@@ -33,23 +31,19 @@ const BlogDetails = () => {
             }
         };
         fetchBlog();
-    }, [id, setAlert]);
+    }, [slug, setAlert]);
 
-    // Handle comment submission
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
-
         if (!newComment.trim()) {
             setAlert("Comment cannot be empty", "danger");
             return;
         }
 
         try {
-            const response = await fetch(`/api/blog/${id}/comments`, {
+            const response = await fetch(`/api/blog/${blog.id}/comments`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     Author: user.email,
                     Content: newComment,
@@ -58,15 +52,9 @@ const BlogDetails = () => {
 
             if (!response.ok) throw new Error("Failed to submit comment");
 
-            const addedComment = {
-                Author: user.email,
-                Content: newComment,
-            };
-
-            // Add the new comment to the current blog's comments
             setBlog((prevBlog) => ({
                 ...prevBlog,
-                comments: [...(prevBlog?.comments || []), addedComment],
+                comments: [...(prevBlog?.comments || []), { Author: user.email, Content: newComment }],
             }));
 
             setNewComment("");
@@ -76,16 +64,13 @@ const BlogDetails = () => {
         }
     };
 
-    // Toggle comment visibility
     const toggleCommentsVisibility = () => {
         setCommentsVisible(!commentsVisible);
     };
 
-    // Loading and Error States
     if (loading) return <p>Loading...</p>;
     if (!blog) return <p>Blog not found.</p>;
 
-    // Format blog content with paragraph breaks
     const formatContent = (content) =>
         content.split("\n\n").map((paragraph, index) => (
             <p key={index} className="text-justify">
@@ -94,8 +79,14 @@ const BlogDetails = () => {
         ));
 
     return (
-        <div style={{ backgroundColor: "var(--background-color)", color: "white" }}>
-            {/* Meta Tags for SEO */}
+        <div
+            style={{
+                backgroundColor: "var(--background-color)",
+                color: "white",
+                paddingTop: "2rem",
+                paddingBottom: "2rem",
+            }}
+        >
             <Helmet>
                 <title>{blog.Title}</title>
                 <meta name="description" content={blog.Content.substring(0, 150)} />
@@ -105,25 +96,30 @@ const BlogDetails = () => {
                 <meta property="og:type" content="article" />
             </Helmet>
 
-            <Container className="pt-3">
-                {/* Blog Title */}
+            <Container
+                style={{
+                    backgroundColor: "white",
+                    color: "black",
+                    borderRadius: "10px",
+                    padding: "2rem",
+                    maxWidth: "800px",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                }}
+            >
                 <Row className="justify-content-center mb-4">
-                    <h1>{blog.Title}</h1>
+                    <h1 className="text-center">{blog.Title}</h1>
                 </Row>
 
-                {/* Blog Content */}
                 <Row className="mb-4">
                     <div>{formatContent(blog.Content)}</div>
                 </Row>
 
-                {/* Back to Blog List */}
                 <Row className="mb-4">
                     <Link to="/blog">
                         <Button variant="secondary">Back to Blog List</Button>
                     </Link>
                 </Row>
 
-                {/* Show/Hide Comments Button */}
                 <Row className="justify-content-center mb-4">
                     <Button style={styles.button} onClick={toggleCommentsVisibility}>
                         {commentsVisible
@@ -132,7 +128,6 @@ const BlogDetails = () => {
                     </Button>
                 </Row>
 
-                {/* Comments Section */}
                 {commentsVisible && (
                     <Row className="justify-content-center mt-4">
                         <Container>
@@ -152,7 +147,6 @@ const BlogDetails = () => {
                     </Row>
                 )}
 
-                {/* Comment Submission Form */}
                 {user.isAuthenticated ? (
                     <Row className="justify-content-center mt-4">
                         <Container>
@@ -191,7 +185,6 @@ const BlogDetails = () => {
                     </Row>
                 )}
 
-                {/* Footer Links */}
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />
                 </Row>
