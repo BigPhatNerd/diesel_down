@@ -6,6 +6,7 @@ import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
 import SocialMediaLinks from "./SocialMediaLinks";
+import AddressComponent from "./AddressComponent";
 
 const HowItWorks = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -55,10 +56,11 @@ const HowItWorks = () => {
                 </Row>
                 <Row className="justify-content-center m-2">
                     <p style={styles.italicText}>
-                        Have Questions? Let’s Chat. <br />Call or Text Us at (901) 443-7461
+                        Have Questions? Let’s Chat. <br />Call or Text Us at <a href="tel:9014437461" style={{ color: "inherit", textDecoration: "none" }}>(901) 443-7461</a>.
                     </p>
                 </Row>
 
+                <AddressComponent />
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />
                 </Row>

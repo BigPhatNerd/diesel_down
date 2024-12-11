@@ -3,6 +3,7 @@ import { Container, Row, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavigationLinks from "../NavigationLinks";
 import SocialMediaLinks from "./SocialMediaLinks";
+import AddressComponent from "./AddressComponent";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import RegistrationContext from "../../context/registration/registrationContext";
 
@@ -70,6 +71,8 @@ const BlogList = () => {
                         )}
                     </Card>
                 ))}
+
+                <AddressComponent />
 
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />

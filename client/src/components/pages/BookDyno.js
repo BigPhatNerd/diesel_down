@@ -6,6 +6,7 @@ import 'react-phone-input-2/lib/style.css';
 import RegistrationContext from '../../context/registration/registrationContext';
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
+import AddressComponent from './AddressComponent';
 import SocialMediaLinks from "./SocialMediaLinks";
 
 export const options = [
@@ -86,10 +87,10 @@ const BookDyno = ({ history }) => {
                 <br />
                 <Row className="justify-content-center">
                     <p style={styles.italicText}>
-                        Feel free to reach out via text or phone at (901) 443-7461.
+                        Feel free to reach out via text or phone at <a href="tel:9014437461" style={{ color: "inherit", textDecoration: "none" }}>(901) 443-7461</a>.
                     </p>
                 </Row>
-
+                <AddressComponent />
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />
                 </Row>

@@ -5,6 +5,7 @@ import RegistrationContext from '../../context/registration/registrationContext'
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
 import SocialMediaLinks from "./SocialMediaLinks";
+import AddressComponent from './AddressComponent';
 
 const ContactUs = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -54,7 +55,7 @@ const ContactUs = () => {
                 </Row>
                 <Row className="justify-content-center">
                     <p style={styles.italicText}>
-                        Have questions? We're here to help. <br />Fill out the form below, or give us a call or text at (901) 443-7461.
+                        Have questions? We're here to help. <br />Fill out the form below, or give us a call or text at <a href="tel:9014437461" style={{ color: "inherit", textDecoration: "none" }}>(901) 443-7461</a>.
                     </p>
                 </Row>
                 <Row className="justify-content-center">
@@ -68,7 +69,7 @@ const ContactUs = () => {
                         allow="geolocation; microphone; camera"
                     ></iframe>
                 </Row>
-
+                <AddressComponent />
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />
                 </Row>

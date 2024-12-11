@@ -6,6 +6,7 @@ import logo from "../../img/transparent_white_red.png";
 import { useHistory, useLocation } from 'react-router-dom';
 import RegistrationContext from '../../context/registration/registrationContext';
 import SocialMediaLinks from "./SocialMediaLinks";
+import AddressComponent from './AddressComponent';
 
 const Dashboard = () => {
     const registrationContext = useContext(RegistrationContext);
@@ -118,6 +119,8 @@ const Dashboard = () => {
                         </Row>
                     </div>
                 )}
+
+                <AddressComponent />
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />
                 </Row>

@@ -11,7 +11,7 @@ const SocialMediaLinks = () => {
     ];
 
     return (
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <div style={{ textAlign: "center" }}>
             <h4>Follow Us</h4>
             <div style={{ display: "flex", justifyContent: "center", gap: "15px" }}>
                 {socialLinks.map((link, index) => (

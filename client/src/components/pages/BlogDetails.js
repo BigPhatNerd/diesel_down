@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet"; // Import Helmet
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import SocialMediaLinks from "./SocialMediaLinks";
+import AddressComponent from "./AddressComponent";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 
 const BlogDetails = () => {
@@ -185,6 +186,8 @@ const BlogDetails = () => {
                     </Row>
                 )}
 
+
+                <AddressComponent />
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />
                 </Row>

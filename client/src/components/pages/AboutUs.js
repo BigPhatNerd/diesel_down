@@ -6,6 +6,7 @@ import RegistrationContext from "../../context/registration/registrationContext"
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
 import SocialMediaLinks from "./SocialMediaLinks";
+import AddressComponent from "./AddressComponent";
 const AboutUs = () => {
     const registrationContext = useContext(RegistrationContext);
     const { loadUser, user } = registrationContext;
@@ -55,9 +56,11 @@ const AboutUs = () => {
 
                 <Row className="justify-content-center m-2">
                     <p style={styles.italicText}>
-                        Want to learn more? <br />Call or Text Us at (901) 443-7461
+                        Want to learn more?  <br />Call or Text Us at <a href="tel:9014437461" style={{ color: "inherit", textDecoration: "none" }}>(901) 443-7461</a>
                     </p>
                 </Row>
+
+                <AddressComponent />
 
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />
