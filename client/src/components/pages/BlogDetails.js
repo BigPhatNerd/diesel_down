@@ -93,6 +93,7 @@ const BlogDetails = () => {
                 <meta name="description" content={blog.Content.substring(0, 150)} />
                 <meta property="og:title" content={blog.Title} />
                 <meta property="og:description" content={blog.Content.substring(0, 150)} />
+                <meta property="og:url" content={`https://dieseldown.com/blog/${blog.slug}`} />
                 <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
                 <meta property="og:type" content="article" />
                 <meta name="facebook-domain-verification" content="zt13iocnc8fecdn0t8f6pmam0vmk27" />
