@@ -95,6 +95,8 @@ const BlogDetails = () => {
                 <meta property="og:description" content={blog.Content.substring(0, 150)} />
                 <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
                 <meta property="og:type" content="article" />
+                <meta name="facebook-domain-verification" content="zt13iocnc8fecdn0t8f6pmam0vmk27" />
+                <meta property="fb:app_id" content="2028204197694958" />
             </Helmet>
 
             <Container
