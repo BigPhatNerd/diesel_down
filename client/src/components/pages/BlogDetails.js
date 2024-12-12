@@ -78,7 +78,7 @@ const BlogDetails = () => {
                 {paragraph}
             </p>
         ));
-
+    console.log({ blog })
     return (
         <div
             style={{
@@ -93,7 +93,7 @@ const BlogDetails = () => {
                 <meta name="description" content={blog.Content.substring(0, 150)} />
                 <meta property="og:title" content={blog.Title} />
                 <meta property="og:description" content={blog.Content.substring(0, 150)} />
-                <meta property="og:image" content={blog.featuredImage?.url || "/default-image.jpg"} />
+                <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
                 <meta property="og:type" content="article" />
             </Helmet>
 
