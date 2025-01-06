@@ -7,6 +7,8 @@ import AddressComponent from "./AddressComponent";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import RegistrationContext from "../../context/registration/registrationContext";
 
+
+
 const BlogList = () => {
     const { setAlert, user } = useContext(RegistrationContext);
     const [blogs, setBlogs] = useState([]);
@@ -24,7 +26,11 @@ const BlogList = () => {
                 const response = await fetch("/api/blog");
                 if (!response.ok) throw new Error("Failed to load blog posts");
                 const data = await response.json();
-                setBlogs(data);
+
+                // Sort blogs by createdAt in descending order (newest first)
+                const sortedBlogs = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                setBlogs(sortedBlogs);
             } catch (error) {
                 setAlert(error.message, "danger");
             } finally {
