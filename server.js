@@ -14,10 +14,14 @@ connectDB();
 
 app.use(
   prerender
-    .set('prerenderToken', process.env.PRERENDER_TOKEN) // Use your Prerender.io token
-    .set('protocol', 'https') // Ensure protocol matches your live site
-    .whitelist('^/blog/')
+    .set('prerenderToken', process.env.PRERENDER_TOKEN)
+    .set('protocol', 'https')
+    .shouldPrerender((req) => {
+      // Only prerender blog routes
+      return req.url.startsWith('/blog/');
+    })
 );
+
 app.use((req, res, next) => {
   // Skip redirection for local development
   if (process.env.NODE_ENV !== 'production') {
