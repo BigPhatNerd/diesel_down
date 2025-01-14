@@ -12,15 +12,17 @@ var cors = require('cors')
 const app = express();
 connectDB();
 
+const prerender = require('prerender-node');
+
+// Set up Prerender middleware
 app.use(
   prerender
-    .set('prerenderToken', process.env.PRERENDER_TOKEN)
-    .set('protocol', 'https')
-    .shouldPrerender((req) => {
-      // Only prerender blog routes
-      return req.url.startsWith('/blog/');
-    })
+    .set('prerenderToken', process.env.PRERENDER_TOKEN) // Your Prerender token
+    .set('protocol', 'https') // Ensure protocol matches your live site
 );
+
+// The rest of your middleware and routes
+
 
 app.use((req, res, next) => {
   // Skip redirection for local development
