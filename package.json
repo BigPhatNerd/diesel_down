@@ -36,6 +36,7 @@
     "node-quickbooks": "^2.0.45",
     "nodemailer": "^6.9.15",
     "popper.js": "^1.16.1",
+    "prerender-node": "^3.8.0",
     "react-stripe-elements": "^6.1.2",
     "request": "^2.88.2",
     "stripe": "^8.142.0",

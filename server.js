@@ -6,12 +6,17 @@ const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
 const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
+const prerender = require('prerender-node');
 
 var cors = require('cors')
 const app = express();
 connectDB();
 
-
+app.use(
+  prerender
+    .set('prerenderToken', process.env.PRERENDER_TOKEN) // Use your Prerender.io token
+    .set('protocol', 'https') // Ensure protocol matches your live site
+);
 app.use((req, res, next) => {
   // Skip redirection for local development
   if (process.env.NODE_ENV !== 'production') {
