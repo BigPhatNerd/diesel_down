@@ -1,15 +1,14 @@
 require('dotenv').config();
-const fs = require('fs');
-
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
 const fs = require('fs'); // Required for reading index.html
-const fetch = require('node-fetch'); // Ensure you have node-fetch installed
+const axios = require('axios');
 const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
 const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
+const puppeteer = require('puppeteer');
 
 const cors = require('cors');
 const app = express();
@@ -44,50 +43,42 @@ app.get('/privacy-policy', (req, res) => {
   });
 });
 
+console.log("Before production")
 // Production setup
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-
-  let cachedIndexHTML;
-
+  console.log("Here....")
   app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
-    console.log('Requested slug:', slug);
 
     try {
-      // Fetch the blog post
-      const response = await fetch(`https://api.dieseldown.com/blog/${slug}`);
-      if (!response.ok) {
-        console.error(`Failed to fetch blog: ${response.status} ${response.statusText}`);
-        throw new Error('Failed to fetch blog data');
-      }
+      // Launch Puppeteer
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
 
-      const blog = await response.json();
-      console.log('Fetched blog:', blog);
+      // Navigate to the blog page
+      const blogUrl = `https://dieseldown.com/blog/${slug}`;
+      await page.goto(blogUrl, { waitUntil: 'networkidle0' });
 
-      // Generate an excerpt
-      const excerpt = blog.Content
-        ? blog.Content.substring(0, 150).replace(/[\r\n]+/g, ' ') + '...'
-        : 'No description available.';
+      // Inject meta tags dynamically
+      const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
+      await page.evaluate((blog) => {
+        console.log('Injecting meta tags:', blog);
+        document.querySelector('meta[property="og:title"]').setAttribute('content', blog.Title);
+        document.querySelector('meta[property="og:description"]').setAttribute('content', blog.Content.substring(0, 150));
+        document.querySelector('meta[property="og:image"]').setAttribute('content', blog.Image);
+        document.querySelector('meta[property="og:url"]').setAttribute('content', `https://dieseldown.com/blog/${blog.slug}`);
+      }, blogData);
 
-      if (!cachedIndexHTML) {
-        cachedIndexHTML = fs.readFileSync(
-          path.resolve(__dirname, 'client', 'build', 'index.html'),
-          'utf8'
-        );
-      }
+      // Get the updated HTML
+      const updatedHTML = await page.content();
+      await browser.close();
 
-      // Replace meta tags dynamically
-      const updatedHTML = cachedIndexHTML
-        .replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${blog.Title}"`)
-        .replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${excerpt}"`)
-        .replace(/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${blog.image || 'https://dieseldown.com/profile_avatar.jpg'}"`)
-        .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="https://dieseldown.com/blog/${slug}"`);
-
+      // Send the rendered HTML to the client
       res.send(updatedHTML);
     } catch (error) {
-      console.error('Error handling /blog/:slug:', error.message);
-      res.status(500).send('Error loading the blog post.');
+      console.error('Error rendering blog with Puppeteer:', error);
+      res.status(500).send('Failed to render blog dynamically.');
     }
   });
 
