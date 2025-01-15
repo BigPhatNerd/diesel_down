@@ -46,6 +46,49 @@ app.get('/privacy-policy', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
+  let cachedIndexHTML;
+
+  app.get('/blog/:slug', async (req, res) => {
+    const slug = req.params.slug;
+    console.log('Requested slug:', slug);
+
+    try {
+      // Fetch the blog post
+      const response = await fetch(`https://api.dieseldown.com/blog/${slug}`);
+      if (!response.ok) {
+        console.error(`Failed to fetch blog: ${response.status} ${response.statusText}`);
+        throw new Error('Failed to fetch blog data');
+      }
+
+      const blog = await response.json();
+      console.log('Fetched blog:', blog);
+
+      // Generate an excerpt
+      const excerpt = blog.Content
+        ? blog.Content.substring(0, 150).replace(/[\r\n]+/g, ' ') + '...'
+        : 'No description available.';
+
+      if (!cachedIndexHTML) {
+        cachedIndexHTML = fs.readFileSync(
+          path.resolve(__dirname, 'client', 'build', 'index.html'),
+          'utf8'
+        );
+      }
+
+      // Replace meta tags dynamically
+      const updatedHTML = cachedIndexHTML
+        .replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${blog.Title}"`)
+        .replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${excerpt}"`)
+        .replace(/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${blog.image || 'https://dieseldown.com/profile_avatar.jpg'}"`)
+        .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="https://dieseldown.com/blog/${slug}"`);
+
+      res.send(updatedHTML);
+    } catch (error) {
+      console.error('Error handling /blog/:slug:', error.message);
+      res.status(500).send('Error loading the blog post.');
+    }
+  });
+
   // Catch-all route for React frontend
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
