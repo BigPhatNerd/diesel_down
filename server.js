@@ -46,42 +46,6 @@ app.get('/privacy-policy', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
-  let cachedIndexHTML;
-
-  // Handle dynamic blog meta tags
-  app.get('/blog/:slug', async (req, res) => {
-    const slug = req.params.slug;
-    console.log('Requested slug:', slug);
-
-    try {
-      // Fetch the blog post from the API
-      const response = await fetch(`https://dieseldown.com/api/blog/${slug}`);
-      if (!response.ok) {
-        console.error(`Failed to fetch blog: ${response.status} ${response.statusText}`);
-        throw new Error('Failed to fetch blog data');
-      }
-      console.log({ response })
-      const blog = await response.json();
-      console.log({ blog })
-      // Cache index.html to reduce file system operations
-      if (!cachedIndexHTML) {
-        cachedIndexHTML = fs.readFileSync(path.resolve(__dirname, 'client', 'build', 'index.html'), 'utf8');
-      }
-
-      // Replace meta tags with dynamic data
-      const updatedHTML = cachedIndexHTML
-        .replace('<meta property="og:title" content="Diesel Down - Performance Diesel Data and Analytics" />', `<meta property="og:title" content="${blog.title}" />`)
-      // .replace('<meta property="og:description" content="Explore Diesel Down\'s professional diesel tuning services with our state-of-the-art Dynocom 15,000 Series Dyno!" />', `<meta property="og:description" content="${blog.excerpt}" />`)
-      // .replace('<meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />', `<meta property="og:image" content="${blog.image}" />`)
-      // .replace('<meta property="og:url" content="https://dieseldown.com" />', `<meta property="og:url" content="https://dieseldown.com/blog/${slug}" />`);
-
-      res.send(updatedHTML);
-    } catch (error) {
-      console.error('Error handling /blog/:slug:', error.message);
-      res.status(500).send('An error occurred while loading the blog.');
-    }
-  });
-
   // Catch-all route for React frontend
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
