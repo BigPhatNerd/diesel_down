@@ -50,14 +50,17 @@ if (process.env.NODE_ENV === 'production') {
   console.log("Here....")
   app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
-
+    console.log({ slug })
     try {
       // Launch Puppeteer
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
       const page = await browser.newPage();
 
       // Navigate to the blog page
       const blogUrl = `https://dieseldown.com/blog/${slug}`;
+      console.log({ blogUrl })
       await page.goto(blogUrl, { waitUntil: 'networkidle0' });
 
       // Inject meta tags dynamically
