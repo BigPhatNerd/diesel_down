@@ -1,55 +1,39 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+const fs = require('fs'); // Required for reading index.html
+const fetch = require('node-fetch'); // Ensure you have node-fetch installed
 const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
 const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
 
-var cors = require('cors')
+const cors = require('cors');
 const app = express();
 connectDB();
 
-
+// Force HTTPS in production
 app.use((req, res, next) => {
-  // Skip redirection for local development
-  if (process.env.NODE_ENV !== 'production') {
-    return next();
-  }
-
-  // Redirect to HTTPS if not already secure
-  if (req.headers['x-forwarded-proto'] !== 'https') {
+  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
     return res.redirect(`https://${req.headers.host}${req.url}`);
   }
   next();
 });
 
-
-//Init middleware
-app.use((_, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  next()
-})
+// Middleware
 app.use(cors());
 app.use(express.json({ extended: false }));
 
+// API routes
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/webhooks', jotFormWebhook);
 app.use('/api/blog', blog);
 
+// Serve privacy policy
 app.get('/privacy-policy', (req, res) => {
   const filePath = path.join(__dirname, 'privacy-policy.html');
-
-  // Debug the path
-  console.log('Resolved filePath:', filePath);
-
-  // Send the file
   res.sendFile(filePath, (err) => {
     if (err) {
       console.error('Error sending privacy-policy.html:', err.message);
@@ -58,26 +42,32 @@ app.get('/privacy-policy', (req, res) => {
   });
 });
 
-console.log({ dirname: __dirname })
+// Production setup
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-  console.log("\n\n\n\n\n I am in here")
+
   let cachedIndexHTML;
 
+  // Handle dynamic blog meta tags
   app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
-    console.log({ slug });
+    console.log('Requested slug:', slug);
 
     try {
-      // Fetch the blog post
-      const blog = await fetch(`https://api.dieseldown.com/blog/${slug}`).then((response) =>
-        response.json()
-      );
+      // Fetch the blog post from the API
+      const response = await fetch(`https://api.dieseldown.com/blog/${slug}`);
+      if (!response.ok) {
+        console.error(`Failed to fetch blog: ${response.status} ${response.statusText}`);
+        throw new Error('Failed to fetch blog data');
+      }
+      const blog = await response.json();
 
+      // Cache index.html to reduce file system operations
       if (!cachedIndexHTML) {
         cachedIndexHTML = fs.readFileSync(path.resolve(__dirname, 'client', 'build', 'index.html'), 'utf8');
       }
 
+      // Replace meta tags with dynamic data
       const updatedHTML = cachedIndexHTML
         .replace('<meta property="og:title" content="Diesel Down - Performance Diesel Data and Analytics" />', `<meta property="og:title" content="${blog.title}" />`)
         .replace('<meta property="og:description" content="Explore Diesel Down\'s professional diesel tuning services with our state-of-the-art Dynocom 15,000 Series Dyno!" />', `<meta property="og:description" content="${blog.excerpt}" />`)
@@ -91,13 +81,12 @@ if (process.env.NODE_ENV === 'production') {
     }
   });
 
+  // Catch-all route for React frontend
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  })
+  });
 }
 
-
-
+// Start server
 const PORT = process.env.PORT || 4390;
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
