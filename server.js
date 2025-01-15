@@ -62,7 +62,7 @@ console.log({ dirname: __dirname })
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
-  app.get('/blog/:slug', async (req, res) => {
+  app.get('/api/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
     console.log({ slug })
     // Fetch the blog post from your API or database
