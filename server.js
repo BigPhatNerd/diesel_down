@@ -74,7 +74,7 @@ if (process.env.NODE_ENV === 'production') {
 
   app.use(express.static('client/build'));
 
-  app.get('/blog/:slug', (req, res) => {
+  app.get('/blog/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 
