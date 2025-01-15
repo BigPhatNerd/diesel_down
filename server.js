@@ -88,6 +88,7 @@ if (process.env.NODE_ENV === 'production') {
 
   // Catch-all route for React frontend
   app.get('*', (req, res) => {
+    console.log("\n\n\n\nIn the catch all route\n\n\n\n")
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
