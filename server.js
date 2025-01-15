@@ -69,10 +69,11 @@ if (process.env.NODE_ENV === 'production') {
     const blog = await fetch(`https://api.dieseldown.com/blog/${slug}`).then((response) =>
       response.json()
     );
+    console.log({ blog })
 
     // Read the index.html file
     const indexHTML = fs.readFileSync(path.resolve(__dirname, 'client', 'build', 'index.html'), 'utf8');
-
+    console.log({ indexHTML })
     // Replace placeholders with dynamic meta tags
     const updatedHTML = indexHTML
       .replace('<meta property="og:title" content="Diesel Down - Performance Diesel Data and Analytics" />', `<meta property="og:title" content="${blog.title}" />`)
