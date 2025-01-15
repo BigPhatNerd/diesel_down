@@ -62,27 +62,35 @@ console.log({ dirname: __dirname })
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   console.log("\n\n\n\n\n I am in here")
+  let cachedIndexHTML;
+
   app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
-    console.log({ slug })
-    // Fetch the blog post from your API or database
-    const blog = await fetch(`https://api.dieseldown.com/blog/${slug}`).then((response) =>
-      response.json()
-    );
-    console.log({ blog })
+    console.log({ slug });
 
-    // Read the index.html file
-    const indexHTML = fs.readFileSync(path.resolve(__dirname, 'client', 'build', 'index.html'), 'utf8');
-    console.log({ indexHTML })
-    // Replace placeholders with dynamic meta tags
-    const updatedHTML = indexHTML
-      .replace('<meta property="og:title" content="Diesel Down - Performance Diesel Data and Analytics" />', `<meta property="og:title" content="${blog.title}" />`)
-      .replace('<meta property="og:description" content="Explore Diesel Down\'s professional diesel tuning services with our state-of-the-art Dynocom 15,000 Series Dyno!" />', `<meta property="og:description" content="${blog.excerpt}" />`)
-      .replace('<meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />', `<meta property="og:image" content="${blog.image}" />`)
-      .replace('<meta property="og:url" content="https://dieseldown.com" />', `<meta property="og:url" content="https://dieseldown.com/blog/${slug}" />`);
-    console.log({ updatedHTML })
-    res.send(updatedHTML);
+    try {
+      // Fetch the blog post
+      const blog = await fetch(`https://api.dieseldown.com/blog/${slug}`).then((response) =>
+        response.json()
+      );
+
+      if (!cachedIndexHTML) {
+        cachedIndexHTML = fs.readFileSync(path.resolve(__dirname, 'client', 'build', 'index.html'), 'utf8');
+      }
+
+      const updatedHTML = cachedIndexHTML
+        .replace('<meta property="og:title" content="Diesel Down - Performance Diesel Data and Analytics" />', `<meta property="og:title" content="${blog.title}" />`)
+        .replace('<meta property="og:description" content="Explore Diesel Down\'s professional diesel tuning services with our state-of-the-art Dynocom 15,000 Series Dyno!" />', `<meta property="og:description" content="${blog.excerpt}" />`)
+        .replace('<meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />', `<meta property="og:image" content="${blog.image}" />`)
+        .replace('<meta property="og:url" content="https://dieseldown.com" />', `<meta property="og:url" content="https://dieseldown.com/blog/${slug}" />`);
+
+      res.send(updatedHTML);
+    } catch (error) {
+      console.error('Error handling /blog/:slug:', error.message);
+      res.status(500).send('An error occurred while loading the blog.');
+    }
   });
+
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   })
