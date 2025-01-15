@@ -69,12 +69,33 @@ if (process.env.NODE_ENV === 'production') {
       // Inject meta tags dynamically
       const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
       await page.evaluate((blog) => {
-        console.log('Injecting meta tags:', blog);
-        document.querySelector('meta[property="og:title"]').setAttribute('content', blog.Title);
-        document.querySelector('meta[property="og:description"]').setAttribute('content', blog.Content.substring(0, 150));
-        document.querySelector('meta[property="og:image"]').setAttribute('content', blog.Image);
-        document.querySelector('meta[property="og:url"]').setAttribute('content', `https://dieseldown.com/blog/${blog.slug}`);
+        // Remove existing Open Graph meta tags
+        document.querySelectorAll('meta[property^="og:"]').forEach((meta) => meta.remove());
+
+        // Add new Open Graph meta tags
+        const head = document.querySelector('head');
+
+        const ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        ogTitle.setAttribute('content', blog.Title);
+        head.appendChild(ogTitle);
+
+        const ogDescription = document.createElement('meta');
+        ogDescription.setAttribute('property', 'og:description');
+        ogDescription.setAttribute('content', blog.Content.substring(0, 150));
+        head.appendChild(ogDescription);
+
+        const ogImage = document.createElement('meta');
+        ogImage.setAttribute('property', 'og:image');
+        ogImage.setAttribute('content', blog.Image);
+        head.appendChild(ogImage);
+
+        const ogUrl = document.createElement('meta');
+        ogUrl.setAttribute('property', 'og:url');
+        ogUrl.setAttribute('content', `https://dieseldown.com/blog/${blog.slug}`);
+        head.appendChild(ogUrl);
       }, blogData);
+
 
       // Get the updated HTML
       const updatedHTML = await page.content();
