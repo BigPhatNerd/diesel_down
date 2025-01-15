@@ -12,7 +12,6 @@ var cors = require('cors')
 const app = express();
 connectDB();
 
-const prerender = require('prerender-node');
 
 // Set up Prerender middleware
 app.use(
