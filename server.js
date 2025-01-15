@@ -55,7 +55,9 @@ if (process.env.NODE_ENV === 'production') {
       // Launch Puppeteer
       const browser = await puppeteer.launch({
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        headless: true,
       });
+
       console.log("\n\n\n\n\nfiring away\n\n\n")
       const page = await browser.newPage();
 
