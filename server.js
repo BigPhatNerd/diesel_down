@@ -6,21 +6,13 @@ const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
 const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
-const prerender = require('prerender-node');
 
 var cors = require('cors')
 const app = express();
 connectDB();
 
 
-// Set up Prerender middleware
-app.use(
-  prerender
-    .set('prerenderToken', process.env.PRERENDER_TOKEN) // Your Prerender token
-    .set('protocol', 'https') // Ensure protocol matches your live site
-);
 
-// The rest of your middleware and routes
 
 
 app.use((req, res, next) => {
@@ -91,7 +83,7 @@ if (process.env.NODE_ENV === 'production') {
       .replace('<meta property="og:description" content="Explore Diesel Down\'s professional diesel tuning services with our state-of-the-art Dynocom 15,000 Series Dyno!" />', `<meta property="og:description" content="${blog.excerpt}" />`)
       .replace('<meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />', `<meta property="og:image" content="${blog.image}" />`)
       .replace('<meta property="og:url" content="https://dieseldown.com" />', `<meta property="og:url" content="https://dieseldown.com/blog/${slug}" />`);
-
+    console.log({ updatedHTML })
     res.send(updatedHTML);
   });
 
