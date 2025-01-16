@@ -69,7 +69,7 @@ if (process.env.NODE_ENV === 'production') {
       // Inject meta tags dynamically
       const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
       await page.evaluate((blog) => {
-        // Remove existing Open Graph meta tags
+        // Remove existing Open Graph meta tags, including react-helmet tags
         document.querySelectorAll('meta[property^="og:"]').forEach((meta) => meta.remove());
 
         // Add new Open Graph meta tags
@@ -95,6 +95,7 @@ if (process.env.NODE_ENV === 'production') {
         ogUrl.setAttribute('content', `https://dieseldown.com/blog/${blog.slug}`);
         head.appendChild(ogUrl);
       }, blogData);
+
 
 
       // Get the updated HTML
