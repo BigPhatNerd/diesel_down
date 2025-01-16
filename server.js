@@ -94,6 +94,16 @@ if (process.env.NODE_ENV === 'production') {
         ogUrl.setAttribute('property', 'og:url');
         ogUrl.setAttribute('content', `https://dieseldown.com/blog/${blog.slug}`);
         head.appendChild(ogUrl);
+
+        const ogType = document.createElement('meta');
+        ogType.setAttribute('property', 'og:type');
+        ogType.setAttribute('content', 'article');
+        head.appendChild(ogType);
+
+        const fbAppId = document.createElement('meta');
+        fbAppId.setAttribute('property', 'fb:app_id');
+        fbAppId.setAttribute('content', '2028204197694958');
+        head.appendChild(fbAppId);
       }, blogData);
 
 
