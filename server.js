@@ -87,7 +87,7 @@ if (process.env.NODE_ENV === 'production') {
 
         const ogImage = document.createElement('meta');
         ogImage.setAttribute('property', 'og:image');
-        ogImage.setAttribute('content', blog.Image);
+        ogImage.setAttribute('content', "https://dieseldown.com/profile_avatar.jpg");
         head.appendChild(ogImage);
 
         const ogUrl = document.createElement('meta');
