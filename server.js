@@ -50,7 +50,8 @@ if (process.env.NODE_ENV === 'production') {
   console.log("Here....")
   app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
-    console.log({ slug })
+    console.log({ slug });
+
     try {
       // Launch Puppeteer
       const browser = await puppeteer.launch({
@@ -58,67 +59,94 @@ if (process.env.NODE_ENV === 'production') {
         headless: true,
       });
 
-      console.log("\n\n\n\n\nfiring away\n\n\n")
+      console.log("\n\n\n\n\nfiring away\n\n\n");
       const page = await browser.newPage();
 
       // Navigate to the blog page
       const blogUrl = `https://dieseldown.com/blog/${slug}`;
-      console.log({ blogUrl })
-      await page.goto(blogUrl, { waitUntil: 'networkidle0' });
+      console.log({ blogUrl });
+      await page.goto(blogUrl, { waitUntil: 'networkidle0', timeout: 10000 });
 
-      // Inject meta tags dynamically
-      const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
+      // Fetch blog metadata
+      let blogData;
+      try {
+        const { data } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
+        blogData = data;
+      } catch (apiError) {
+        console.error('Error fetching blog data:', apiError);
+        blogData = null; // Ensure fallback handling
+      }
+
+      if (!blogData) {
+        console.log("Blog data not found, using fallback meta tags.");
+        return res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta property="og:title" content="Diesel Down Blog">
+          <meta property="og:description" content="Explore performance diesel insights at Diesel Down.">
+          <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg">
+          <meta property="og:url" content="https://dieseldown.com/blog">
+          <meta property="og:type" content="website">
+          <meta property="fb:app_id" content="2028204197694958">
+        </head>
+        <body>
+          <h1>Blog Post Not Found</h1>
+          <p>The requested blog post is unavailable. Please check back later.</p>
+        </body>
+        </html>
+      `);
+      }
+
+      // Inject Open Graph meta tags
       await page.evaluate((blog) => {
-        // Remove existing Open Graph meta tags, including react-helmet tags
-        document.querySelectorAll('meta[property^="og:"]').forEach((meta) => meta.remove());
-
-        // Add new Open Graph meta tags
         const head = document.querySelector('head');
+        const createMetaTag = (property, content) => {
+          const meta = document.createElement('meta');
+          meta.setAttribute('property', property);
+          meta.setAttribute('content', content);
+          head.appendChild(meta);
+        };
 
-        const ogTitle = document.createElement('meta');
-        ogTitle.setAttribute('property', 'og:title');
-        ogTitle.setAttribute('content', blog.Title);
-        head.appendChild(ogTitle);
-
-        const ogDescription = document.createElement('meta');
-        ogDescription.setAttribute('property', 'og:description');
-        ogDescription.setAttribute('content', blog.Content.substring(0, 150));
-        head.appendChild(ogDescription);
-
-        const ogImage = document.createElement('meta');
-        ogImage.setAttribute('property', 'og:image');
-        ogImage.setAttribute('content', "https://dieseldown.com/profile_avatar.jpg");
-        head.appendChild(ogImage);
-
-        const ogUrl = document.createElement('meta');
-        ogUrl.setAttribute('property', 'og:url');
-        ogUrl.setAttribute('content', `https://dieseldown.com/blog/${blog.slug}`);
-        head.appendChild(ogUrl);
-
-        const ogType = document.createElement('meta');
-        ogType.setAttribute('property', 'og:type');
-        ogType.setAttribute('content', 'article');
-        head.appendChild(ogType);
-
-        const fbAppId = document.createElement('meta');
-        fbAppId.setAttribute('property', 'fb:app_id');
-        fbAppId.setAttribute('content', '2028204197694958');
-        head.appendChild(fbAppId);
+        createMetaTag('og:title', blog.Title);
+        createMetaTag('og:description', blog.Content.substring(0, 150));
+        createMetaTag('og:image', "https://dieseldown.com/profile_avatar.jpg");
+        createMetaTag('og:url', `https://dieseldown.com/blog/${blog.slug}`);
+        createMetaTag('og:type', 'article');
+        createMetaTag('fb:app_id', '2028204197694958');
       }, blogData);
-
-
 
       // Get the updated HTML
       const updatedHTML = await page.content();
       await browser.close();
 
-      // Send the rendered HTML to the client
       res.send(updatedHTML);
     } catch (error) {
       console.error('Error rendering blog with Puppeteer:', error);
-      res.status(500).send('Failed to render blog dynamically.');
+
+      // ✅ **Ensure a 200 response with a backup OG preview**
+      res.send(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta property="og:title" content="Diesel Down Blog">
+        <meta property="og:description" content="Explore performance diesel insights at Diesel Down.">
+        <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg">
+        <meta property="og:url" content="https://dieseldown.com/blog">
+        <meta property="og:type" content="website">
+        <meta property="fb:app_id" content="2028204197694958">
+      </head>
+      <body>
+        <h1>Blog Page Unavailable</h1>
+        <p>We are experiencing technical difficulties. Please check back later.</p>
+      </body>
+      </html>
+    `);
     }
   });
+
 
   // Catch-all route for React frontend
   app.get('*', (req, res) => {
