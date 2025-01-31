@@ -50,82 +50,76 @@ if (process.env.NODE_ENV === 'production') {
   console.log("Here....")
   app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
-    console.log({ slug });
+    console.log("\n\nReceived blog request:", { slug });
 
     try {
       // Launch Puppeteer
+      console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
         headless: true,
       });
 
-      console.log("\n\n\nLaunching Puppeteer\n\n\n");
+      console.log("\n\nPuppeteer launched successfully.\n\n");
       const page = await browser.newPage();
 
       // Navigate to the blog page
       const blogUrl = `https://dieseldown.com/blog/${slug}`;
-      console.log({ blogUrl });
+      console.log("\n\nNavigating to:", blogUrl);
+      await page.goto(blogUrl, { waitUntil: 'networkidle0' });
 
-      await page.goto(blogUrl, { waitUntil: 'networkidle0', timeout: 10000 });
+      console.log("\n\nSuccessfully loaded blog page:", blogUrl);
 
       // Fetch blog metadata
-      console.log("\n\nFetching blog data...\n\n");
+      console.log("\n\nFetching blog metadata from API...");
       const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
 
-      if (!blogData) throw new Error("Blog data is undefined or null");
+      if (!blogData) {
+        console.error("\n\nERROR: Blog data is undefined or null\n\n");
+        throw new Error("Blog data is undefined or null");
+      }
 
-      console.log("\n\nSuccessfully fetched blog data\n\n");
+      console.log("\n\nSuccessfully fetched blog data:\n", blogData);
 
-      // Inject Open Graph meta tags dynamically
+      // Inject meta tags dynamically
+      console.log("\n\nInjecting Open Graph meta tags...\n\n");
       await page.evaluate((blog) => {
+        // Remove existing Open Graph meta tags, including react-helmet tags
+        document.querySelectorAll('meta[property^="og:"]').forEach((meta) => meta.remove());
+
+        // Add new Open Graph meta tags
         const head = document.querySelector('head');
-        const createMetaTag = (property, content) => {
+
+        const createMeta = (property, content) => {
           const meta = document.createElement('meta');
           meta.setAttribute('property', property);
           meta.setAttribute('content', content);
           head.appendChild(meta);
         };
 
-        createMetaTag('og:title', blog.Title);
-        createMetaTag('og:description', blog.Content.substring(0, 150));
-        createMetaTag('og:image', "https://dieseldown.com/profile_avatar.jpg");
-        createMetaTag('og:url', `https://dieseldown.com/blog/${blog.slug}`);
-        createMetaTag('og:type', 'article');
-        createMetaTag('fb:app_id', '2028204197694958');
+        createMeta('og:title', blog.Title);
+        createMeta('og:description', blog.Content.substring(0, 150));
+        createMeta('og:image', "https://dieseldown.com/profile_avatar.jpg");
+        createMeta('og:url', `https://dieseldown.com/blog/${blog.slug}`);
+        createMeta('og:type', 'article');
+        createMeta('fb:app_id', '2028204197694958');
       }, blogData);
 
-      console.log("\n\nMeta tags injected successfully\n\n");
+      console.log("\n\nMeta tags injected successfully.\n\n");
 
       // Get the updated HTML
+      console.log("\n\nGenerating updated HTML...\n\n");
       const updatedHTML = await page.content();
       await browser.close();
 
-      console.log("\n\nSending updated HTML response\n\n");
-      res.status(200).send(updatedHTML);
+      console.log("\n\nSending updated HTML response.\n\n");
+      res.send(updatedHTML);
 
     } catch (error) {
-      console.error('Error rendering blog with Puppeteer:', error);
+      console.error('\n\nError rendering blog with Puppeteer:', error, "\n\n");
 
-      // Force a 200 response with error details
-      res.status(200).send(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta property="og:title" content="Error Loading Blog">
-        <meta property="og:description" content="There was an issue loading this blog post. Please try again later.">
-        <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg">
-        <meta property="og:url" content="https://dieseldown.com/blog">
-        <meta property="og:type" content="website">
-        <meta property="fb:app_id" content="2028204197694958">
-      </head>
-      <body>
-        <h1>Blog Page Error</h1>
-        <p>We are experiencing issues loading this blog post.</p>
-        <pre>${error.message}</pre>
-      </body>
-      </html>
-    `);
+      // ✅ Ensure Facebook always receives a 200 response
+      res.status(200).send('FB does not render meta tags dynamically. Blog can be found at https://dieseldown.com/blog');
     }
   });
 
