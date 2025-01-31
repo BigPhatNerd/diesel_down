@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === 'production') {
       // Launch Puppeteer
       console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/tmp/puppeteer_cache/chrome/linux-132.0.6834.83/chrome-linux64/chrome',
+        executablePath: puppeteer.executablePath(), // Auto-detect new location
         headless: 'new',
         args: [
           '--no-sandbox',
