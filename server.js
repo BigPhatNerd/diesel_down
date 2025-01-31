@@ -56,16 +56,21 @@ if (process.env.NODE_ENV === 'production') {
       // Launch Puppeteer
       console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
-        headless: 'new', // Fix for Chromium in Heroku
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable',
+        headless: 'new',  // Ensures compatibility
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
           '--disable-gpu',
-          '--no-zygote',
-          '--single-process'
+          '--disable-dev-shm-usage',
+          '--disable-software-rasterizer',
+          '--disable-accelerated-2d-canvas',
+          '--disable-features=site-per-process',
+          '--single-process',
+          '--no-zygote'
         ],
       });
+
 
 
       console.log("\n\nPuppeteer launched successfully.\n\n");
