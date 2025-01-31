@@ -57,35 +57,32 @@ if (process.env.NODE_ENV === 'production') {
       console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
         executablePath: process.env.CHROME_BIN || "/app/.chrome-for-testing/chrome-linux64/chrome",
-        headless: true,
+        headless: "new", // Use "new" headless mode for better compatibility
+        ignoreHTTPSErrors: true, // Ignore HTTPS certificate issues
+        timeout: 0, // Removes timeout issue completely
         args: [
-          "--headless",
           "--no-sandbox",
-          "--disable-gpu",
           "--disable-setuid-sandbox",
           "--disable-dev-shm-usage",
-          "--disable-software-rasterizer",
-          "--disable-background-timer-throttling",
-          "--disable-backgrounding-occluded-windows",
-          "--disable-renderer-backgrounding",
+          "--disable-accelerated-2d-canvas",
+          "--disable-gpu",
+          "--no-zygote",
+          "--disable-background-networking",
           "--disable-breakpad",
           "--disable-crash-reporter",
-          "--disable-component-extensions-with-background-pages",
-          "--disable-ipc-flooding-protection",
-          "--disable-background-networking",
-          "--disable-client-side-phishing-detection",
+          "--disable-default-apps",
           "--disable-translate",
           "--disable-sync",
-          "--metrics-recording-only",
-          "--disable-features=site-per-process",
-          "--mute-audio",
-          "--disable-extensions",
-          "--remote-debugging-port=9222",
+          "--disable-component-extensions-with-background-pages",
+          "--disable-ipc-flooding-protection",
           "--disable-dev-shm-usage",
-          "--single-process", // 🟢 FIX 1: Forces single process mode to prevent memory issues
-          "--no-zygote", // 🟢 FIX 2: Stops Chrome from spawning extra processes
+          "--remote-debugging-port=9222",
+          "--disable-extensions",
+          "--disable-software-rasterizer",
+          "--single-process",
         ]
       });
+
 
 
 
