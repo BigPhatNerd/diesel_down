@@ -57,16 +57,35 @@ if (process.env.NODE_ENV === 'production') {
       console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
         executablePath: process.env.CHROME_BIN || "/app/.chrome-for-testing/chrome-linux64/chrome",
+        headless: true,
         args: [
           "--headless",
           "--no-sandbox",
           "--disable-gpu",
+          "--disable-dev-shm-usage",
           "--disable-setuid-sandbox",
           "--disable-software-rasterizer",
-          "--disable-dev-shm-usage",
-          "--remote-debugging-port=9222"
+          "--disable-background-networking",
+          "--disable-default-apps",
+          "--disable-translate",
+          "--disable-sync",
+          "--metrics-recording-only",
+          "--disable-features=site-per-process",
+          "--disable-breakpad",
+          "--disable-crash-reporter",
+          "--disable-client-side-phishing-detection",
+          "--disable-component-extensions-with-background-pages",
+          "--disable-ipc-flooding-protection",
+          "--disable-background-timer-throttling",
+          "--disable-backgrounding-occluded-windows",
+          "--disable-renderer-backgrounding",
+          "--disable-background-timer-throttling",
+          "--mute-audio",
+          "--disable-extensions",
+          "--remote-debugging-port=9222",
         ]
       });
+
 
 
 
