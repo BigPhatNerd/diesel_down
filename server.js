@@ -56,9 +56,17 @@ if (process.env.NODE_ENV === 'production') {
       // Launch Puppeteer
       console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        headless: true,
+        headless: 'new', // Fix for Chromium in Heroku
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--no-zygote',
+          '--single-process'
+        ],
       });
+
 
       console.log("\n\nPuppeteer launched successfully.\n\n");
       const page = await browser.newPage();
