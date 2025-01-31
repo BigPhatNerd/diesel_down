@@ -59,7 +59,7 @@ if (process.env.NODE_ENV === 'production') {
       // Launch Puppeteer
       console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
-        executablePath: process.env.CHROME_BIN || "/app/.chrome-for-testing/chrome-linux64/chrome",
+        executablePath: "/app/.apt/usr/bin/google-chrome",
         headless: "new", // Use "new" headless mode for better compatibility
         ignoreHTTPSErrors: true, // Ignore HTTPS certificate issues
         timeout: 0, // Removes timeout issue completely
