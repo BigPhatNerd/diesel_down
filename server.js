@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === 'production') {
     const slug = req.params.slug;
     console.log("\n\nReceived blog request:", { slug });
 
-    // Detect if request is from a bot (Facebook, Twitter, LinkedIn, etc.)
+    // ✅ Detect if request is from a bot (Facebook, Twitter, etc.)
     const botUserAgents = [
       "facebookexternalhit",
       "Twitterbot",
@@ -66,67 +66,65 @@ if (process.env.NODE_ENV === 'production') {
       "Yahoo! Slurp",
       "Discordbot"
     ];
-
     const userAgent = req.headers["user-agent"] || "";
     const isBot = botUserAgents.some((bot) => userAgent.includes(bot));
 
-    if (!isBot) {
-      // ✅ If NOT a bot, redirect user to the actual blog post on React site
-      console.log("Normal user detected, redirecting to React page.");
-      return res.redirect(301, `https://dieseldown.com/blog/${slug}`);
-    }
+    if (isBot) {
+      // ✅ Fetch blog metadata for bots
+      try {
+        console.log("\n\nFetching blog metadata from API...");
+        const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
 
-    // ✅ If it's a bot, generate the meta tags dynamically
-    try {
-      console.log("\n\nFetching blog metadata from API...");
-      const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
+        if (!blogData) {
+          console.error("\n\nERROR: Blog data is undefined or null\n\n");
+          return res.status(404).send("Blog post not found.");
+        }
 
-      if (!blogData) {
-        console.error("\n\nERROR: Blog data is undefined or null\n\n");
-        return res.status(404).send("Blog post not found.");
+        console.log("\n\nSuccessfully fetched blog data:\n", blogData);
+
+        // ✅ Send static meta tags for social media
+        return res.send(`
+        <html>
+          <head>
+            <title>${blogData.Title}</title>
+            <meta property="og:title" content="${blogData.Title}" />
+            <meta property="og:description" content="${blogData.Content.substring(0, 150)}" />
+            <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
+            <meta property="og:url" content="https://dieseldown.com/blog/${blogData.slug}" />
+            <meta property="og:type" content="article" />
+            <meta property="fb:app_id" content="2028204197694958" />
+          </head>
+          <body>
+            <h1>${blogData.Title}</h1>
+            <p>${blogData.Content.substring(0, 150)}</p>
+          </body>
+        </html>
+      `);
+      } catch (error) {
+        console.error('\n\nError rendering blog metadata:', error, "\n\n");
+        return res.status(200).send(`
+        <html>
+          <head>
+            <title>Blog Not Found</title>
+            <meta property="og:title" content="Diesel Down Blog" />
+            <meta property="og:description" content="Check out our latest blog posts at Diesel Down." />
+            <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
+            <meta property="og:url" content="https://dieseldown.com/blog" />
+            <meta property="og:type" content="website" />
+          </head>
+          <body>
+            <h1>Blog post not found.</h1>
+          </body>
+        </html>
+      `);
       }
-
-      console.log("\n\nSuccessfully fetched blog data:\n", blogData);
-
-      // ✅ Send meta-tagged HTML response for social media scrapers
-      return res.send(`
-      <html>
-        <head>
-          <title>${blogData.Title}</title>
-          <meta property="og:title" content="${blogData.Title}" />
-          <meta property="og:description" content="${blogData.Content.substring(0, 150)}" />
-          <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
-          <meta property="og:url" content="https://dieseldown.com/blog/${blogData.slug}" />
-          <meta property="og:type" content="article" />
-          <meta property="fb:app_id" content="2028204197694958" />
-        </head>
-        <body>
-          <h1>${blogData.Title}</h1>
-          <p>${blogData.Content.substring(0, 150)}</p>
-        </body>
-      </html>
-    `);
-    } catch (error) {
-      console.error('\n\nError rendering blog with Puppeteer:', error, "\n\n");
-
-      // ✅ Ensure Facebook always receives a 200 response
-      return res.status(200).send(`
-      <html>
-        <head>
-          <title>Blog Not Found</title>
-          <meta property="og:title" content="Diesel Down Blog" />
-          <meta property="og:description" content="Check out our latest blog posts at Diesel Down." />
-          <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
-          <meta property="og:url" content="https://dieseldown.com/blog" />
-          <meta property="og:type" content="website" />
-        </head>
-        <body>
-          <h1>Blog post not found.</h1>
-        </body>
-      </html>
-    `);
     }
+
+    // ✅ If NOT a bot, serve React app (DO NOT REDIRECT)
+    console.log("Normal user detected, serving React app.");
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+
 
 
 
