@@ -56,86 +56,78 @@ if (process.env.NODE_ENV === 'production') {
     const slug = req.params.slug;
     console.log("\n\nReceived blog request:", { slug });
 
-    // ✅ Immediately return a placeholder response
-    res.status(202).send(`
-    <html>
-      <head>
-        <title>Loading...</title>
-        <meta property="og:title" content="Loading blog post..." />
-        <meta property="og:description" content="Fetching content..." />
-        <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
-      </head>
-      <body>
-        <h1>Loading blog post...</h1>
-      </body>
-    </html>
-  `);
+    // Detect if request is from a bot (Facebook, Twitter, LinkedIn, etc.)
+    const botUserAgents = [
+      "facebookexternalhit",
+      "Twitterbot",
+      "LinkedInBot",
+      "Googlebot",
+      "bingbot",
+      "Yahoo! Slurp",
+      "Discordbot"
+    ];
 
-    // ✅ Run Puppeteer in the background (this will NOT block the response)
-    (async () => {
-      try {
-        console.log("\n\nLaunching Puppeteer...\n\n");
-        const browser = await puppeteer.launch({
-          executablePath: process.env.NODE_ENV === "production"
-            ? "/app/.apt/usr/bin/google-chrome"
-            : undefined,
-          headless: "new",
-          args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-accelerated-2d-canvas",
-            "--disable-gpu",
-            "--disable-background-networking",
-            "--disable-breakpad",
-            "--disable-crash-reporter",
-            "--disable-default-apps",
-            "--disable-translate",
-            "--disable-sync",
-            "--disable-component-extensions-with-background-pages",
-            "--remote-debugging-port=9222",
-            "--disable-extensions",
-            "--disable-software-rasterizer",
-            "--single-process",
-          ]
-        });
+    const userAgent = req.headers["user-agent"] || "";
+    const isBot = botUserAgents.some((bot) => userAgent.includes(bot));
 
-        console.log("\n\nPuppeteer launched successfully.\n\n");
-        const page = await browser.newPage();
-        const blogUrl = `https://dieseldown.com/blog/${slug}`;
-        await page.goto(blogUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
+    if (!isBot) {
+      // ✅ If NOT a bot, redirect user to the actual blog post on React site
+      console.log("Normal user detected, redirecting to React page.");
+      return res.redirect(301, `https://dieseldown.com/blog/${slug}`);
+    }
 
-        console.log("\n\nFetching blog metadata from API...");
-        const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
+    // ✅ If it's a bot, generate the meta tags dynamically
+    try {
+      console.log("\n\nFetching blog metadata from API...");
+      const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
 
-        // Inject Open Graph meta tags
-        await page.evaluate((blog) => {
-          document.querySelectorAll('meta[property^="og:"]').forEach((meta) => meta.remove());
-          const head = document.querySelector('head');
-          const createMeta = (property, content) => {
-            const meta = document.createElement('meta');
-            meta.setAttribute('property', property);
-            meta.setAttribute('content', content);
-            head.appendChild(meta);
-          };
-          createMeta('og:title', blog.Title);
-          createMeta('og:description', blog.Content.substring(0, 150));
-          createMeta('og:image', "https://dieseldown.com/profile_avatar.jpg");
-          createMeta('og:url', `https://dieseldown.com/blog/${blog.slug}`);
-          createMeta('og:type', 'article');
-          createMeta('fb:app_id', '2028204197694958');
-        }, blogData);
-
-        console.log("\n\nMeta tags injected successfully.\n\n");
-        await browser.close();
-
-        console.log("\n\nUpdated HTML generated and ready.\n\n");
-
-      } catch (error) {
-        console.error('\n\nError rendering blog with Puppeteer:', error, "\n\n");
+      if (!blogData) {
+        console.error("\n\nERROR: Blog data is undefined or null\n\n");
+        return res.status(404).send("Blog post not found.");
       }
-    })(); // Run Puppeteer in the background
+
+      console.log("\n\nSuccessfully fetched blog data:\n", blogData);
+
+      // ✅ Send meta-tagged HTML response for social media scrapers
+      return res.send(`
+      <html>
+        <head>
+          <title>${blogData.Title}</title>
+          <meta property="og:title" content="${blogData.Title}" />
+          <meta property="og:description" content="${blogData.Content.substring(0, 150)}" />
+          <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
+          <meta property="og:url" content="https://dieseldown.com/blog/${blogData.slug}" />
+          <meta property="og:type" content="article" />
+          <meta property="fb:app_id" content="2028204197694958" />
+        </head>
+        <body>
+          <h1>${blogData.Title}</h1>
+          <p>${blogData.Content.substring(0, 150)}</p>
+        </body>
+      </html>
+    `);
+    } catch (error) {
+      console.error('\n\nError rendering blog with Puppeteer:', error, "\n\n");
+
+      // ✅ Ensure Facebook always receives a 200 response
+      return res.status(200).send(`
+      <html>
+        <head>
+          <title>Blog Not Found</title>
+          <meta property="og:title" content="Diesel Down Blog" />
+          <meta property="og:description" content="Check out our latest blog posts at Diesel Down." />
+          <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
+          <meta property="og:url" content="https://dieseldown.com/blog" />
+          <meta property="og:type" content="website" />
+        </head>
+        <body>
+          <h1>Blog post not found.</h1>
+        </body>
+      </html>
+    `);
+    }
   });
+
 
 
 
