@@ -10,6 +10,9 @@ const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
 const puppeteer = require('puppeteer');
 
+process.env.DEBUG = "puppeteer:*";  // Enables detailed logging for Puppeteer
+
+
 const cors = require('cors');
 const app = express();
 connectDB();
@@ -94,7 +97,7 @@ if (process.env.NODE_ENV === 'production') {
       // Navigate to the blog page
       const blogUrl = `https://dieseldown.com/blog/${slug}`;
       console.log("\n\nNavigating to:", blogUrl);
-      await page.goto(blogUrl, { waitUntil: 'networkidle0' });
+      await page.goto(blogUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
 
       console.log("\n\nSuccessfully loaded blog page:", blogUrl);
 
