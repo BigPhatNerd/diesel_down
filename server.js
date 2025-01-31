@@ -56,17 +56,16 @@ if (process.env.NODE_ENV === 'production') {
       // Launch Puppeteer
       console.log("\n\nLaunching Puppeteer...\n\n");
       const browser = await puppeteer.launch({
-        executablePath: puppeteer.executablePath(), // Auto-detect new location
-        headless: 'new',
+        executablePath: process.env.CHROME_BIN || "/app/.chrome-for-testing/chrome-linux64/chrome",
         args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-gpu',
-          '--disable-dev-shm-usage',
-          '--disable-features=site-per-process',
-          '--single-process',
-          '--no-zygote'
-        ],
+          "--headless",
+          "--no-sandbox",
+          "--disable-gpu",
+          "--disable-setuid-sandbox",
+          "--disable-software-rasterizer",
+          "--disable-dev-shm-usage",
+          "--remote-debugging-port=9222"
+        ]
       });
 
 
