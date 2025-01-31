@@ -51,108 +51,92 @@ console.log("Before production")
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   console.log("Here....")
+
   app.get('/blog/:slug', async (req, res) => {
     const slug = req.params.slug;
     console.log("\n\nReceived blog request:", { slug });
 
-    try {
-      // Launch Puppeteer
-      console.log("\n\nLaunching Puppeteer...\n\n");
-      const browser = await puppeteer.launch({
-        executablePath: "/app/.apt/usr/bin/google-chrome",
-        headless: "new", // Use "new" headless mode for better compatibility
-        ignoreHTTPSErrors: true, // Ignore HTTPS certificate issues
-        timeout: 0, // Removes timeout issue completely
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-accelerated-2d-canvas",
-          "--disable-gpu",
-          "--no-zygote",
-          "--disable-background-networking",
-          "--disable-breakpad",
-          "--disable-crash-reporter",
-          "--disable-default-apps",
-          "--disable-translate",
-          "--disable-sync",
-          "--disable-component-extensions-with-background-pages",
-          "--disable-ipc-flooding-protection",
-          "--disable-dev-shm-usage",
-          "--remote-debugging-port=9222",
-          "--disable-extensions",
-          "--disable-software-rasterizer",
-          "--single-process",
-        ]
-      });
+    // ✅ Immediately return a placeholder response
+    res.status(202).send(`
+    <html>
+      <head>
+        <title>Loading...</title>
+        <meta property="og:title" content="Loading blog post..." />
+        <meta property="og:description" content="Fetching content..." />
+        <meta property="og:image" content="https://dieseldown.com/profile_avatar.jpg" />
+      </head>
+      <body>
+        <h1>Loading blog post...</h1>
+      </body>
+    </html>
+  `);
 
+    // ✅ Run Puppeteer in the background (this will NOT block the response)
+    (async () => {
+      try {
+        console.log("\n\nLaunching Puppeteer...\n\n");
+        const browser = await puppeteer.launch({
+          executablePath: process.env.NODE_ENV === "production"
+            ? "/app/.apt/usr/bin/google-chrome"
+            : undefined,
+          headless: "new",
+          args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-accelerated-2d-canvas",
+            "--disable-gpu",
+            "--disable-background-networking",
+            "--disable-breakpad",
+            "--disable-crash-reporter",
+            "--disable-default-apps",
+            "--disable-translate",
+            "--disable-sync",
+            "--disable-component-extensions-with-background-pages",
+            "--remote-debugging-port=9222",
+            "--disable-extensions",
+            "--disable-software-rasterizer",
+            "--single-process",
+          ]
+        });
 
+        console.log("\n\nPuppeteer launched successfully.\n\n");
+        const page = await browser.newPage();
+        const blogUrl = `https://dieseldown.com/blog/${slug}`;
+        await page.goto(blogUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
 
+        console.log("\n\nFetching blog metadata from API...");
+        const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
 
+        // Inject Open Graph meta tags
+        await page.evaluate((blog) => {
+          document.querySelectorAll('meta[property^="og:"]').forEach((meta) => meta.remove());
+          const head = document.querySelector('head');
+          const createMeta = (property, content) => {
+            const meta = document.createElement('meta');
+            meta.setAttribute('property', property);
+            meta.setAttribute('content', content);
+            head.appendChild(meta);
+          };
+          createMeta('og:title', blog.Title);
+          createMeta('og:description', blog.Content.substring(0, 150));
+          createMeta('og:image', "https://dieseldown.com/profile_avatar.jpg");
+          createMeta('og:url', `https://dieseldown.com/blog/${blog.slug}`);
+          createMeta('og:type', 'article');
+          createMeta('fb:app_id', '2028204197694958');
+        }, blogData);
 
+        console.log("\n\nMeta tags injected successfully.\n\n");
+        await browser.close();
 
-      console.log("\n\nPuppeteer launched successfully.\n\n");
-      const page = await browser.newPage();
+        console.log("\n\nUpdated HTML generated and ready.\n\n");
 
-      // Navigate to the blog page
-      const blogUrl = `https://dieseldown.com/blog/${slug}`;
-      console.log("\n\nNavigating to:", blogUrl);
-      await page.goto(blogUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
-
-      console.log("\n\nSuccessfully loaded blog page:", blogUrl);
-
-      // Fetch blog metadata
-      console.log("\n\nFetching blog metadata from API...");
-      const { data: blogData } = await axios.get(`https://api.dieseldown.com/api/blog/${slug}`);
-
-      if (!blogData) {
-        console.error("\n\nERROR: Blog data is undefined or null\n\n");
-        throw new Error("Blog data is undefined or null");
+      } catch (error) {
+        console.error('\n\nError rendering blog with Puppeteer:', error, "\n\n");
       }
-
-      console.log("\n\nSuccessfully fetched blog data:\n", blogData);
-
-      // Inject meta tags dynamically
-      console.log("\n\nInjecting Open Graph meta tags...\n\n");
-      await page.evaluate((blog) => {
-        // Remove existing Open Graph meta tags, including react-helmet tags
-        document.querySelectorAll('meta[property^="og:"]').forEach((meta) => meta.remove());
-
-        // Add new Open Graph meta tags
-        const head = document.querySelector('head');
-
-        const createMeta = (property, content) => {
-          const meta = document.createElement('meta');
-          meta.setAttribute('property', property);
-          meta.setAttribute('content', content);
-          head.appendChild(meta);
-        };
-
-        createMeta('og:title', blog.Title);
-        createMeta('og:description', blog.Content.substring(0, 150));
-        createMeta('og:image', "https://dieseldown.com/profile_avatar.jpg");
-        createMeta('og:url', `https://dieseldown.com/blog/${blog.slug}`);
-        createMeta('og:type', 'article');
-        createMeta('fb:app_id', '2028204197694958');
-      }, blogData);
-
-      console.log("\n\nMeta tags injected successfully.\n\n");
-
-      // Get the updated HTML
-      console.log("\n\nGenerating updated HTML...\n\n");
-      const updatedHTML = await page.content();
-      await browser.close();
-
-      console.log("\n\nSending updated HTML response.\n\n");
-      res.send(updatedHTML);
-
-    } catch (error) {
-      console.error('\n\nError rendering blog with Puppeteer:', error, "\n\n");
-
-      // ✅ Ensure Facebook always receives a 200 response
-      res.status(200).send('FB does not render meta tags dynamically. Blog can be found at https://dieseldown.com/blog');
-    }
+    })(); // Run Puppeteer in the background
   });
+
 
 
   // Catch-all route for React frontend
