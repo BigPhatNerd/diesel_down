@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
 import 'react-phone-input-2/lib/style.css';

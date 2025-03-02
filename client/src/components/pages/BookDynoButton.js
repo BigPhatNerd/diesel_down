@@ -7,7 +7,6 @@ import RegistrationContext from '../../context/registration/registrationContext'
 
 const BookDynoButton = ({ style }) => {
     const registrationContext = useContext(RegistrationContext);
-    const { user } = registrationContext;
     const history = useHistory();
 
     const handleBookDynoClick = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Container, Row, Button, Form } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
 import RegistrationContext from '../../context/registration/registrationContext';
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
@@ -21,24 +21,6 @@ const ContactUs = () => {
 
     const [formSubmitted, setFormSubmitted] = useState(false);
 
-    const onChange = e => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const onSubmit = async e => {
-        e.preventDefault();
-        if (!formData.name || !formData.email || !formData.message) {
-            setAlert('Please fill in all required fields.', 'danger');
-            return;
-        }
-
-        // Attempt to send the contact form
-        const success = await contactUs(formData);
-
-        if (success) {
-            setFormSubmitted(true);
-        }
-    };
 
     const styles = getBackgroundStyles();
 

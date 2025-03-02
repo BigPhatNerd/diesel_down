@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Container, Row, Accordion, Card, Button } from 'react-bootstrap';
+import { Container, Row Card, Button } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
