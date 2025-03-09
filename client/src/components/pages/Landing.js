@@ -72,7 +72,7 @@ const Landing = () => {
         </Row>
         <Row className="justify-content-center m-2">
           <p>
-            <strong>Specialized Tuning for Cummins (Dodge/RAM), Duramax (GMC/Chevy), and Power Stroke (Ford):</strong> While we dyno test all diesel vehicles, we focus on delivering efficient and powerful custom tunes specifically for Cummins and Duramax engines. With our expertise in these brands, we ensure that your engine reaches its peak performance. Armed with our dyno data, you get the insights you need for a smoother, more powerful ride that’s built for your goals.
+            <strong>Specialized Tuning for Cummins (Dodge/RAM), Duramax (GMC/Chevy), and Power Stroke (Ford):</strong> While we dyno test most all vehicles, we focus on delivering efficient and powerful custom tunes specifically for Cummins, Powerstroke and Duramax engines. With our expertise in these brands, we ensure that your engine reaches its peak performance. Armed with our dyno data, you get the insights you need for a smoother, more powerful ride that’s built for your goals.
           </p>
         </Row>
         <Row className="justify-content-center m-2">

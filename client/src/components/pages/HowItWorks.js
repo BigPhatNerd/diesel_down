@@ -31,10 +31,10 @@ const HowItWorks = () => {
                 <Row className="m-3 text-left">
                     <ol>
                         <li><strong>Book Your Appointment:</strong> Schedule a time that works best for you.</li>
-                        <li><strong>Show Up & Relax:</strong> Arrive on the day, kick back, ask questions, and share any details you might have forgotten.</li>
-                        <li><strong>Watch the Dyno Performance:</strong> Kick back in the observation room as we test your truck’s performance on the dyno.</li>
+                        <li><strong>Show Up & Ask Questions:</strong> Arrive on the day, kick back, ask questions, and share any details you might have forgotten.</li>
+                        <li><strong>Drop your vehicle:</strong> Depending on if you are just getting dyno data and/or diagnostics or getting your vehicle tuned you will want to either drop your vehicle for a day or stick around and watch the pulls. If just getting data and diagnostics, kick back in the observation room as we test your truck’s performance on the dyno.</li>
                         <li><strong>Receive Your Data:</strong> Get detailed files with all the data produced from the run.</li>
-                        <li><strong>Tuning & Re-Running (Optional):</strong> Choose to have your truck tuned and run again for even better performance.</li>
+                        <li><strong>Tuning & Re-Running (Optional):</strong> If having the vehicle tuned, it is best to plan on your leaving your truck with us so that we can precisely adjust the vehicle and test the tune thoroughly.</li>
                         <li><strong>Take Your Data, Truck, & Tune:</strong> Leave with your data, truck, and tune, then go show the world just how badass your ride is.</li>
                     </ol>
                     <p>
