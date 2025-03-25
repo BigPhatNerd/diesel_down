@@ -216,3 +216,23 @@ body,
 .text-justify {
     text-align: justify;
 }
+
+
+.custom-pagination .page-item .page-link {
+    background-color: #C70C18;
+    border: none;
+    color: #fff;
+    /* White text */
+    transition: background-color 0.3s ease;
+}
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #9A0B14;
+    /* Slightly darker shade for active state */
+    border: none;
+}
+
+.custom-pagination .page-item .page-link:hover {
+    background-color: #9A0B14;
+    /* Darker red on hover */
+}
