@@ -7,6 +7,7 @@ import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
 import SocialMediaLinks from "./SocialMediaLinks";
 import AddressComponent from "./AddressComponent";
+import GoogleReviews from "./GoogleReviews";
 
 const Landing = () => {
   const registrationContext = useContext(RegistrationContext);
@@ -25,7 +26,7 @@ const Landing = () => {
         <Row className="justify-content-center m-2">
           <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
         </Row>
-
+        <GoogleReviews />
         <Row className="justify-content-center m-2">
           <h1>Welcome to Diesel Down – Where Power Meets Performance.</h1>
         </Row>
