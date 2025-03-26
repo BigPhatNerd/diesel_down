@@ -17,7 +17,9 @@ const ThankYou = () => {
         // Fire Google Ads Conversion Event
         if (window.gtag) {
             window.gtag('event', 'conversion', {
-                send_to: 'AW-11555277884/XXXXXXX12345abcde' // Replace this with your actual ID
+                send_to: 'AW-11555277884/cJngCMPA-q8aELyY_oUr',
+                value: 1.0,
+                currency: 'USD'
             });
         }
 
