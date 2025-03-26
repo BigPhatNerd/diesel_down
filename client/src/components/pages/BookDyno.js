@@ -7,6 +7,7 @@ import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
 import AddressComponent from './AddressComponent';
 import SocialMediaLinks from "./SocialMediaLinks";
+import GoogleReviews from "./GoogleReviews";
 
 export const options = [
     {
@@ -54,6 +55,8 @@ const BookDyno = ({ history }) => {
                         Happy to answer any questions (901) 443-7461
                     </p>
                 </Row>
+
+                <GoogleReviews />
 
                 {/* PRODUCTION Book Dyno */}
                 <Row className="justify-content-center">
