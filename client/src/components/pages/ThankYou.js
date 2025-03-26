@@ -23,6 +23,10 @@ const ThankYou = () => {
             });
         }
 
+        if (window.fbq) {
+            window.fbq('track', 'Lead');
+        }
+
         //eslint-disable-next-line
     }, []);
 
