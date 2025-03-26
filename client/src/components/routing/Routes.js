@@ -13,7 +13,7 @@ import HowItWorks from '../pages/HowItWorks';
 import ContactUs from '../pages/ContactUs';
 import BlogList from '../pages/BlogList'; // Adjust the import path
 import BlogDetails from '../pages/BlogDetails';
-
+import ThankYou from '../pages/ThankYou';
 
 
 const Routes = () => {
@@ -31,6 +31,7 @@ const Routes = () => {
 				<Route exact path='/contact-us' component={ContactUs} />
 				<Route exact path='/blog' component={BlogList} />
 				<Route exact path='/blog/:slug' component={BlogDetails} />
+				<Route exact path='/thank-you' component={ThankYou} />
 				<Route component={NotFound} />
 			</Switch>
 		</>
