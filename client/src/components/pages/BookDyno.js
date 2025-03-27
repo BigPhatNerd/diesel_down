@@ -30,7 +30,7 @@ const BookDyno = ({ history }) => {
                 <Row className="justify-content-center m-2">
                     <p style={{ fontStyle: 'italic', textAlign: 'center', maxWidth: '700px' }}>
                         Dyno + custom dyno-tune: <strong>$800</strong><br />
-                        Hardware (if needed) is additional — typically <strong>$300–$400</strong>.
+                        Hardware/Credits (if needed) is additional — ranges from <strong>$100–$400</strong>.
                     </p>
                 </Row>
                 <Row className="justify-content-center">
