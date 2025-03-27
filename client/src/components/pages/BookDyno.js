@@ -18,6 +18,14 @@ const BookDyno = ({ history }) => {
 
     useEffect(() => {
         loadUser();
+        if (window.fbq) {
+            window.fbq('track', 'ViewContent', {
+                content_name: 'Book Dyno',
+                content_category: 'Booking Page',
+                value: 800,
+                currency: 'USD'
+            });
+        }
         //eslint-disable-next-line
     }, []);
 
