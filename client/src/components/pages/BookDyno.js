@@ -9,26 +9,6 @@ import AddressComponent from './AddressComponent';
 import SocialMediaLinks from "./SocialMediaLinks";
 import GoogleReviews from "./GoogleReviews";
 
-export const options = [
-    {
-        name: 'Dyno Run',
-        descr: "3 Runs at dyno",
-        price: 220,
-        id: 100
-    },
-    {
-        name: "Custom Tuning (per tune)",
-        descr: "Single tune based off dyno results. Price includes dyno runs pre and post tuning",
-        price: 350,
-        id: 102
-    },
-    {
-        name: "EFI Auto Cal",
-        descr: "Device allowing you to load different tunes as well as have us make adjustments and create new tunes.",
-        price: 650,
-        id: 103
-    },
-];
 
 const BookDyno = ({ history }) => {
     const registrationContext = useContext(RegistrationContext);
@@ -48,7 +28,10 @@ const BookDyno = ({ history }) => {
                     <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
                 </Row>
                 <Row className="justify-content-center m-2">
-                    <h1>Book Your Dyno Session</h1>
+                    <p style={{ fontStyle: 'italic', textAlign: 'center', maxWidth: '700px' }}>
+                        Dyno + custom dyno-tune: <strong>$800</strong><br />
+                        Hardware (if needed) is additional — typically <strong>$300–$400</strong>.
+                    </p>
                 </Row>
                 <Row className="justify-content-center">
                     <p style={styles.italicText}>
