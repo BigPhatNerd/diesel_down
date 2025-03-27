@@ -57,7 +57,7 @@ const MyNavbar = () => {
           )}
 
           {currentPath !== "/book-dyno" && (
-            <Nav.Link as={Link} to="/book-dyno" onClick={handleLinkClick}>Book a Dyno</Nav.Link>
+            <Nav.Link as={Link} to="/book-dyno" onClick={handleLinkClick}>Schedule Dyno Tuning</Nav.Link>
           )}
 
           {currentPath !== "/about-us" && (

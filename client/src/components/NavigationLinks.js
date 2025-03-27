@@ -33,7 +33,7 @@ const NavigationLinks = ({ user, currentPage }) => {
 
             {currentPage !== "book-dyno" &&
                 <Link to="/book-dyno" className="custom-link">
-                    Book a Dyno
+                    Schedule Dyno Tuning
                 </Link>
             }
 
