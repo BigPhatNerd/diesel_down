@@ -11,12 +11,12 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             )}
 
-            {currentPage !== "dashboard" && (
+            {/* {currentPage !== "dashboard" && (
                 <Link to="/dashboard" className="custom-link">
                     Dashboard
                 </Link>
 
-            )}
+            )} */}
 
             {currentPage !== "more-info" && (
                 <Link to="/more-info" className="custom-link">
@@ -24,11 +24,11 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             )}
 
-            {currentPage !== "how-it-works" && (
+            {/* {currentPage !== "how-it-works" && (
                 <Link to="/how-it-works" className="custom-link">
                     How It Works
                 </Link>
-            )}
+            )} */}
 
 
             {currentPage !== "book-dyno" &&
@@ -61,11 +61,11 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             )}
 
-            {user && user.isAuthenticated && currentPage !== "logout" && (
+            {/* {user && user.isAuthenticated && currentPage !== "logout" && (
                 <Link to="/logout" className="custom-link">
                     Logout
                 </Link>
-            )}
+            )} */}
         </Row>
     );
 };

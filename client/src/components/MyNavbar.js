@@ -44,17 +44,17 @@ const MyNavbar = () => {
             <Nav.Link as={Link} to="/login" onClick={handleLinkClick}>Login</Nav.Link>
           )}
 
-          {currentPath !== "/dashboard" && (
+          {/* {currentPath !== "/dashboard" && (
             <Nav.Link as={Link} to="/dashboard" onClick={handleLinkClick}>Dashboard</Nav.Link>
-          )}
+          )} */}
 
           {currentPath !== "/more-info" && (
             <Nav.Link as={Link} to="/more-info" onClick={handleLinkClick}>More Info</Nav.Link>
           )}
 
-          {currentPath !== "/how-it-works" && (
+          {/* {currentPath !== "/how-it-works" && (
             <Nav.Link as={Link} to="/how-it-works" onClick={handleLinkClick}>How It Works</Nav.Link>
-          )}
+          )} */}
 
           {currentPath !== "/book-dyno" && (
             <Nav.Link as={Link} to="/book-dyno" onClick={handleLinkClick}>Schedule Dyno Tuning</Nav.Link>
