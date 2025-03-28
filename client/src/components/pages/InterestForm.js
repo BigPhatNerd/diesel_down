@@ -20,10 +20,10 @@ const InterestForm = ({ history }) => {
     useEffect(() => {
         loadUser();
         if (window.fbq) {
-            window.fbq('track', 'ViewContent', {
-                content_name: 'Book Dyno',
-                content_category: 'Booking Page',
-                value: 800,
+            window.fbq('track', 'lead', {
+                content_name: 'Request Info',
+                content_category: 'Lead Page',
+                value: 0,
                 currency: 'USD'
             });
         }

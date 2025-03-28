@@ -13,20 +13,9 @@ const ThankYouInfoForm = () => {
 
     useEffect(() => {
         loadUser();
-
-        // Fire Google Ads Conversion Event
-        if (window.gtag) {
-            window.gtag('event', 'conversion', {
-                send_to: 'AW-11555277884/cJngCMPA-q8aELyY_oUr',
-                value: 1.0,
-                currency: 'USD'
-            });
-        }
-
         if (window.fbq) {
-            window.fbq('track', 'Lead');
+            window.fbq('track', 'CompletedRegistration');
         }
-
         //eslint-disable-next-line
     }, []);
 

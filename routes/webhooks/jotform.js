@@ -163,17 +163,16 @@ router.post('/jotform/request-info', async (req, res) => {
                 // Parse the extracted JSON string
                 const parsedData = JSON.parse(match[1]);
 
-                console.log({ parsedData })
 
                 // Construct the message
                 const messageBody = `
-👊 Interest Form 👊 `;
-                // Name: ${parsedData.q3_name.first} ${parsedData.q3_name.last}
-                // Email: ${parsedData.q4_email}
-                // Phone: ${parsedData.q5_celPhone.full}
-                // Subject: ${parsedData.q27_subject}
-                // Message: ${parsedData.q29_message}
+👊 New Diesel Down Request 👊
 
+Name: ${parsedData.q3_name.first} ${parsedData.q3_name.last}
+Preferred Contact Method: ${parsedData.q30_how}
+${parsedData.q30_how === 'Phone Call' && parsedData.q5_celPhoneForCalling.full ? `Phone: ${parsedData.q5_celPhoneForCalling.full}` : ''}
+${parsedData.q30_how === 'Email' && parsedData.q4_email ? `Email: ${parsedData.q4_email}` : ''}
+`;
 
                 // Send the Twilio SMS
                 await client.messages.create({
