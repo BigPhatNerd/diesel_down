@@ -34,10 +34,10 @@ router.post('/jotform/book-dyno', async (req, res) => {
                         postal: parsedData.q6_address.postal,
                     },
                     appointmentDetails: {
-                        implementation: parsedData.q8_appointment.implementation,
-                        date: parsedData.q8_appointment.date,
-                        duration: parseInt(parsedData.q8_appointment.duration, 10),
-                        timezone: parsedData.q8_appointment.timezone,
+                        implementation: parsedData.q8_appointment && parsedData.q8_appointment.implementation,
+                        date: parsedData.q8_appointment && parsedData.q8_appointment.date,
+                        duration: parsedData.q8_appointment && parseInt(parsedData.q8_appointment.duration, 10),
+                        timezone: parsedData.q8_appointment && parsedData.q8_appointment.timezone,
                     },
                     vehicle: {
                         vin: parsedData.q9_vehicleVin,
@@ -131,6 +131,58 @@ Message: ${parsedData.q29_message}
                 });
 
                 res.status(201).json({ msg: 'Contact Us form received successfully', parsedData });
+            } else {
+                console.error('rawRequest not found in the payload');
+                res.status(400).send('rawRequest field not found in the payload');
+            }
+        } catch (error) {
+            console.error('Error processing form submission:', error);
+            res.status(400).send('Error processing form submission');
+        }
+    });
+
+    req.on('error', (err) => {
+        console.error('Error receiving data:', err.message);
+        res.status(500).send('Server Error');
+    });
+});
+
+router.post('/jotform/request-info', async (req, res) => {
+    let body = '';
+
+    req.on('data', (chunk) => {
+        body += chunk.toString(); // Collect chunks into `body`
+    });
+
+    req.on('end', async () => {
+        try {
+            // Use regex to extract the rawRequest JSON
+            const match = body.match(/name="rawRequest"\r\n\r\n([\s\S]*?)\r\n/);
+
+            if (match && match[1]) {
+                // Parse the extracted JSON string
+                const parsedData = JSON.parse(match[1]);
+
+                console.log({ parsedData })
+
+                // Construct the message
+                const messageBody = `
+👊 Interest Form 👊 `;
+                // Name: ${parsedData.q3_name.first} ${parsedData.q3_name.last}
+                // Email: ${parsedData.q4_email}
+                // Phone: ${parsedData.q5_celPhone.full}
+                // Subject: ${parsedData.q27_subject}
+                // Message: ${parsedData.q29_message}
+
+
+                // Send the Twilio SMS
+                await client.messages.create({
+                    body: messageBody,
+                    from: process.env.TWILIO_PHONE_NUMBER,
+                    to: process.env.MY_PHONE_NUMBER,
+                });
+
+                res.status(201).json({ msg: 'Interestform received successfully', parsedData });
             } else {
                 console.error('rawRequest not found in the payload');
                 res.status(400).send('rawRequest field not found in the payload');

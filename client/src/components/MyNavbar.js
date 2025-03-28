@@ -60,6 +60,10 @@ const MyNavbar = () => {
             <Nav.Link as={Link} to="/book-dyno" onClick={handleLinkClick}>Schedule Dyno Tuning</Nav.Link>
           )}
 
+          {currentPath !== "/request-info" && (
+            <Nav.Link as={Link} to="/request-info" onClick={handleLinkClick}>Request Info</Nav.Link>
+          )}
+
           {currentPath !== "/about-us" && (
             <Nav.Link as={Link} to="/about-us" onClick={handleLinkClick}>About Us</Nav.Link>
           )}

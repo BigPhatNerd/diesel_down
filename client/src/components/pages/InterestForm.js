@@ -1,3 +1,4 @@
+
 import React, { useEffect, useContext } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
@@ -10,7 +11,7 @@ import SocialMediaLinks from "./SocialMediaLinks";
 // import GoogleReviews from "./GoogleReviews";
 
 
-const BookDyno = ({ history }) => {
+const InterestForm = ({ history }) => {
     const registrationContext = useContext(RegistrationContext);
     const { loadUser, user } = registrationContext;
 
@@ -30,7 +31,7 @@ const BookDyno = ({ history }) => {
     }, []);
 
     return (
-        <div id='book-dyno' style={styles.container}>
+        <div id='request-info' style={styles.container}>
             <Container className='pt-3'>
                 <Row className="justify-content-center m-2">
                     <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
@@ -53,7 +54,7 @@ const BookDyno = ({ history }) => {
                 <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
-                        src={`https://form.jotform.com/243176354266157?email=${user && user.email ? user.email : ''}`} // Replace with your JotForm URL
+                        src="https://form.jotform.com/250863857819170"
                         width="100%"
                         height="600px"
                         frameBorder="0"
@@ -88,10 +89,10 @@ const BookDyno = ({ history }) => {
                     <SocialMediaLinks />
                 </Row>
 
-                <NavigationLinks user={user} currentPage="book-dyno" />
+                <NavigationLinks user={user} currentPage="interest-form" />
             </Container>
         </div>
     )
 };
 
-export default BookDyno;
+export default InterestForm;

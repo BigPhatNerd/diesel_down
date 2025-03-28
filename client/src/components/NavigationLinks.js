@@ -37,6 +37,12 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             }
 
+            {currentPage !== "request-info" &&
+                <Link to="/request-info" className="custom-link">
+                    Request Info
+                </Link>
+            }
+
             {currentPage !== "about-us" && (
                 <Link to="/about-us" className="custom-link">
                     About Us

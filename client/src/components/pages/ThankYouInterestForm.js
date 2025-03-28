@@ -7,7 +7,7 @@ import logo from "../../img/transparent_white_red.png";
 import SocialMediaLinks from "./SocialMediaLinks";
 import AddressComponent from "./AddressComponent";
 
-const ThankYou = () => {
+const ThankYouInterestForm = () => {
     const registrationContext = useContext(RegistrationContext);
     const { loadUser, user } = registrationContext;
 
@@ -45,7 +45,7 @@ const ThankYou = () => {
                 </Row>
                 <Row className="justify-content-center m-3">
                     <p style={{ lineHeight: "1.8", fontSize: "1.1rem", maxWidth: "700px", textAlign: "center" }}>
-                        We appreciate your interest in getting your vehicle dialed in! We'll review your submission and get back to you ASAP to confirm your appointment or answer any questions.
+                        We appreciate your interest in getting your vehicle dialed in! We will get back to you shortly to answer any questions!
                     </p>
                 </Row>
                 <Row className="justify-content-center m-4">
@@ -67,4 +67,4 @@ const ThankYou = () => {
     );
 };
 
-export default ThankYou;
+export default ThankYouInterestForm;

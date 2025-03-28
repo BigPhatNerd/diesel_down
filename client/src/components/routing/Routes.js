@@ -13,7 +13,9 @@ import HowItWorks from '../pages/HowItWorks';
 import ContactUs from '../pages/ContactUs';
 import BlogList from '../pages/BlogList'; // Adjust the import path
 import BlogDetails from '../pages/BlogDetails';
-import ThankYou from '../pages/ThankYou';
+import ThankYouInterestForm from '../pages/ThankYouInterestForm';
+import ThankYouInfoForm from '../pages/ThankYouInfoForm';
+import InterestForm from '../pages/InterestForm';
 
 
 const Routes = () => {
@@ -26,12 +28,14 @@ const Routes = () => {
 				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/more-info' component={MoreInfo} />
 				<Route exact path='/book-dyno' component={BookDyno} />
+				<Route exact path='/request-info' component={InterestForm} />
 				<Route exact path='/how-it-works' component={HowItWorks} />
 				<Route exact path='/about-us' component={AboutUs} />
 				<Route exact path='/contact-us' component={ContactUs} />
 				<Route exact path='/blog' component={BlogList} />
 				<Route exact path='/blog/:slug' component={BlogDetails} />
-				<Route exact path='/thank-you' component={ThankYou} />
+				<Route exact path='/thank-you' component={ThankYouInterestForm} />
+				<Route exact path='/thank-you-info' component={ThankYouInfoForm} />
 				<Route component={NotFound} />
 			</Switch>
 		</>
