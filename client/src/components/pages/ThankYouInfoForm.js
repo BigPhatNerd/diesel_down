@@ -50,7 +50,7 @@ const ThankYouInfoForm = () => {
                     <SocialMediaLinks />
                 </Row>
 
-                <NavigationLinks user={user} currentPage="thank-you" />
+                <NavigationLinks user={user} currentPage="thank-you-info" />
             </Container>
         </div>
     );

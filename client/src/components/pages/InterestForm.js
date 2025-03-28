@@ -20,10 +20,10 @@ const InterestForm = ({ history }) => {
     useEffect(() => {
         loadUser();
         if (window.fbq) {
-            window.fbq('track', 'lead', {
+            window.fbq('track', 'ViewContent', {
                 content_name: 'Request Info',
                 content_category: 'Lead Page',
-                value: 0,
+                value: 800,
                 currency: 'USD'
             });
         }
