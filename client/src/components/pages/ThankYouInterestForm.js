@@ -17,9 +17,9 @@ const ThankYouInterestForm = () => {
         // Fire Google Ads Conversion Event
         if (window.gtag) {
             window.gtag('event', 'conversion', {
-                send_to: 'AW-11555277884/cJngCMPA-q8aELyY_oUr',
-                value: 1.0,
-                currency: 'USD'
+                'send_to': 'AW-11555277884/AbE-CO6a9bAaELyY_oUr',
+                'value': 800.0,
+                'currency': 'USD'
             });
         }
 
