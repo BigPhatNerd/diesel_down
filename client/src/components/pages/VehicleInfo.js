@@ -10,7 +10,7 @@ import SocialMediaLinks from "./SocialMediaLinks";
 // import GoogleReviews from "./GoogleReviews";
 
 
-const VehiclInfo = ({ history }) => {
+const VehicleInfo = ({ history }) => {
     const registrationContext = useContext(RegistrationContext);
     const { loadUser, user } = registrationContext;
 
@@ -94,4 +94,4 @@ const VehiclInfo = ({ history }) => {
     )
 };
 
-export default VehiclInfo;
+export default VehicleInfo;

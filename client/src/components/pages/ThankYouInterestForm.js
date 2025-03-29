@@ -40,7 +40,7 @@ const ThankYouInterestForm = () => {
                 </Row>
                 <Row className="justify-content-center m-4">
                     <h2 style={{ fontWeight: "bold", textAlign: "center" }}>
-                        Thanks for Booking with Diesel Down!
+                        Thank you for your interest with Diesel Down!
                     </h2>
                 </Row>
                 <Row className="justify-content-center m-3">

@@ -16,6 +16,7 @@ import BlogDetails from '../pages/BlogDetails';
 import ThankYouInterestForm from '../pages/ThankYouInterestForm';
 import ThankYouInfoForm from '../pages/ThankYouInfoForm';
 import InterestForm from '../pages/InterestForm';
+import VehicleInfo from '../pages/VehicleInfo';
 
 
 const Routes = () => {
@@ -29,6 +30,7 @@ const Routes = () => {
 				<Route exact path='/more-info' component={MoreInfo} />
 				<Route exact path='/book-dyno' component={BookDyno} />
 				<Route exact path='/request-info' component={InterestForm} />
+				<Route exact path='/vehicle-info' component={VehicleInfo} />
 				{/* <Route exact path='/how-it-works' component={HowItWorks} /> */}
 				<Route exact path='/about-us' component={AboutUs} />
 				<Route exact path='/contact-us' component={ContactUs} />
