@@ -17,6 +17,7 @@ import ThankYouInterestForm from '../pages/ThankYouInterestForm';
 import ThankYouInfoForm from '../pages/ThankYouInfoForm';
 import InterestForm from '../pages/InterestForm';
 import VehicleInfo from '../pages/VehicleInfo';
+import PricingInfo from '../pages/PricingInfo';
 
 
 const Routes = () => {
@@ -33,6 +34,7 @@ const Routes = () => {
 				<Route exact path='/vehicle-info' component={VehicleInfo} />
 				{/* <Route exact path='/how-it-works' component={HowItWorks} /> */}
 				<Route exact path='/about-us' component={AboutUs} />
+				<Route exact path='/pricing-info' component={PricingInfo} />
 				<Route exact path='/contact-us' component={ContactUs} />
 				<Route exact path='/blog' component={BlogList} />
 				<Route exact path='/blog/:slug' component={BlogDetails} />
