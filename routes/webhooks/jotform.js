@@ -233,15 +233,15 @@ router.post('/jotform/vehicle-info', async (req, res) => {
                     eventId: parsedData.event_id,
                 };
 
-                const appointment = new Appointment(appointmentData);
-                await appointment.save();
+                // const appointment = new Appointment(appointmentData);
+                // await appointment.save();
 
-                // Associate with a user (if user email exists)
-                const user = await User.findOne({ email: parsedData.q4_email });
-                if (user) {
-                    user.appointments.push(appointment._id);
-                    await user.save();
-                }
+                // // Associate with a user (if user email exists)
+                // const user = await User.findOne({ email: parsedData.q4_email });
+                // if (user) {
+                //     user.appointments.push(appointment._id);
+                //     await user.save();
+                // }
 
                 const messageBody = `
 🛠️ New Vehicle Information 🛠️
@@ -259,7 +259,7 @@ Tuning Goal: ${appointmentData.tuningGoal}
                     to: process.env.MY_PHONE_NUMBER,
                 });
 
-                res.status(201).json({ msg: 'Vehicle info saved successfully', appointment });
+                res.status(201).json({ msg: 'Vehicle info saved successfully', appointmentData });
             } catch (error) {
                 console.error('Error processing appointment:', error);
                 res.status(400).send('Error processing appointment');
