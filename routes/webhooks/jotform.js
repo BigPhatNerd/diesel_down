@@ -67,7 +67,7 @@ Name: ${appointmentData.name.first} ${appointmentData.name.last}
 Email: ${appointmentData.email}
 Phone: ${appointmentData.phone}
 Vehicle: ${appointmentData.vehicle.info}
-Date: ${appointmentData.appointmentDetails.date}
+Date: ${appointmentData.appointmentDetails?.date}
 Tuning Goal: ${appointmentData.tuningGoal}
                 `;
 
@@ -250,7 +250,7 @@ Name: ${appointmentData.name.first} ${appointmentData.name.last}
 Email: ${appointmentData.email}
 Phone: ${appointmentData.phone}
 Vehicle: ${appointmentData.vehicle.info}
-Date: ${appointmentData.appointmentDetails.date}
+Date: ${appointmentData.appointmentDetails?.date}
 Tuning Goal: ${appointmentData.tuningGoal}
                 `;
 
