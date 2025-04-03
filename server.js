@@ -8,10 +8,9 @@ const users = require('./routes/api/users');
 const auth = require('./routes/api/auth');
 const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
-const puppeteer = require('puppeteer');
-const geoip = require('geoip-lite');
 
-process.env.DEBUG = "puppeteer:*";  // Enables detailed logging for Puppeteer
+const geoip = require('geoip-lite');
+// Enables detailed logging for Puppeteer
 
 
 const cors = require('cors');
