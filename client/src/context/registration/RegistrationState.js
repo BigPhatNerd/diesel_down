@@ -97,6 +97,7 @@ const RegistrationState = props => {
 		}
 	}
 	//logout user
+	//force rebuilt
 
 	const logout = () => {
 
