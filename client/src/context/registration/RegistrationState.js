@@ -3,7 +3,8 @@ import React, { useReducer } from 'react'
 import RegistrationContext from './registrationContext'
 import RegistrationReducer from './registrationReducer'
 import axios from 'axios'
-import uuid from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid';
+
 
 import {
 
@@ -106,7 +107,7 @@ const RegistrationState = props => {
 
 
 	const setAlert = (msg, type) => {
-		const id = uuid()
+		const id = uuidv4();
 
 		dispatch({
 			type: SET_ALERT,

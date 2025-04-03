@@ -9,6 +9,7 @@ const auth = require('./routes/api/auth');
 const blog = require('./routes/api/blog');
 const jotFormWebhook = require('./routes/webhooks/jotform');
 const puppeteer = require('puppeteer');
+const geoip = require('geoip-lite');
 
 process.env.DEBUG = "puppeteer:*";  // Enables detailed logging for Puppeteer
 
@@ -16,6 +17,22 @@ process.env.DEBUG = "puppeteer:*";  // Enables detailed logging for Puppeteer
 const cors = require('cors');
 const app = express();
 connectDB();
+
+// Geo-block India
+app.use((req, res, next) => {
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket?.remoteAddress;
+  console.log({ ip })
+  // Lookup the geo location of the IP
+  const geo = geoip.lookup(ip);
+
+  // Block Indian traffic
+  if (geo?.country === 'IN') {
+    console.log(`Blocked request from India: IP ${ip}`);
+    return res.status(403).send('Access denied');
+  }
+
+  next();
+});
 
 // Force HTTPS in production
 app.use((req, res, next) => {
