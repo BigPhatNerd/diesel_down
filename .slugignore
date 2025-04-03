@@ -1,0 +1,32 @@
+# Ignore unnecessary dev junk
+.cache/
+*.log
+*.md
+tests/
+test/
+docs/
+.vscode/
+.idea/
+coverage/
+.nyc_output/
+tmp/
+*.test.js
+*.spec.js
+
+# Ignore local-only config
+.env
+.env.*
+
+# Ignore frontend build output ONLY if you're building on Heroku
+# (If you're NOT building on Heroku, don't exclude client/build/)
+# Uncomment below ONLY if using local builds
+# client/src/
+# client/public/
+# client/.env
+# client/node_modules/
+
+# Ignore extra build artifacts not used at runtime
+dist/
+build/
+out/
+.next/
