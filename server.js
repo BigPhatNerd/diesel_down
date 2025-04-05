@@ -17,17 +17,14 @@ const cors = require('cors');
 const app = express();
 connectDB();
 
-// Geo-block India
 app.use((req, res, next) => {
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket?.remoteAddress;
-  console.log({ ip })
-  // Lookup the geo location of the IP
   const geo = geoip.lookup(ip);
 
-  // Block Indian traffic
-  if (geo?.country === 'IN') {
-    console.log(`Blocked request from India: IP ${ip}`);
-    return res.status(403).send('Access denied');
+  // Allow only U.S. traffic
+  if (!geo || geo.country !== 'US') {
+    console.log(`Blocked non-US traffic from IP ${ip}, country: ${geo?.country}`);
+    return res.status(403).send('Access denied: US traffic only');
   }
 
   next();
