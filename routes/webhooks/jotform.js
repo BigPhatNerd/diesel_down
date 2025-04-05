@@ -170,7 +170,7 @@ router.post('/jotform/request-info', async (req, res) => {
 
 Name: ${parsedData.q3_name.first} ${parsedData.q3_name.last}
 Preferred Contact Method: ${parsedData.q30_how}
-${parsedData.q30_how === 'Text' && parsedData.q5_celPhoneForCalling.full ? `Text: ${parsedData.q5_celPhoneForCalling.full}` : ''}
+${parsedData.q30_how === 'Text' && parsedData.q5_text.full ? `Text: ${parsedData.q5_text.full}` : ''}
 ${parsedData.q30_how === 'Phone Call' && parsedData.q5_celPhoneForCalling.full ? `Phone: ${parsedData.q5_celPhoneForCalling.full}` : ''}
 ${parsedData.q30_how === 'Email' && parsedData.q4_email ? `Email: ${parsedData.q4_email}` : ''}
 `;
