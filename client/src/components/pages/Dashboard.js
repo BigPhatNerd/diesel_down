@@ -106,7 +106,7 @@ const Dashboard = () => {
                                 <br />please log in or sign up.
                             </p>
                         </Row>
-                        <Row className="justify-content-center m-4">
+                        {/* <Row className="justify-content-center m-4">
                             <Button
                                 style={styles.button}
                                 className="custom-button"
@@ -116,7 +116,7 @@ const Dashboard = () => {
                             >
                                 Register or login
                             </Button>
-                        </Row>
+                        </Row> */}
                     </div>
                 )}
 

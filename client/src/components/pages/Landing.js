@@ -42,13 +42,13 @@ const Landing = () => {
 
         <Row className="justify-content-center m-2">
           <ul style={{ listStylePosition: 'outside', paddingLeft: '20px', textAlign: 'left' }}>
-            <li>💪 Handles up to 14,000 lbs – That’s a pretty big boy.</li>
-            <li>📊 <strong>DC AFM Module:</strong> Industry-leading data analysis for accurate adjustments.</li>
-            <li>🔗 <strong>CAN Complete Module:</strong> Advanced integration with your truck’s onboard systems for seamless tuning.</li>
-            <li>💨 <strong>Opacity Meter:</strong> Measure and optimize emissions without compromising power.</li>
-            <li>⚡ 2400 HP Capacity – That’s a lot of power.</li>
-            <li>🔥 15,000 ft-lbs of Torque – Get the facts on what your truck can really do.</li>
-            <li>🏆 World’s Largest Eddy Brake – The biggest brake there is, capable of handling over 850+ HP and 3000 ft-lbs of torque.</li>
+            <li>Handles up to 14,000 lbs – That’s a pretty big boy.</li>
+            <li><strong>DC AFM Module:</strong> Industry-leading data analysis for accurate adjustments.</li>
+            <li><strong>CAN Complete Module:</strong> Advanced integration with your truck’s onboard systems for seamless tuning.</li>
+            <li><strong>Opacity Meter:</strong> Measure and optimize emissions without compromising power.</li>
+            <li>2400 HP Capacity – That’s a lot of power.</li>
+            <li>15,000 ft-lbs of Torque – Get the facts on what your truck can really do.</li>
+            <li>World’s Largest Eddy Brake – The biggest brake there is, capable of handling over 850+ HP and 3000 ft-lbs of torque.</li>
           </ul>
         </Row>
 
@@ -79,7 +79,7 @@ const Landing = () => {
         <Row className="justify-content-center m-2">
           <p>
             <strong>Custom Tuning – Tailored to You: &nbsp;
-            </strong> At Diesel Down, we don’t do “one-size-fits-all.” Every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to towing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says so.
+            </strong> At Diesel Down, we know that every vehicle is unique, and so is our approach - that's why we bought the damn thing. From street performance to towing to everyday use or heavy-duty work, we create a custom tuning solution that meets your exact needs. And we’re not just passionate about it – we’re <em>obsessive</em>. You won't leave our shop until the data says so.
           </p>
         </Row>
 

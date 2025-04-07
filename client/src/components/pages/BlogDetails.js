@@ -124,7 +124,7 @@ const BlogDetails = () => {
                     </Link>
                 </Row>
 
-                <Row className="justify-content-center mb-4">
+                {/* <Row className="justify-content-center mb-4">
                     <Button style={styles.button} onClick={toggleCommentsVisibility}>
                         {commentsVisible
                             ? "Hide Comments"
@@ -187,7 +187,7 @@ const BlogDetails = () => {
                             to leave a comment.
                         </p>
                     </Row>
-                )}
+                )} */}
 
 
                 <AddressComponent />

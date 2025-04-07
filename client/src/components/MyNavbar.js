@@ -40,9 +40,9 @@ const MyNavbar = () => {
             <Nav.Link as={Link} to="/" onClick={handleLinkClick}>Home</Nav.Link>
           )}
 
-          {!user.isAuthenticated && currentPath !== "/login" && (
+          {/* {!user.isAuthenticated && currentPath !== "/login" && (
             <Nav.Link as={Link} to="/login" onClick={handleLinkClick}>Login</Nav.Link>
-          )}
+          )} */}
 
           {/* {currentPath !== "/dashboard" && (
             <Nav.Link as={Link} to="/dashboard" onClick={handleLinkClick}>Dashboard</Nav.Link>

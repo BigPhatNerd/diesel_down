@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import UserRegistration from '../pages/auth/UserRegistration'
+// import UserRegistration from '../pages/auth/UserRegistration'
 import NotFound from '../pages/NotFound'
-import Login from '../pages/auth/Login'
+// import Login from '../pages/auth/Login'
 import Alert from '../Alert';
 
 import MoreInfo from '../pages/MoreInfo';
@@ -25,8 +25,8 @@ const Routes = () => {
 		<>
 			<Alert />
 			<Switch>
-				<Route exact path="/login" component={Login} />
-				<Route exact path="/user-registration" component={UserRegistration} />
+				{/* <Route exact path="/login" component={Login} /> */}
+				{/* <Route exact path="/user-registration" component={UserRegistration} /> */}
 				{/* <Route exact path='/dashboard' component={Dashboard} /> */}
 				<Route exact path='/more-info' component={MoreInfo} />
 				<Route exact path='/book-dyno' component={BookDyno} />
