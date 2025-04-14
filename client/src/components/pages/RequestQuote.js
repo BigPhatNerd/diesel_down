@@ -10,7 +10,7 @@ import SocialMediaLinks from "./SocialMediaLinks";
 // import GoogleReviews from "./GoogleReviews";
 
 
-const BookDyno = ({ history }) => {
+const RequestQuote = ({ history }) => {
     const registrationContext = useContext(RegistrationContext);
     const { loadUser, user } = registrationContext;
 
@@ -20,7 +20,7 @@ const BookDyno = ({ history }) => {
         loadUser();
         if (window.fbq) {
             window.fbq('track', 'ViewContent', {
-                content_name: 'Book Dyno',
+                content_name: 'Request Quote',
                 content_category: 'Booking Page',
                 value: 800,
                 currency: 'USD'
@@ -30,7 +30,7 @@ const BookDyno = ({ history }) => {
     }, []);
 
     return (
-        <div id='book-dyno' style={styles.container}>
+        <div id='request-quote' style={styles.container}>
             <Container className='pt-3'>
                 <Row className="justify-content-center m-2">
                     <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
@@ -49,7 +49,7 @@ const BookDyno = ({ history }) => {
 
                 {/* <GoogleReviews /> */}
 
-                {/* PRODUCTION Book Dyno */}
+                {/* PRODUCTION Request Quote */}
                 <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
@@ -62,7 +62,7 @@ const BookDyno = ({ history }) => {
                     ></iframe>
                 </Row>
 
-                {/* Development Book Dyno */}
+                {/* Development Request Quote */}
                 {/* <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
@@ -88,10 +88,10 @@ const BookDyno = ({ history }) => {
                     <SocialMediaLinks />
                 </Row>
 
-                <NavigationLinks user={user} currentPage="book-dyno" />
+                <NavigationLinks user={user} currentPage="request-quote" />
             </Container>
         </div>
     )
 };
 
-export default BookDyno;
+export default RequestQuote;

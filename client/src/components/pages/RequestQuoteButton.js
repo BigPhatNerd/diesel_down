@@ -1,27 +1,27 @@
-// BookDynoButton.js
+// RequestQuoteButton.js
 
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import RegistrationContext from '../../context/registration/registrationContext';
 
-const BookDynoButton = ({ style }) => {
+const RequestQuoteButton = ({ style }) => {
     const registrationContext = useContext(RegistrationContext);
     const history = useHistory();
 
-    const handleBookDynoClick = () => {
-        history.push('/book-dyno');
+    const handleRequestQuoteClick = () => {
+        history.push('/request-quote');
     };
 
     return (
         <Button
             style={style}
             className="custom-button"
-            onClick={handleBookDynoClick}
+            onClick={handleRequestQuoteClick}
         >
-            Book Your Dyno Session Today!
+            Request Quote Today!
         </Button>
     );
 };
 
-export default BookDynoButton;
+export default RequestQuoteButton;

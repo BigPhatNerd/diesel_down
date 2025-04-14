@@ -20,7 +20,7 @@ const VehicleInfo = ({ history }) => {
         loadUser();
         if (window.fbq) {
             window.fbq('track', 'ViewContent', {
-                content_name: 'Book Dyno',
+                content_name: 'Request Quote',
                 content_category: 'Booking Page',
                 value: 800,
                 currency: 'USD'
@@ -49,7 +49,7 @@ const VehicleInfo = ({ history }) => {
 
                 {/* <GoogleReviews /> */}
 
-                {/* PRODUCTION Book Dyno */}
+                {/* PRODUCTION Request Quote */}
                 <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
@@ -62,7 +62,7 @@ const VehicleInfo = ({ history }) => {
                     ></iframe>
                 </Row>
 
-                {/* Development Book Dyno */}
+                {/* Development Request Quote */}
                 {/* <Row className="justify-content-center">
                     <iframe
                         title="JotForm"
@@ -88,7 +88,7 @@ const VehicleInfo = ({ history }) => {
                     <SocialMediaLinks />
                 </Row>
 
-                <NavigationLinks user={user} currentPage="book-dyno" />
+                <NavigationLinks user={user} currentPage="request-quote" />
             </Container>
         </div>
     )

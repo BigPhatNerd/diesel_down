@@ -10,7 +10,7 @@ const client = new twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUT
 // @route POST /webhooks/jotform
 // @desc Handle incoming webhook from JotForm
 // @access Public
-router.post('/jotform/book-dyno', async (req, res) => {
+router.post('/jotform/request-quote', async (req, res) => {
     let body = '';
 
     req.on('data', (chunk) => {
@@ -33,12 +33,6 @@ router.post('/jotform/book-dyno', async (req, res) => {
                         state: parsedData.q6_address.state,
                         postal: parsedData.q6_address.postal,
                     },
-                    appointmentDetails: {
-                        implementation: parsedData.q8_appointment && parsedData.q8_appointment.implementation,
-                        date: parsedData.q8_appointment && parsedData.q8_appointment.date,
-                        duration: parsedData.q8_appointment && parseInt(parsedData.q8_appointment.duration, 10),
-                        timezone: parsedData.q8_appointment && parsedData.q8_appointment.timezone,
-                    },
                     vehicle: {
                         vin: parsedData.q9_vehicleVin,
                         info: parsedData.q12_vehicleInfo.replace(/\+/g, ' '),
@@ -51,8 +45,6 @@ router.post('/jotform/book-dyno', async (req, res) => {
                     eventId: parsedData.event_id,
                 };
 
-                const appointment = new Appointment(appointmentData);
-                await appointment.save();
 
                 // Associate with a user (if user email exists)
                 const user = await User.findOne({ email: parsedData.q4_email });
@@ -67,7 +59,6 @@ Name: ${appointmentData.name.first} ${appointmentData.name.last}
 Email: ${appointmentData.email}
 Phone: ${appointmentData.phone}
 Vehicle: ${appointmentData.vehicle.info}
-Date: ${appointmentData.appointmentDetails?.date}
 Tuning Goal: ${appointmentData.tuningGoal}
                 `;
 
@@ -170,7 +161,7 @@ router.post('/jotform/request-info', async (req, res) => {
 
 Name: ${parsedData.q3_name.first} ${parsedData.q3_name.last}
 Preferred Contact Method: ${parsedData.q30_how}
-${parsedData.q30_how === 'Text' && parsedData.q5_text.full ? `Text: ${parsedData.q5_text.full}` : ''}
+${parsedData.q30_how === 'Text' && parsedData.q32_text.full ? `Text: ${parsedData.q32_text.full}` : ''}
 ${parsedData.q30_how === 'Phone Call' && parsedData.q5_celPhoneForCalling.full ? `Phone: ${parsedData.q5_celPhoneForCalling.full}` : ''}
 ${parsedData.q30_how === 'Email' && parsedData.q4_email ? `Email: ${parsedData.q4_email}` : ''}
 `;

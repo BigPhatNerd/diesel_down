@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Row } from "react-bootstrap";
-import BookDynoButton from "./BookDynoButton";
+import RequestQuoteButton from "./RequestQuoteButton";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
@@ -85,7 +85,7 @@ const MoreInfo = () => {
                 </Row>
 
                 <Row className="justify-content-center m-4">
-                    <BookDynoButton style={styles.button} />
+                    <RequestQuoteButton style={styles.button} />
                 </Row>
                 <Row className="justify-content-center m-2">
                     <p style={styles.italicText}>

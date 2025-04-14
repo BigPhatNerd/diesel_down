@@ -56,8 +56,8 @@ const MyNavbar = () => {
             <Nav.Link as={Link} to="/how-it-works" onClick={handleLinkClick}>How It Works</Nav.Link>
           )} */}
 
-          {currentPath !== "/book-dyno" && (
-            <Nav.Link as={Link} to="/book-dyno" onClick={handleLinkClick}>Schedule Dyno Tuning</Nav.Link>
+          {currentPath !== "/request-quote" && (
+            <Nav.Link as={Link} to="/request-quote" onClick={handleLinkClick}>Request Quote</Nav.Link>
           )}
 
           {currentPath !== "/request-info" && (

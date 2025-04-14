@@ -8,7 +8,7 @@ import Alert from '../Alert';
 import MoreInfo from '../pages/MoreInfo';
 import AboutUs from '../pages/AboutUs';
 // import Dashboard from '../pages/Dashboard';
-import BookDyno from '../pages/BookDyno';
+import RequestQuote from '../pages/RequestQuote';
 // import HowItWorks from '../pages/HowItWorks';
 import ContactUs from '../pages/ContactUs';
 import BlogList from '../pages/BlogList'; // Adjust the import path
@@ -29,7 +29,7 @@ const Routes = () => {
 				{/* <Route exact path="/user-registration" component={UserRegistration} /> */}
 				{/* <Route exact path='/dashboard' component={Dashboard} /> */}
 				<Route exact path='/more-info' component={MoreInfo} />
-				<Route exact path='/book-dyno' component={BookDyno} />
+				<Route exact path='/request-quote' component={RequestQuote} />
 				<Route exact path='/request-info' component={InterestForm} />
 				<Route exact path='/vehicle-info' component={VehicleInfo} />
 				{/* <Route exact path='/how-it-works' component={HowItWorks} /> */}

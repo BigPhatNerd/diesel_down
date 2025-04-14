@@ -28,13 +28,13 @@ const Login = () => {
       setAlert('Please fill in all fields', 'danger');
     } else {
       await login(email, password);
-      const redirectTo = location.state?.from || '/book-dyno'; // Fallback to default
+      const redirectTo = location.state?.from || '/request-quote'; // Fallback to default
       history.push(redirectTo);
     }
   };
 
   if (user.isAuthenticated && user.email) {
-    return <Redirect to={location.state?.from || '/book-dyno'} />;
+    return <Redirect to={location.state?.from || '/request-quote'} />;
   }
 
   return (

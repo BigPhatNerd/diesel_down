@@ -18,8 +18,18 @@ const app = express();
 connectDB();
 
 app.use((req, res, next) => {
+
+
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || req.socket?.remoteAddress;
   const geo = geoip.lookup(ip);
+
+  if (
+    ip === '::1' || // IPv6 localhost
+    ip === '127.0.0.1' || // IPv4 localhost
+    ip.startsWith('::ffff:127.') // IPv4-mapped IPv6 localhost
+  ) {
+    return next();
+  }
 
   // Allow only U.S. traffic
   if (!geo || geo.country !== 'US') {
