@@ -50,25 +50,25 @@ const Landing = () => {
 
           </p>
         </Row>
-        <Row className="justify-content-center m-2">
-          {!expanded && (
-            <>
-              <strong>...</strong>
-              <Button
-                variant="link"
-                onClick={() => setExpanded(true)}
-                style={{
-                  padding: 0,
-                  marginLeft: "5px",
-                  color: "#fff",
-                  textDecoration: "underline",
-                }}
-              >
-                Read More
-              </Button>
-            </>
-          )}
-        </Row>
+        {!expanded && (
+          <Row className="justify-content-center m-2">
+            <strong>...</strong>
+            <Button
+              variant="link"
+              onClick={() => setExpanded(true)}
+              style={{
+                padding: 0,
+                marginLeft: "5px",
+                color: "#fff",
+                textDecoration: "underline",
+              }}
+            >
+              Read More
+            </Button>
+          </Row>
+        )}
+
+
 
         <Collapse in={expanded}>
           <div>
@@ -168,6 +168,20 @@ const Landing = () => {
             </Row>
           </div>
         </Collapse>
+        {expanded && <Row className="justify-content-center m-2">
+          <Button
+            variant="link"
+            onClick={() => setExpanded(false)}
+            style={{
+              padding: 0,
+              marginTop: "10px",
+              color: "#fff",
+              textDecoration: "underline",
+            }}
+          >
+            Read Less
+          </Button>
+        </Row>}
 
         <Row className="justify-content-center m-4">
           <RequestQuoteButton style={styles.button} />
