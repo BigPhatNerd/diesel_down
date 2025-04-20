@@ -38,7 +38,7 @@ const MoreInfo = () => {
                     <ul>
                         <li><strong>Speed & Power Capacity:</strong> Supports speeds over 240 MPH and 2400+ HP.</li>
                         <li><strong>Robust Design:</strong> Built to withstand axle weights up to 14,000 lbs with a track width range of 30" to 102".</li>
-                        <li><strong>Rugged Build:</strong> Center-mounted eddy brake, capable of handling an additional 850+ HP and over 3000 ft-lbs of torque, making it ideal for high-torque diesel engines.</li>
+                        <li><strong>Rugged Build:</strong> Center-mounted eddy brake, capable of handling an additional 850+ HP and over 3000 ft-lbs of torque, making it ideal for high-torque engines.</li>
                         <li><strong>Superior Traction & Stability:</strong> Features X Factor Knurling for maximum traction and a revolutionary hybrid-pyramid frame design for better braking and smoother operation.</li>
                         <li><strong>Real-Time Data:</strong> Monitor torque and horsepower in real-time, allowing instant feedback for tuning adjustments.</li>
                     </ul>

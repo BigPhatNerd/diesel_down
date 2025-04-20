@@ -36,11 +36,7 @@ const Landing = () => {
         <GoogleReviews />
 
         <Row className="justify-content-center m-2">
-          <h1>Welcome to Diesel Down – Where Power Meets Performance.</h1>
-        </Row>
-
-        <Row className="justify-content-center m-2">
-          <h2>Bringing Dyno Testing & Precision Tuning to North Mississippi</h2>
+          <h2>Welcome to Diesel Down – Where Power Meets Performance.</h2>
         </Row>
 
         <Row className="justify-content-center m-2">

@@ -45,7 +45,7 @@ const PricingInfo = ({ history }) => {
 
                 <Row className="justify-content-center m-2">
                     <h2>What You Can Expect When You Work with Diesel Down</h2>
-                    <p>We make it easy to get your diesel dialed in — from power to drivability to shift control. Here’s how it works:</p>
+                    <p>We make it easy to get your vehicle dialed in — from power to drivability to shift control. Here’s how it works:</p>
                 </Row>
 
                 <Row className="justify-content-center m-2">
