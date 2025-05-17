@@ -1,22 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Container, Row, Card, Button, Form } from "react-bootstrap";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Container, Row, Button } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet"; // Import Helmet
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import SocialMediaLinks from "./SocialMediaLinks";
 import AddressComponent from "./AddressComponent";
-import { getBackgroundStyles } from "../helpers/backgroundStyles";
 
 const BlogDetails = () => {
     const { setAlert, user } = useContext(RegistrationContext);
     const { slug } = useParams();
-    const location = useLocation();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [newComment, setNewComment] = useState("");
-    const [commentsVisible, setCommentsVisible] = useState(false);
-    const styles = getBackgroundStyles();
 
     useEffect(() => {
         const fetchBlog = async () => {
@@ -34,40 +29,40 @@ const BlogDetails = () => {
         fetchBlog();
     }, [slug, setAlert]);
 
-    const handleCommentSubmit = async (e) => {
-        e.preventDefault();
-        if (!newComment.trim()) {
-            setAlert("Comment cannot be empty", "danger");
-            return;
-        }
+    // const handleCommentSubmit = async (e) => {
+    //     e.preventDefault();
+    //     if (!newComment.trim()) {
+    //         setAlert("Comment cannot be empty", "danger");
+    //         return;
+    //     }
 
-        try {
-            const response = await fetch(`/api/blog/${blog.id}/comments`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    Author: user.email,
-                    Content: newComment,
-                }),
-            });
+    //     try {
+    //         const response = await fetch(`/api/blog/${blog.id}/comments`, {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({
+    //                 Author: user.email,
+    //                 Content: newComment,
+    //             }),
+    //         });
 
-            if (!response.ok) throw new Error("Failed to submit comment");
+    //         if (!response.ok) throw new Error("Failed to submit comment");
 
-            setBlog((prevBlog) => ({
-                ...prevBlog,
-                comments: [...(prevBlog?.comments || []), { Author: user.email, Content: newComment }],
-            }));
+    //         setBlog((prevBlog) => ({
+    //             ...prevBlog,
+    //             comments: [...(prevBlog?.comments || []), { Author: user.email, Content: newComment }],
+    //         }));
 
-            setNewComment("");
-            setAlert("Comment submitted successfully", "success");
-        } catch (error) {
-            setAlert(error.message, "danger");
-        }
-    };
+    //         setNewComment("");
+    //         setAlert("Comment submitted successfully", "success");
+    //     } catch (error) {
+    //         setAlert(error.message, "danger");
+    //     }
+    // };
 
-    const toggleCommentsVisibility = () => {
-        setCommentsVisible(!commentsVisible);
-    };
+    // const toggleCommentsVisibility = () => {
+    //     setCommentsVisible(!commentsVisible);
+    // };
 
     if (loading) return <p>Loading...</p>;
     if (!blog) return <p>Blog not found.</p>;

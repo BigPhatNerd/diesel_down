@@ -1,5 +1,5 @@
 
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -31,9 +31,6 @@ const PricingInfo = ({ history }) => {
         }
         //eslint-disable-next-line
     }, []);
-
-    const [showInfo, setShowInfo] = useState(false);
-
 
     return (
         <div id='request-info' style={styles.container}>

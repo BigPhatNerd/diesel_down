@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import NavigationLinks from "../NavigationLinks";
 import RegistrationContext from '../../context/registration/registrationContext';
@@ -9,18 +9,7 @@ import AddressComponent from './AddressComponent';
 
 const ContactUs = () => {
     const registrationContext = useContext(RegistrationContext);
-    const { contactUs, setAlert, user } = registrationContext;
-
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-    });
-
-    const [formSubmitted, setFormSubmitted] = useState(false);
-
+    const { user } = registrationContext;
 
     const styles = getBackgroundStyles();
 

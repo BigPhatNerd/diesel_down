@@ -1,12 +1,10 @@
 // RequestQuoteButton.js
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import RegistrationContext from '../../context/registration/registrationContext';
 
 const RequestQuoteButton = ({ style }) => {
-    const registrationContext = useContext(RegistrationContext);
     const history = useHistory();
 
     const handleRequestQuoteClick = () => {

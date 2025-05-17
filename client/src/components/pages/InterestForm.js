@@ -43,7 +43,7 @@ const InterestForm = ({ history }) => {
                 </Row>
 
                 <Row className="justify-content-center m-2 text-center">
-                    <h1>Want a Custom Dyno Tune for Your Diesel?</h1>
+                    <h1>Want a Custom Dyno Tune for Your Vehicle?</h1>
                     <p>Fill this out and I’ll text or email you the details — no pressure. no ongoing marketing.</p>
                 </Row>
 
@@ -73,7 +73,7 @@ const InterestForm = ({ history }) => {
                     <>
                         <Row className="justify-content-center m-2">
                             <h2>What You Can Expect When You Work with Diesel Down</h2>
-                            <p>We make it easy to get your diesel dialed in — from power to drivability to shift control. Here’s how it works:</p>
+                            <p>We make it easy to get your vehicle dialed in — from power to drivability to shift control. Here’s how it works:</p>
                         </Row>
 
                         <Row className="justify-content-center m-2">

@@ -41,6 +41,12 @@ const Landing = () => {
 
         <Row className="justify-content-center m-2">
           <p>
+            <strong>We Tune More Than Diesels:</strong> While Diesel Down was born out of a passion for tuning Cummins, Powerstroke, and Duramax, we don’t stop there. We dyno and tune gas trucks, street cars, muscle cars, and modern performance vehicles too. If it runs, we’ll get the data — and then we’ll make it better.
+          </p>
+        </Row>
+
+        <Row className="justify-content-center m-2">
+          <p>
             At Diesel Down, we’re bringing world-class dyno testing data and
             analytics right to your backyard.{" "}
 
