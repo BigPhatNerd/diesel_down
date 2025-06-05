@@ -38,9 +38,10 @@ const TuningCatalogue = () => {
             style={{
                 overflow: 'hidden',
                 transition: 'max-height 0.3s ease',
-                maxHeight: expandIframe ? '2000px' : '250px', // collapsed vs expanded
+                maxHeight: expandIframe || window.innerWidth < 1024 ? '2000px' : '250px',
                 width: '100%',
             }}
+
         >
             <iframe
                 ref={iframeRef}
