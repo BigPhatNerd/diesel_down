@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import TuningCatalogue from './TuningCatalogue';
 import { Container, Row, Button, Collapse } from "react-bootstrap";
 import RequestQuoteButton from "./RequestQuoteButton";
 import RegistrationContext from "../../context/registration/registrationContext";
@@ -17,8 +18,10 @@ const Landing = () => {
 
   useEffect(() => {
     loadUser();
-    //eslint-disable-next-line
+
+    // Dynamically inject the iFrame resizer script
   }, []);
+
 
   const styles = getBackgroundStyles();
 
@@ -184,6 +187,10 @@ const Landing = () => {
             Read Less
           </Button>
         </Row>}
+
+        <Row className="justify-content-center m-4">
+          <TuningCatalogue />
+        </Row>
 
         <Row className="justify-content-center m-4">
           <RequestQuoteButton style={styles.button} />
