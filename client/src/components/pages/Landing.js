@@ -38,6 +38,10 @@ const Landing = () => {
 
         <GoogleReviews />
 
+        <Row className="justify-content-center m-4">
+          <TuningCatalogue />
+        </Row>
+
         <Row className="justify-content-center m-2">
           <h2>Welcome to Diesel Down – Where Power Meets Performance.</h2>
         </Row>
@@ -188,9 +192,7 @@ const Landing = () => {
           </Button>
         </Row>}
 
-        <Row className="justify-content-center m-4">
-          <TuningCatalogue />
-        </Row>
+
 
         <Row className="justify-content-center m-4">
           <RequestQuoteButton style={styles.button} />
