@@ -35,12 +35,6 @@ const VehicleInfo = ({ history }) => {
                 <Row className="justify-content-center m-2">
                     <img src={logo} alt="Diesel Down Logo" style={{ maxWidth: '60%', height: 'auto', marginBottom: '20px' }} />
                 </Row>
-                <Row className="justify-content-center m-2">
-                    <p style={{ fontStyle: 'italic', textAlign: 'center', maxWidth: '700px' }}>
-                        Dyno + custom dyno-tune: <strong>$800</strong><br />
-                        Hardware/Credits (if needed) is additional — ranges from <strong>$100–$400</strong>.
-                    </p>
-                </Row>
                 <Row className="justify-content-center">
                     <p style={styles.italicText}>
                         Happy to answer any questions (901) 443-7461
