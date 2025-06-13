@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const GoogleReviews = () => {
+const GoogleReviews = ({ widgetId }) => {
     useEffect(() => {
         const script = document.createElement("script");
         script.src = "https://static.elfsight.com/platform/platform.js";
@@ -11,7 +11,7 @@ const GoogleReviews = () => {
     return (
         <div className="my-4">
             <div
-                className="elfsight-app-80158f93-3ced-4d95-8b99-2fdf3a45c161"
+                className={widgetId}
                 data-elfsight-app-lazy
             ></div>
         </div>

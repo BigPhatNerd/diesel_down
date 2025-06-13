@@ -79,6 +79,9 @@ li.country {
     color: white;
 }
 
+#services-dropdown {
+    color: white;
+}
 
 * {
     box-sizing: border-box;

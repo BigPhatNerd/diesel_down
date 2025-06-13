@@ -18,6 +18,12 @@ import ThankYouInfoForm from '../pages/ThankYouInfoForm';
 import InterestForm from '../pages/InterestForm';
 import VehicleInfo from '../pages/VehicleInfo';
 import PricingInfo from '../pages/PricingInfo';
+import GoogleLanding from '../pages/GoogleLanding';
+import CumminsTuning from '../pages/CumminsTuning';
+import PowerstrokeTuning from '../pages/PowerstrokeTuning';
+import DuramaxTuning from '../pages/DuramaxTuning';
+import DynoTesting from '../pages/DynoTesting';
+
 
 
 const Routes = () => {
@@ -29,6 +35,7 @@ const Routes = () => {
 				{/* <Route exact path="/user-registration" component={UserRegistration} /> */}
 				{/* <Route exact path='/dashboard' component={Dashboard} /> */}
 				<Route exact path='/more-info' component={MoreInfo} />
+				<Route exact path='/google-landing' component={GoogleLanding} />
 				<Route exact path='/request-quote' component={RequestQuote} />
 				<Route exact path='/request-info' component={InterestForm} />
 				<Route exact path='/vehicle-info' component={VehicleInfo} />
@@ -40,6 +47,10 @@ const Routes = () => {
 				<Route exact path='/blog/:slug' component={BlogDetails} />
 				<Route exact path='/thank-you' component={ThankYouInterestForm} />
 				<Route exact path='/thank-you-info' component={ThankYouInfoForm} />
+				<Route exact path='/Cummins-Tuning' component={CumminsTuning} />
+				<Route exact path='/Powerstroke-Tuning' component={PowerstrokeTuning} />
+				<Route exact path='/Duramax-Tuning' component={DuramaxTuning} />
+				<Route exact path='/Dyno-Testing' component={DynoTesting} />
 				<Route component={NotFound} />
 			</Switch>
 		</>
