@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Row, Button } from "react-bootstrap";
-import RequestQuoteButton from "./RequestQuoteButton";
+import QuoteAndCallButtons from "./QuoteAndCallButtons";
 import logo from "../../img/transparent_white_red.png";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import { Helmet } from "react-helmet";
@@ -40,14 +40,7 @@ const PowerstrokeTuning = () => {
                 Upgrade your Ford Powerstroke with precision dyno tuning from Diesel Down. We fine-tune your engine for increased torque, better throttle response, and improved fuel economy — all backed by real data.
             </p>
 
-            <Row className="justify-content-center mt-3">
-                <RequestQuoteButton style={styles.button} />
-                <Button
-                    href="tel:9014437461"
-                    className="ms-3"
-                    variant="outline-light"
-                >📞 (901) 443-7461</Button>
-            </Row>
+            <QuoteAndCallButtons style={styles.button} />
             <Row className="justify-content-center">
                 <GoogleReviews widgetId="elfsight-app-01b90faf-ad03-459f-9f63-4c9dbf527bf2" />
             </Row>

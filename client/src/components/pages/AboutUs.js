@@ -1,7 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Row, Button } from "react-bootstrap";
-import RequestQuoteButton from "./RequestQuoteButton";
+
 import NavigationLinks from "../NavigationLinks";
+import QuoteAndCallButtons from "./QuoteAndCallButtons";
 import RegistrationContext from "../../context/registration/registrationContext";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
@@ -53,14 +54,7 @@ const AboutUs = () => {
                         – Wilson Horrell
                     </p>
                 </Row>
-                <Row className="justify-content-center mt-3">
-                    <RequestQuoteButton style={styles.button} />
-                    <Button
-                        href="tel:9014437461"
-                        className="ms-3"
-                        variant="outline-light"
-                    >📞 (901) 443-7461</Button>
-                </Row>
+                <QuoteAndCallButtons style={styles.button} />
                 <Row className="justify-content-center m-2">
                     <p style={styles.italicText}>
                         Want to learn more?  <br />Call or Text Us at <a href="tel:9014437461" style={{ color: "inherit", textDecoration: "none" }}>(901) 443-7461</a>

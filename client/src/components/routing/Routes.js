@@ -22,7 +22,9 @@ import GoogleLanding from '../pages/GoogleLanding';
 import CumminsTuning from '../pages/CumminsTuning';
 import PowerstrokeTuning from '../pages/PowerstrokeTuning';
 import DuramaxTuning from '../pages/DuramaxTuning';
+import GasTuning from '../pages/GasTuning';
 import DynoTesting from '../pages/DynoTesting';
+
 
 
 
@@ -50,6 +52,7 @@ const Routes = () => {
 				<Route exact path='/Cummins-Tuning' component={CumminsTuning} />
 				<Route exact path='/Powerstroke-Tuning' component={PowerstrokeTuning} />
 				<Route exact path='/Duramax-Tuning' component={DuramaxTuning} />
+				<Route exact path='/GasTuning' component={GasTuning} />
 				<Route exact path='/Dyno-Testing' component={DynoTesting} />
 				<Route component={NotFound} />
 			</Switch>

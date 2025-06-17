@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import TuningCatalogue from './TuningCatalogue';
 import { Container, Row, Button } from "react-bootstrap";
-import RequestQuoteButton from "./RequestQuoteButton";
+import QuoteAndCallButtons from "./QuoteAndCallButtons";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
 import RegistrationContext from "../../context/registration/registrationContext";
@@ -41,14 +41,7 @@ const GoogleLanding = () => {
                         Real Dyno Data. Real Results. Tuning for Cummins, Powerstroke, Duramax & More.
                     </h4>
                 </Row>
-                <Row className="justify-content-center mt-3">
-                    <RequestQuoteButton style={styles.button} />
-                    <Button
-                        href="tel:9014437461"
-                        className="ms-3"
-                        variant="outline-light"
-                    >📞 (901) 443-7461</Button>
-                </Row>
+                <QuoteAndCallButtons style={styles.button} />
                 <Row className="justify-content-center m-4">
                     <TuningCatalogue />
                 </Row>
@@ -156,14 +149,7 @@ const GoogleLanding = () => {
 
                 {/* --- Sticky CTA Section --- */}
                 <h2>Ready to Get Tuned?</h2>
-                <Row className="justify-content-center mt-3">
-                    <RequestQuoteButton style={styles.button} />
-                    <Button
-                        href="tel:9014437461"
-                        className="ms-3"
-                        variant="outline-light"
-                    >📞 (901) 443-7461</Button>
-                </Row>
+                <QuoteAndCallButtons style={styles.button} />
                 <AddressComponent />
                 <Row className="justify-content-center m-4">
                     <SocialMediaLinks />

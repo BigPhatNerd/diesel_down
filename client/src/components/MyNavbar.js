@@ -50,6 +50,9 @@ const MyNavbar = () => {
             <NavDropdown.Item as={Link} to="/Duramax-Tuning" onClick={handleLinkClick}>
               Duramax Tuning
             </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/GasTuning" onClick={handleLinkClick}>
+              Gas Tuning
+            </NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/Dyno-Testing" onClick={handleLinkClick}>
               Dyno Testing
             </NavDropdown.Item>

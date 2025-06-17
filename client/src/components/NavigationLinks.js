@@ -29,6 +29,12 @@ const NavigationLinks = ({ user, currentPage }) => {
                 </Link>
             )}
 
+            {currentPage !== "GasTuning" && (
+                <Link to="/GasTuning" className="custom-link">
+                    Gas Tuning
+                </Link>
+            )}
+
             {currentPage !== "Dyno-Testing" && (
                 <Link to="/Dyno-Testing" className="custom-link">
                     Dyno Testing

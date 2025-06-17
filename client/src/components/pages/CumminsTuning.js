@@ -1,8 +1,9 @@
 // CumminsTuning.js
 import React, { useEffect, useContext } from "react";
 import { Container, Row, Button } from "react-bootstrap";
-import RequestQuoteButton from "./RequestQuoteButton";
+
 import logo from "../../img/transparent_white_red.png";
+import QuoteAndCallButtons from "./QuoteAndCallButtons";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import { Helmet } from "react-helmet";
 import RegistrationContext from "../../context/registration/registrationContext";
@@ -42,14 +43,7 @@ const CumminsTuning = () => {
                 Unlock your Cummins full potential with custom tuning from Diesel Down. Whether you tow heavy, daily drive, or want improved throttle response, our dyno-tested tuning will deliver. We optimize fuel economy, horsepower, and torque while maintaining reliability.
             </p>
 
-            <Row className="justify-content-center mt-3">
-                <RequestQuoteButton style={styles.button} />
-                <Button
-                    href="tel:9014437461"
-                    className="ms-3"
-                    variant="outline-light"
-                >📞 (901) 443-7461</Button>
-            </Row>
+            <QuoteAndCallButtons style={styles.button} />
             <Row className="justify-content-center">
                 <GoogleReviews widgetId="elfsight-app-01b90faf-ad03-459f-9f63-4c9dbf527bf2" />
             </Row>

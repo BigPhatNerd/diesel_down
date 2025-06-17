@@ -1,9 +1,10 @@
 import React, { useEffect, useContext, useState } from "react";
 import TuningCatalogue from './TuningCatalogue';
-import { Container, Row, Button, Collapse } from "react-bootstrap";
+import { Container, Row, Button, Collapse, Col } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 
-import RequestQuoteButton from "./RequestQuoteButton";
+
+import QuoteAndCallButtons from "./QuoteAndCallButtons";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
@@ -211,14 +212,8 @@ const Landing = () => {
 
 
 
-          <Row className="justify-content-center mt-3">
-            <RequestQuoteButton style={styles.button} />
-            <Button
-              href="tel:9014437461"
-              className="ms-3"
-              variant="outline-light"
-            >📞 (901) 443-7461</Button>
-          </Row>
+          <QuoteAndCallButtons style={styles.button} />
+
 
 
           <Row className="justify-content-center m-2">

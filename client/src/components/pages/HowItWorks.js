@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Row } from "react-bootstrap";
-import RequestQuoteButton from "./RequestQuoteButton";
+import QuoteAndCallButtons from "./QuoteAndCallButtons";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
@@ -51,9 +51,7 @@ const HowItWorks = () => {
                         <strong>No Limits on Dyno Pulls for Tuning:</strong> If your vehicle is being tuned, we don’t limit the number of dyno pulls. We continue to make pulls and adjustments until the data shows us that we’ve achieved optimal performance. Your truck deserves the best, and we’re committed to making that happen.
                     </p>
                 </Row>
-                <Row className="justify-content-center m-4">
-                    <RequestQuoteButton style={styles.button} />
-                </Row>
+                <QuoteAndCallButtons style={styles.button} />
                 <Row className="justify-content-center m-2">
                     <p style={styles.italicText}>
                         Have Questions? Let’s Chat. <br />Call or Text Us at <a href="tel:9014437461" style={{ color: "inherit", textDecoration: "none" }}>(901) 443-7461</a>.

@@ -1,31 +1,35 @@
+// GasTuning.js
 import React, { useEffect, useContext } from "react";
 import { Container, Row, Button } from "react-bootstrap";
-import QuoteAndCallButtons from "./QuoteAndCallButtons";
-import logo from "../../img/transparent_white_red.png";
-import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import { Helmet } from "react-helmet";
+
+import logo from "../../img/transparent_white_red.png";
+import QuoteAndCallButtons from "./QuoteAndCallButtons";
+import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import RegistrationContext from "../../context/registration/registrationContext";
 import NavigationLinks from "../NavigationLinks";
 import SocialMediaLinks from "./SocialMediaLinks";
 import AddressComponent from "./AddressComponent";
 import GoogleReviews from "./GoogleReviews";
 
-const DynoTesting = () => {
+const GasTuning = () => {
     const styles = getBackgroundStyles();
     const registrationContext = useContext(RegistrationContext);
     const { loadUser, user } = registrationContext;
 
     useEffect(() => {
         loadUser();
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <Container className="pt-3">
             <Helmet>
-                <title>Diesel Dyno Testing in Mississippi</title>
-                <meta name="description" content="See what your truck is really made of. Diesel Down offers dyno testing with real-time data for Cummins, Duramax, Powerstroke & more." />
+                <title>Custom Gas Vehicle Tuning in Mississippi | Diesel Down</title>
+                <meta
+                    name="description"
+                    content="We tune gas-powered trucks, muscle cars, and modern performance vehicles. Get dyno-proven results from Diesel Down in Mississippi."
+                />
             </Helmet>
 
             <Row className="justify-content-center m-2">
@@ -36,22 +40,35 @@ const DynoTesting = () => {
                 />
             </Row>
 
-            <h1 className="text-white text-center">Dyno Testing in Mississippi</h1>
+            <h1 className="text-white text-center">Gas Tuning in Mississippi</h1>
             <p>
-                Find out what your diesel truck can really do. Diesel Down’s Dynocom 15,000 Series dyno delivers accurate horsepower, torque, and efficiency data so you can upgrade smart and tune right.
+                Diesel Down might be known for diesels, but our shop is fully equipped
+                and experienced in tuning a wide range of gas-powered vehicles. Whether
+                you're looking to improve throttle response, increase horsepower, or
+                squeeze out better fuel efficiency, we've got you covered.
+            </p>
+
+            <p>
+                From naturally aspirated muscle cars to turbocharged street builds and
+                late-model trucks, we bring the same dyno-driven precision and custom
+                tuning experience that our diesel clients trust — now for your gas ride.
             </p>
 
             <QuoteAndCallButtons style={styles.button} />
+
             <Row className="justify-content-center">
                 <GoogleReviews widgetId="elfsight-app-01b90faf-ad03-459f-9f63-4c9dbf527bf2" />
             </Row>
+
             <AddressComponent />
+
             <Row className="justify-content-center m-4">
                 <SocialMediaLinks />
             </Row>
-            <NavigationLinks user={user} currentPage="Dyno-Testing" />
+
+            <NavigationLinks user={user} currentPage="Gas-Tuning" />
         </Container>
     );
 };
 
-export default DynoTesting;
+export default GasTuning;
