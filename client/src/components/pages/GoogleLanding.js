@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import TuningCatalogue from './TuningCatalogue';
-import { Container, Row, Button } from "react-bootstrap";
+import { Container, Row, Button, Col } from "react-bootstrap";
 import QuoteAndCallButtons from "./QuoteAndCallButtons";
 import { getBackgroundStyles } from "../helpers/backgroundStyles";
 import logo from "../../img/transparent_white_red.png";
@@ -9,6 +9,7 @@ import NavigationLinks from "../NavigationLinks";
 import SocialMediaLinks from "./SocialMediaLinks";
 import AddressComponent from "./AddressComponent";
 import GoogleReviews from "./GoogleReviews";
+import cropped_dodge from "../../img/cropped_dodge.png";
 
 const GoogleLanding = () => {
 
@@ -56,10 +57,52 @@ const GoogleLanding = () => {
 
 
                 {/* --- Section 1: Why Diesel Down --- */}
+                {/* <Row className="justify-content-center">
+                    <h2>Performance Backed by Data – Built for Serious Drivers</h2>
+                </Row> */}
+                {/* <Row className="align-items-center m-4">
+                    <Col md={6}>
+                        <img
+                            src={require("../../img/cropped_dodge.png")}
+                            alt="Dyno performance data"
+                            style={{ width: "100%", borderRadius: "8px" }}
+                        />
+                    </Col>
+                    <Col md={6}>
+                        <h2 className="text-white">Performance Backed by Data – Built for Serious Drivers</h2>
+                        <ul style={{ listStylePosition: "outside", paddingLeft: "20px", textAlign: "left", color: "#fff" }}>
+                            <li>✔ World’s largest eddy brake (850+ HP & 3000 ft-lbs torque)</li>
+                            <li>✔ Custom tuning for Cummins, Powerstroke, Duramax & gas vehicles</li>
+                            <li>✔ 15,000 Series Dyno with real-time analytics</li>
+                            <li>✔ Dyno-tested for fuel efficiency, horsepower & torque</li>
+                        </ul>
+                    </Col>
+                </Row> */}
+
+                {/* <Row className="align-items-center m-4">
+                    <Col md={6}>
+                        <img
+                            src={require("../../img/cropped_dodge.png")}
+                            alt="Dyno performance data"
+                            style={{ width: "100%", borderRadius: "8px" }}
+                        />
+                    </Col>
+                    <Col md={6}>
+                        <h2 className="text-white">Performance Backed by Data – Built for Serious Drivers</h2>
+                        <ul style={{ listStylePosition: "outside", paddingLeft: "20px", textAlign: "left", color: "#fff" }}>
+                            <li>✔ World’s largest eddy brake (850+ HP & 3000 ft-lbs torque)</li>
+                            <li>✔ Custom tuning for Cummins, Powerstroke, Duramax & gas vehicles</li>
+                            <li>✔ 15,000 Series Dyno with real-time analytics</li>
+                            <li>✔ Dyno-tested for fuel efficiency, horsepower & torque</li>
+                        </ul>
+                    </Col>
+                </Row> */}
                 <Row className="justify-content-center">
                     <h2>Performance Backed by Data – Built for Serious Drivers</h2>
                 </Row>
+
                 <Row className="justify-content-center">
+
                     <ul
                         style={{
                             listStylePosition: "outside",
